@@ -32,77 +32,77 @@
 
 ### 2.2 - Domini e Entità
 
-| ENTITA' | DESCRIZIONE | ATTRIBUTI | DESCRIZIONE | DOMINIO |
-|:---|:---|:---|:---|:---|
-| Progetto | A cui la scuola partecipa | ID | Chiave primaria;<br> Identificativo | BIGINT
-| |        | Finanziamento | Tipo di finanziamento se la Scuola ne beneficia |	TEXT
-| |        | Nome | Indica il nome |	TEXT
-| Scuola   | Indentifica la scuola | cod_Meccanografico | Chiave primaria; <br>Identifica il codice meccanografico della scuola | VARCHAR(10) |
-| |        | Nome | Indica il nome della scuola | TEXT |
-| |        | Ciclo_Istruzione | La scuola è del primo ciclo d’istruzione o il secondo | 1,2 |
-| |        | Collabora | La scuola collabora con altre (True) o no (False) | BOOLEAN |
-| |        | Provincia | Sigla della provincia di appartenza | CHAR(2) |
-| |        | Comune | Comune dov’è la scuola | TEXT |
-| Classe   | Indica le classi che aderiscono | Sezione | Chiave primaria<br> Nome della classe | CHAR(2) |
-| |        | Ordine | Ordine della classe (primo, secondo); Opzionale | 1, 2|
-| |        | Tipo   | Scientifico, Classico, Agrario, ... | TEXT |
-| Persona  | Coloro che partecipano | Email | Chiave primaria;<br> Email della persona. | TEXT |
-| |        | Nome   | Nome della persona | TEXT |
-| |        | Cognome | Cognome della persona | TEXT |
-| |        | Ruolo | Ruolo della persona | Dirigente, Docente, Finanziatore, Rilevatore Esterno |
-| |        | Telefono | Numero di telefono; Opzionale | NUMERIC(10) |
-| Orto     | Orti delle scuole partecipanti | Nome | Chiave primaria;<br> Nome dell'orto | TEXT |
-| |        | Coordinate_GPS | Chiave primaria;<br>Coordinate GPS dell’orto (Latitudine, Longitudine) | DOUBLE, DOUBLE |
-| |        | Condizione_Ambientale | Condizioni ambientali dell’orto (Pulito, Inquinato) | Pulito, Inquinato |
-| |        | Collocazione | L'orto è in terra o in vaso. | Vaso, Terra |
-| |        | Superficie_mq | Superficie in metri quadrati | DOUBLE |
-| Specie   | Specie della pianta coltivata | Nome_Scientifico | Chiave primaria;<br> Nome della famiglia della pianta | TEXT |
-| |        | Substrato | Tipo di terra in cui è coltivata la specie, terriccio da rinvaso o suolo pre-esistente | Terriccio_Rinvaso, Suolo_Pre-Esistente |
-| Replica / Pianta   | Piante che vengono coltivate | Nome_Comune | Nome comune della pianta | TEXT |
-| |        | Scopo | Scopo della specie, Fitobonifica o Biomonitoraggio. | Fitobonifica, Biomonitoraggio |
-| |        | Data_Messa_A_Dimora | Data in cui è stata piantata una replica | DATE |
-| |        | Esposizione | Esposizione della replica | Sole, Mezz’ombra, Ombra |
-| |        | ID | Chiave Primaria; <br>Identificativo della replica della pianta | BIGINT |
-| Gruppo   | Gruppo di piante per un determinato scopo | ID | Chiave primaria;<br> Identificatore del gruppo | BIGINT |
-| |        | Tipo | Il gruppo è Pulito o Inquinato | Pulito, Inquinato |
-| Rilevazione | Elenco dei dati registrati dai sensori sulle piante | ID | Chiave primaria;<br> Identificatore della rilevazione | BIGINT |
-| |        | DataOra_Rilevazione | Data e Ora in cui viene eseguita la rilevazione | TIMESTAMP |
-| |        | DataOra_Inserimento | Data e Ora in cui viene eseguito l’inserimento nella base di dati | TIMESTAMP |
-| |        | Parametri del suolo | Attributo composto;<br> Informazioni riguardanti il suolo | Temperatura, PH, Umidità |
-| |        | Altre Informazioni | Attributo composto;<br> Altre informazioni riguardanti le piante | Danni, Fioritura, Biomassa, Dtruttura, Fruttificazione |
-| Sensore  | Sensori per le rilevazioni | ID | Chiave primaria;<br> Identificatore univoco | BIGINT              |
-| |        | Tipo | Tipo del sensore: SchedaArduino o Sensore| SchedaArduino, Sensore |
-| |        | Acquisizione  | Tipo di acquisizione delle informazioni | Arduino, App |
+|#| ENTITA' | DESCRIZIONE | ATTRIBUTI | DESCRIZIONE | DOMINIO |
+|:---|:---|:---|:---|:---|:---|
+|1| Progetto | A cui la scuola partecipa | ID | Chiave primaria;<br> Identificativo | BIGINT
+| | |        | Finanziamento | Tipo di finanziamento se la Scuola ne beneficia |	TEXT
+| | |        | Nome | Indica il nome |	TEXT
+|2| Scuola   | Indentifica la scuola | cod_Meccanografico | Chiave primaria; <br>Identifica il codice meccanografico della scuola | VARCHAR(10) |
+| | |        | Nome | Indica il nome della scuola | TEXT |
+| | |        | Ciclo_Istruzione | La scuola è del primo ciclo d’istruzione o il secondo | 1,2 |
+| | |        | Collabora | La scuola collabora con altre (True) o no (False) | BOOLEAN |
+| | |        | Provincia | Sigla della provincia di appartenza | CHAR(2) |
+| | |        | Comune | Comune dov’è la scuola | TEXT |
+|3| Classe   | Indica le classi che aderiscono | Sezione | Chiave primaria<br> Nome della classe es. 4E,4ART,4E-I  | VARCHAR(5) |
+| | |        | Ordine | Ordine della classe (primo, secondo); Opzionale | 1, 2|
+| | |        | Tipo   | Scientifico, Classico, Agrario, ... | TEXT |
+|4| Persona  | Coloro che partecipano | Email | Chiave primaria;<br> Email della persona. | TEXT |
+| | |        | Nome   | Nome della persona | TEXT |
+| | |        | Cognome | Cognome della persona | TEXT |
+| | |        | Ruolo | Ruolo della persona | Dirigente, Docente, Finanziatore, Rilevatore Esterno |
+| | |        | Telefono | Numero di telefono; Opzionale | NUMERIC(10) |
+|5| Orto     | Orti delle scuole partecipanti | Nome | Chiave primaria;<br> Nome dell'orto | TEXT |
+| | |        | Coordinate_GPS | Chiave primaria;<br>Coordinate GPS dell’orto (Latitudine, Longitudine) | DOUBLE, DOUBLE |
+| | |        | Condizione_Ambientale | Condizioni ambientali dell’orto (Pulito, Inquinato) | Pulito, Inquinato |
+| | |        | Collocazione | L'orto è in terra o in vaso. | Vaso, Terra |
+| | |        | Superficie_mq | Superficie in metri quadrati | DOUBLE |
+|6| Specie   | Specie della pianta coltivata | Nome_Scientifico | Chiave primaria;<br> Nome della famiglia della pianta | TEXT |
+| | |        | Substrato | Tipo di terra in cui è coltivata la specie, terriccio da rinvaso o suolo pre-esistente | Terriccio_Rinvaso, Suolo_Pre-Esistente |
+|7| Replica / Pianta   | Piante che vengono coltivate | Nome_Comune | Nome comune della pianta | TEXT |
+| | |        | Scopo | Scopo della specie, Fitobonifica o Biomonitoraggio. | Fitobonifica, Biomonitoraggio |
+| | |        | Data_Messa_A_Dimora | Data in cui è stata piantata una replica | DATE |
+| | |        | Esposizione | Esposizione della replica | Sole, Mezz’ombra, Ombra |
+| | |        | ID | Chiave Primaria; <br>Identificativo della replica della pianta | BIGINT |
+|8| Gruppo   | Gruppo di piante per un determinato scopo | ID | Chiave primaria;<br> Identificatore del gruppo | BIGINT |
+| | |        | Tipo | Il gruppo è Pulito o Inquinato | Pulito, Inquinato |
+|9| Rilevazione | Elenco dei dati registrati dai sensori sulle piante | ID | Chiave primaria;<br> Identificatore della rilevazione | BIGINT |
+| | |        | DataOra_Rilevazione | Data e Ora in cui viene eseguita la rilevazione | TIMESTAMP |
+| | |        | DataOra_Inserimento | Data e Ora in cui viene eseguito l’inserimento nella base di dati | TIMESTAMP |
+| | |        | Parametri del suolo | Attributo composto;<br> Informazioni riguardanti il suolo | Temperatura, PH, Umidità |
+| | |        | Altre Informazioni | Attributo composto;<br> Altre informazioni riguardanti le piante | Danni, Fioritura, Biomassa, Dtruttura, Fruttificazione |
+|10| Sensore  | Sensori per le rilevazioni | ID | Chiave primaria;<br> Identificatore univoco | BIGINT              |
+| | |        | Tipo | Tipo del sensore: SchedaArduino o Sensore| SchedaArduino, Sensore |
+| | |        | Acquisizione  | Tipo di acquisizione delle informazioni | Arduino, App |
 
 ### 2.3 - Associazioni
 
-| ASSOCIAZIONE | DESCRIZIONE |
-|:---|:---|
-| Rappresentata | La classe è rappresentata da un docente |
-| Coltiva | La classe coltiva delle piante |
-| Afferisce | La classe fa parte di una scuola |
-| Appartiene | Persone lavorano e/o appartengono alla scuola |
-| Iscritta | La scuola è iscritta a uno o più progetti |
-| Utilizza | La scuola utilizza un orto di un’altra scuola |
-| Possiede | La scuola possiede un orto |
-| Partecipa | Una persona partecipa al progetto, con un determinato ruolo |
-| Responsabile | Una persona è responsabile della rilevazione |
-| Contiene | Nell’orto sono contenute diverse specie di piante |
-| Ospitate | Nell’orto sono messe a dimora delle piante |
-| Include | Una specie include diversi piante |
-| Contenuta | Le piante sono contenute in al massimo 2 diversi gruppi |
-| Effettuata | Sulle piante/repliche sono effettuate delle rilevazioni |
-| Rilevata | I sensiori fanno le rilevazioni dei dati |
+|#| ASSOCIAZIONE | DESCRIZIONE |
+|:---|:---|:---|
+|1| Rappresentata | La classe è rappresentata da un docente |
+|2| Coltiva | La classe coltiva delle piante |
+|3| Afferisce | La classe fa parte di una scuola |
+|4| Appartiene | Persone lavorano e/o appartengono alla scuola |
+|5| Iscritta | La scuola è iscritta a uno o più progetti |
+|6| Utilizza | La scuola utilizza un orto di un’altra scuola |
+|7| Possiede | La scuola possiede un orto |
+|8| Partecipa | Una persona partecipa al progetto, con un determinato ruolo |
+|9| Responsabile | Una persona è responsabile della rilevazione |
+|10| Contiene | Nell’orto sono contenute diverse specie di piante |
+|11| Ospitate | Nell’orto sono messe a dimora delle piante |
+|12| Include | Una specie include diversi piante |
+|13| Contenuta | Le piante sono contenute in al massimo 2 diversi gruppi |
+|14| Effettuata | Sulle piante/repliche sono effettuate delle rilevazioni |
+|15| Rilevata | I sensiori fanno le rilevazioni dei dati |
 
 ### 2.4 - Vincoli
 
-| ENTITÀ | VINCOLO | TIPO SQL |
-|:---|:---|:---|
-| Progetto | Se la scuola riceve un finanziamento per un progetto, si memorizzerà una Persona con ruolo "Referente" | [TRIGGER] |
-| Orto | Se l'orto della scuola ha come Condizione Ambientale "Pulito", allora può essere adatto per fare da controllo per orti di altre scuole | [CHECK] |
-| Scuola | Se la scuola utilizza un orto con Condizione Ambientale "Pulito", allora può essere collaborare con altre scuole | [CHECK] |
-| Replica \ Pianta | Se lo Scopo è "Biomonitoraggio" allora il Numero di Repliche del Gruppo di Controllo devono essere uguali a quelle del Gruppo di Monitoraggio | [CHECK] |
-| Rilevamento | Se il responsabile dell'Inserimento è diverso da quello della Rilevazione allora dobbiamo inserire due Persone o Classi per la stessa rilevazione. | [TRIGGER] |
+|#|ENTITÀ | VINCOLO | TIPO SQL |
+|:---|:---|:---|:---|
+|1| Progetto | Se la scuola riceve un finanziamento per un progetto, si memorizzerà una Persona con ruolo "Referente" | [TRIGGER] |
+|2| Orto | Se l'orto della scuola ha come Condizione Ambientale "Pulito", allora può essere adatto per fare da controllo per orti di altre scuole | [CHECK] |
+|3| Scuola | Se la scuola utilizza un orto con Condizione Ambientale "Pulito", allora può essere collaborare con altre scuole | [CHECK] |
+|4| Replica \ Pianta | Se lo Scopo è "Biomonitoraggio" allora il Numero di Repliche del Gruppo di Controllo devono essere uguali a quelle del Gruppo di Monitoraggio | [CHECK] |
+|5| Rilevamento | Se il responsabile dell'Inserimento è diverso da quello della Rilevazione allora dobbiamo inserire due Persone o Classi per la stessa rilevazione. | [TRIGGER] |
 
 ### 2.5 - Generalizzazioni
 
@@ -143,17 +143,35 @@ Non erano presenti generalizzazioni nello scheam concettuale, quindi non sono st
 
 ### 3.5 - Schema Logico
 
-- Classe(<u>Sezione</u>, <u>cod_Meccanografico</u><sup>cod_Meccanografico</sup>, Ordine, TipoScuola)
-- Scuola(<u>cod_Meccanografico</u>, NomeScuola, Ciclo_istruzione, Collabora<sub>o</sub>, Provincia, Comune)
-- Progetto(<u>ID</u>, Finanziamento<sub>o</sub>, Nome)
-- Persona(<u>Email</u>, Telefono<sub>o</sub>, Nome, Cognome)
-- Ruolo(Tipo)
-- Orto(<u>Nome</U>, <u>Coordinate_GPS</u>, Superficie_mq, Posizione, Condinzione_Ambientale)
-- Specie(<u>Nome_Scientifico</U>, Substrato)
-- Pianta(<u>ID</u>, Nome_Comune, Data_Messa_A_Dimora, Scopo, Sole<sub>o</sub>, Mezz’ombra<sub>o</sub>, Ombra<sub>o</sub>)
-- Gruppo(<u>ID</u>, Tipo)
-- Rilevazione(<u>ID</u>, DataOra_Inserimento, DataOra_Rilevazione, Temperatura, Umidità, Ph, Danni, Fioritura, Biomassa, Struttura, Fruttificazione)
-- Sensore(<u>ID</u>, Tipo, Acquisizione)
+Entità:
+1. Classe (<u>Sezione</u>, <u>cod_Meccanografico</u><sup>Scuola</sup>, Ordine, TipoScuola)
+2. Scuola (<u>cod_Meccanografico</u>, NomeScuola, Ciclo_istruzione, Collabora<sub>o</sub>, Provincia, Comune)
+3. Progetto (<u>ID</u>, Finanziamento<sub>o</sub>, Nome)
+4. Persona (<u>Email</u>, Telefono<sub>o</sub>, Nome, Cognome)
+5. Ruolo (Tipo)
+6. Orto (<u>Nome</u>, <u>Coordinate_GPS</u>, Superficie_mq, Posizione, Condinzione_Ambientale)
+7. Specie (<u>Nome_Scientifico</U>, Substrato)
+8. Replica / Pianta (<u>ID</u>, Nome_Comune, Data_Messa_A_Dimora, Scopo, Sole<sub>o</sub>, Mezz’ombra<sub>o</sub>, Ombra<sub>o</sub>)
+9. Gruppo (<u>ID</u>, Tipo)
+10. Rilevazione (<u>ID</u>, DataOra_Inserimento, DataOra_Rilevazione, Temperatura, Umidità, Ph, Danni, Fioritura, Biomassa, Struttura, Fruttificazione)
+11. Sensore (<u>ID</u>, Tipo, Acquisizione)
+
+Relazioni:
+1. Rappresentata (<u>Sezione</u><sup>Classe</sup>, <u>cod_Meccanografico</u><sup>Scuola</sup>, <u>Email</u>)
+2. Coltiva (<u>Sezione<sup>Classe</sup></u>, <u>cod_Meccanografico</u><sup>Scuola</sup>, <u>ID</u><sup>Replica/Pianta</sup>)
+3. Afferisce (<u>Sezione<sup>Classe</sup></u>, <u>cod_Meccanografico</u><sup>Scuola</sup>)
+4. Appartiene (<u>Email</u><sup>Persona</sup>, <u>cod_Meccanografico</u><sup>Scuola</sup>)
+5. Iscritta (<u>cod_Meccanografico</u><sup>Scuola</sup>, <u>ID</u><sup>Progetto</sup>)
+6. Utilizza (<u>cod_Meccanografico</u><sup>Scuola</sup>, <u>Nome</u><sup>Orto</sup>, <u>Coordinate_GPS</u><sup>Orto</sup>)
+7. Possiede (<u>cod_Meccanografico</u><sup>Scuola</sup>, <u>Nome</u><sup>Orto</sup>, <u>Coordinate_GPS</u><sup>Orto</sup>)
+8. Partecipa (<u>Email</u><sup>Persona</sup>, <u>ID</u><sup>Progetto</sup>, Tipo<sup>Ruolo</sup>)
+9. Responsabile (<u>Email</u><sup>Persona</sup>, <u>ID</u><sup>Rilevazione</sup>)
+10. Contiene (<u>Nome</u><sup>Orto</sup>, <u>Coordinate_GPS</u><sup>Orto</sup>, <u>Nome_Scientifico</u><sup>Specie</sup>)
+11. Ospitate (<u>Nome</u><sup>Orto</sup>, <u>Coordinate_GPS</u><sup>Orto</sup>, <u>ID</u><sup>Replica/Pianta</sup>)
+12. Include (<u>Nome_Scientifico</u><sup>Specie</sup>, <u>ID</u><sup></sup>Replica/Pianta)
+13. Contenuta (<u>ID</u><sup>Replica/Pianta</sup>, <u>ID</u><sup>Gruppo</sup>)
+14. Effettuata (<u>ID</u><sup>Replica/Pianta</sup>, <u>ID</u><sup>Rilevazione</sup>)
+15. Rilevata (<u>ID<sup>Rilevata</sup></u>, <u>ID</u><sup>Sensore</sup>)
 
 
 ### 3.6 - Verifica della correttezza e della qualità dello schema logico e del modello ER ristrutturato

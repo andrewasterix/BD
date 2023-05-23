@@ -39,7 +39,7 @@
 | | |        | Nome | Indica il nome |	TEXT
 |2| Scuola   | Indentifica la scuola | cod_Meccanografico | Chiave primaria; <br>Identifica il codice meccanografico della scuola | VARCHAR(10) |
 | | |        | Nome | Indica il nome della scuola | TEXT |
-| | |        | Ciclo_Istruzione | La scuola è del primo ciclo d’istruzione o il secondo | 1,2 |
+| | |        | Ciclo_Istruzione | La scuola è del primo ciclo d’istruzione o il secondo | Primo, Secondo |
 | | |        | Collabora | La scuola collabora con altre (True) o no (False) | BOOLEAN |
 | | |        | Provincia | Sigla della provincia di appartenza | CHAR(2) |
 | | |        | Comune | Comune dov’è la scuola | TEXT |
@@ -49,7 +49,7 @@
 |4| Persona  | Coloro che partecipano | Email | Chiave primaria;<br> Email della persona. | TEXT |
 | | |        | Nome   | Nome della persona | TEXT |
 | | |        | Cognome | Cognome della persona | TEXT |
-| | |        | Ruolo | Ruolo della persona | Dirigente, Docente, Finanziatore, Rilevatore Esterno |
+| | |        | Ruolo | Ruolo della persona | Dirigente, Docente, Referente, Rilevatore Esterno |
 | | |        | Telefono | Numero di telefono; Opzionale | NUMERIC(10) |
 |5| Orto     | Orti delle scuole partecipanti | Nome | Chiave primaria;<br> Nome dell'orto | TEXT |
 | | |        | Coordinate_GPS | Chiave primaria;<br>Coordinate GPS dell’orto (Latitudine, Longitudine) | DOUBLE, DOUBLE |
@@ -64,7 +64,7 @@
 | | |        | Esposizione | Esposizione della replica | Sole, Mezz’ombra, Ombra |
 | | |        | ID | Chiave Primaria; <br>Identificativo della replica della pianta | BIGINT |
 |8| Gruppo   | Gruppo di piante per un determinato scopo | ID | Chiave primaria;<br> Identificatore del gruppo | BIGINT |
-| | |        | Tipo | Il gruppo è Pulito o Inquinato | Pulito, Inquinato |
+| | |        | Tipo | Il gruppo è Pulito o Inquinato | Controllo, Stress_Ambientale |
 |9| Rilevazione | Elenco dei dati registrati dai sensori sulle piante | ID | Chiave primaria;<br> Identificatore della rilevazione | BIGINT |
 | | |        | DataOra_Rilevazione | Data e Ora in cui viene eseguita la rilevazione | TIMESTAMP |
 | | |        | DataOra_Inserimento | Data e Ora in cui viene eseguito l’inserimento nella base di dati | TIMESTAMP |
@@ -76,23 +76,23 @@
 
 ### 2.3 - Associazioni
 
-|#| ASSOCIAZIONE | DESCRIZIONE |
-|:---|:---|:---|
-|1| Rappresentata | La classe è rappresentata da un docente |
-|2| Coltiva | La classe coltiva delle piante |
-|3| Afferisce | La classe fa parte di una scuola |
-|4| Appartiene | Persone lavorano e/o appartengono alla scuola |
-|5| Iscritta | La scuola è iscritta a uno o più progetti |
-|6| Utilizza | La scuola utilizza un orto di un’altra scuola |
-|7| Possiede | La scuola possiede un orto |
-|8| Partecipa | Una persona partecipa al progetto, con un determinato ruolo |
-|9| Responsabile | Una persona è responsabile della rilevazione |
-|10| Contiene | Nell’orto sono contenute diverse specie di piante |
-|11| Ospitate | Nell’orto sono messe a dimora delle piante |
-|12| Include | Una specie include diversi piante |
-|13| Contenuta | Le piante sono contenute in al massimo 2 diversi gruppi |
-|14| Effettuata | Sulle piante/repliche sono effettuate delle rilevazioni |
-|15| Rilevata | I sensiori fanno le rilevazioni dei dati |
+|#| ASSOCIAZIONE | DESCRIZIONE | ENTITA' | MOLTEPLICITA' |
+|:---|:---|:---|:----|:---:|
+|1| Rappresentata | La classe è rappresentata da un docente | Classe, Persona | 1:1 - 0:1 |
+|2| Coltiva | La classe coltiva delle piante | Classe, Replica/Pianta | 1:N - 1:1 |
+|3| Afferisce | La classe fa parte di una scuola | Classe, Scuola | 1:1 - 1:N |
+|4| Appartiene | Persone lavorano e/o appartengono alla scuola | Persona, Scuola | 0:1 - 1:N |
+|5| Iscritta | La scuola è iscritta a uno o più progetti | Scuola, Progetto | 1:N - 1:N |
+|6| Utilizza | La scuola utilizza un orto di un’altra scuola | Scuola, Orto | 1:N - 0:N|
+|7| Possiede | La scuola possiede un orto | Scuola, Orto | 1:N - 1,1 |
+|8| Partecipa | Una persona partecipa al progetto, con un determinato ruolo | Persona, Progetto | 0:N - 1:N |
+|9| Responsabile | Una persona è responsabile della rilevazione | Persona, Rilevazione | 0:N - 1:1 |
+|10| Contiene | Nell’orto sono contenute diverse specie di piante | Orto, Specie | 1:3 - 1:N |
+|11| Ospitate | Nell’orto sono messe a dimora delle piante | Orto, Replica/Pianta | 1:N - 1:1 |
+|12| Include | Una specie include diversi piante | Specie, Replica/Pianta | 1:N - 1:1 |
+|13| Contenuta | Le piante sono contenute in al massimo 2 diversi gruppi | Replica/Pianta, Gruppo | 1:1 - 1:20 |
+|14| Effettuata | Sulle piante/repliche sono effettuate delle rilevazioni | Replica/Pianta, Rilevazione | 1:N - 1:N |
+|15| Rilevata | I sensiori fanno le rilevazioni dei dati | Sensore, Rilevazione | 1:N - 1:N |
 
 ### 2.4 - Vincoli
 

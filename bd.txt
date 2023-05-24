@@ -1,0 +1,168 @@
+CREATE SCHEMA "OrtiScolastici";
+SET search_path TO "OrtiScolastici";
+SET datestyle TO "MDY";
+
+
+CREATE TABLE Progetto (
+    id_progetto BIGINT NOT NULL,
+    nome_progetto TEXT NOT NULL,
+    finanziamento TEXT NOT NULL,
+    referente TEXT REFERENCES Persona (email),
+   
+    
+	PRIMARY KEY (id_progetto)
+);
+
+
+CREATE TABLE Ruolo (
+    Tipo_ruolo TEXT NOT NULL CHECK (Tipo_ruolo IN ('Docente', 'Referente', 'Rilevatore Esterno')),
+    
+	PRIMARY KEY (Tipo_ruolo)
+);
+
+
+CREATE TABLE Scuola (
+    codice_mecanografico CHAR(25) NOT NULL,
+    nome_scuola CHAR(25) NOT NULL,
+    provincia VARCHAR(2) NOT NULL,
+    comune VARCHAR(25) NOT NULL,
+    ciclo_istruzione VARCHAR(25) NOT NULL CHECK (ciclo_istruzione IN ('Primo', 'Secondo')),
+    collabora BOOLEAN NOT NULL,
+    progetto TEXT REFERENCES Progetto (id_progetto),
+    
+	PRIMARY KEY (codice_mecanografico),
+    UNIQUE (codice_mecanografico)
+);
+
+
+CREATE TABLE Persona (
+    email TEXT,
+    nome TEXT,
+    cognome TEXT,
+    telefono BIGINT,
+    scuola CHAR REFERENCES Scuola (codice_mecanografico),
+    ruolo TEXT REFERENCES Ruolo (Tipo_ruolo),
+	
+	PRIMARY KEY (email)
+);
+
+
+CREATE TABLE Classe (
+    nome_classe CHAR(10) NOT NULL,
+    docente TEXT NOT NULL REFERENCES Persona (email),
+    ordine TEXT NOT NULL,
+    tipo_scuola TEXT NOT NULL,
+    scuola CHAR REFERENCES Scuola (codice_mecanografico),
+    
+	PRIMARY KEY (nome_classe, codice_mecanografico)
+);
+
+CREATE TABLE Specie (
+    nome_scientifico TEXT NOT NULL,
+    substrato TEXT NOT NULL CHECK (substrato IN ('Terriccio rinvaso', 'Suolo pre-esistente')),
+    
+	PRIMARY KEY (nome_scientifico)
+);
+
+CREATE TABLE Gruppo (
+    id_gruppo BIGINT NOT NULL,
+    tipo_gruppo TEXT NOT NULL CHECK (tipo_gruppo IN ('Controllo', 'Stress ambientale')),
+	
+    PRIMARY KEY (id_gruppo)
+);
+
+CREATE TABLE Piante (
+    id_pianta BIGINT NOT NULL,
+    nome_comune TEXT NOT NULL,
+    data_messa_a_dimora DATE NOT NULL,
+    sole TEXT NOT NULL,
+    ombra TEXT NOT NULL,
+    mezz_ombra TEXT NOT NULL,
+    scopo TEXT NOT NULL CHECK (scopo IN ('Biomonitoraggio', 'Fitobotanica')),
+    gruppo TEXT REFERENCES Gruppo (id_gruppo),
+    orto TEXT REFERENCES Orto (nome_orto),
+    specie TEXT REFERENCES Specie (nome_scientifico),
+	
+    PRIMARY KEY (id_pianta)
+);
+
+CREATE TABLE Orto (
+    nome_orto TEXT NOT NULL,
+    superficie DOUBLE NOT NULL,
+    latitudine BIGINT NOT NULL,
+    longitudine BIGINT NOT NULL,
+    condizione_ambientale TEXT NOT NULL CHECK (condizione_ambientale IN ('Pulito', 'Inquinato')),
+    collocazione TEXT NOT NULL CHECK (collocazione IN ('Vaso', 'Terra')),
+    scuola CHAR REFERENCES Scuola (codice_mecanografico),
+	pianta BIGINT REFERENCES Pianta(id_pianta),
+    specie TEXT REFERENCES Specie (nome_scientifico),
+	
+    PRIMARY KEY (nome_orto, latitudine, longitudine)
+);
+
+
+
+CREATE TABLE Biomassa (
+    id_biomassa BIGINT NOT NULL,
+    lunghezza_foglia INT NOT NULL,
+    larghezza_foglia INT NOT NULL,
+    peso_fresco DOUBLE NOT NULL,
+    peso_secco DOUBLE NOT NULL,
+    altezza_pianta INT NOT NULL,
+    lunghezza_radice INT NOT NULL,
+    
+    PRIMARY KEY (id_biomassa)
+);
+
+CREATE TABLE Fruttificazione (
+    id_fruttificazione BIGINT NOT NULL,
+    peso_fresco_radici DOUBLE NOT NULL,
+    peso_secco_radici DOUBLE NOT NULL,
+    num_fiori INT NOT NULL,
+    num_frutti INT NOT NULL
+	,
+    PRIMARY KEY (id_fruttificazione)
+);
+
+CREATE TABLE Danni (
+    id_danni BIGINT NOT NULL,
+    num_foglie_danneggiate INT NOT NULL,
+    percent_superficie_foglie_danneggiate DOUBLE NOT NULL,
+	
+    PRIMARY KEY (id_danni)
+);
+
+CREATE TABLE Parametri (
+    id_parametri BIGINT NOT NULL,
+    temperatura INT NOT NULL,
+    umidita DOUBLE NOT NULL,
+    ph DOUBLE NOT NULL,
+	
+    PRIMARY KEY (id_parametri)
+);
+
+CREATE TABLE Sensore (
+    id_sensore BIGINT,
+    tipo CHAR NOT NULL CHECK (tipo IN ('arduino', 'sensore')),
+    acquisizione TEXT NOT NULL CHECK (acquisizione IN ('BD', 'App')),
+	
+    PRIMARY KEY (id_sensore)
+);
+
+CREATE TABLE Rilevazioni (
+    id_rilevazione BIGINT,
+    data_ora_inserimento TIMESTAMP NOT NULL,
+    data_ora_rilevazione TIMESTAMP NOT NULL,
+    responsabile TEXT REFERENCES Persona (email),
+    pianta BIGINT REFERENCES Piante (id_pianta),
+    biomassa BIGINT REFERENCES Biomassa (id_biomassa),
+    fruttificazione BIGINT REFERENCES Fruttificazione (id_fruttificazione),
+    danni BIGINT REFERENCES Danni (id_danni),
+    parametri BIGINT REFERENCES Parametri (id_parametri),
+	
+    PRIMARY KEY (id_rilevazione),
+	
+    CONSTRAINT data_ora_rilevazione_a_antecedente_a_data_ora_inserimento
+        CHECK (data_ora_rilevazione > data_ora_inserimento),
+    UNIQUE (data_ora_inserimento, data_ora_rilevazione)
+);

@@ -12,12 +12,12 @@
 
 ### 1.1 - Leggenda
 
-- <font color="#539165">Verde</font> - Entità
-- <font color="#F7C04A">Giallo</font> - Attributo
-- <font color="#6495ED">Blu</font> - Attibuti composti
-- <font color="#FF00FF">Viola</font> - Relazione
-- <font color="#FF7F50">Arancione</font> - Vincoli
-- <font color="#DE3163">Rosso</font> - Note di disambiguazione
+- <font color="#539165">Verde </font> - Entità
+- <font color="#F7C04A">Giallo </font> - Attributo
+- <font color="#6495ED">Blu </font> - Attibuti composti
+- <font color="#FF00FF">Viola </font> - Relazione
+- <font color="#FF7F50">Arancione </font> - Vincoli
+- <font color="#DE3163">Rosso </font> - Note di disambiguazione
 
 ### 1.2 - Descrizione del dominio applicativo
 
@@ -53,7 +53,7 @@
 |    |                  |                                           | Collabora             | La scuola collabora con altre (True) o no (False)                                       | BOOLEAN                                                |
 |    |                  |                                           | Provincia             | Sigla della provincia di appartenza                                                     | CHAR(2)                                                |
 |    |                  |                                           | Comune                | Comune dov’è la scuola                                                                | TEXT                                                   |
-| 3  | Classe           | Indica le classi che aderiscono           | Sezione               | Chiave primaria <br> Nome della classe es. 4E,4ART,4E-I                             | VARCHAR(5)                                             |
+| 3  | Classe           | Indica le classi che aderiscono           | Sezione               | Chiave primaria<br> Nome della classe es. 4E,4ART,4E-I                              | VARCHAR(5)                                             |
 |    |                  |                                           | Ordine                | Ordine della classe (primo, secondo); Opzionale                                         | 1, 2                                                   |
 |    |                  |                                           | Tipo                  | Scientifico, Classico, Agrario, ...                                                     | TEXT                                                   |
 | 4  | Persona          | Coloro che partecipano                    | Email                 | Chiave primaria;<br> Email della persona.                                           | TEXT                                                   |
@@ -62,10 +62,10 @@
 |    |                  |                                           | Ruolo                 | Ruolo della persona                                                                     | Dirigente, Docente, Referente, Rilevatore Esterno      |
 |    |                  |                                           | Telefono              | Numero di telefono; Opzionale                                                           | NUMERIC(10)                                            |
 | 5  | Orto             | Orti delle scuole partecipanti            | Nome                  | Chiave primaria;<br> Nome dell'orto                                                 | TEXT                                                   |
-|    |                  |                                           | Coordinate_GPS        | Chiave primaria;<br>Coordinate GPS dell’orto (Latitudine, Longitudine)             | DOUBLE, DOUBLE                                         |
+|    |                  |                                           | Coordinate_GPS        | Chiave primaria;<br>Coordinate GPS dell’orto (Latitudine, Longitudine)             | FLOAT, FLOAT                                           |
 |    |                  |                                           | Condizione_Ambientale | Condizioni ambientali dell’orto (Pulito, Inquinato)                                    | Pulito, Inquinato                                      |
 |    |                  |                                           | Collocazione          | L'orto è in terra o in vaso.                                                           | Vaso, Terra                                            |
-|    |                  |                                           | Superficie_mq         | Superficie in metri quadrati                                                            | DOUBLE                                                 |
+|    |                  |                                           | Superficie_mq         | Superficie in metri quadrati                                                            | FLOAT                                                  |
 | 6  | Specie           | Specie della pianta coltivata             | Nome_Scientifico      | Chiave primaria;<br> Nome della famiglia della pianta                               | TEXT                                                   |
 |    |                  |                                           | Substrato             | Tipo di terra in cui è coltivata la specie, terriccio da rinvaso o suolo pre-esistente | Terriccio_Rinvaso, Suolo_Pre-Esistente                 |
 | 7  | Replica / Pianta | Piante che vengono coltivate              | Nome_Comune           | Nome comune della pianta                                                                | TEXT                                                   |
@@ -96,7 +96,7 @@
 | 6  | Utilizza      | La scuola utilizza un orto di un’altra scuola              | Scuola, Orto                |   1:N - 0:N   |
 | 7  | Possiede      | La scuola possiede un orto                                  | Scuola, Orto                |   1:N - 1,1   |
 | 8  | Partecipa     | Una persona partecipa al progetto, con un determinato ruolo | Persona, Progetto           |   0:N - 1:N   |
-| 9  | Responsabile  | Una persona è responsabile della rilevazione               | Persona, Rilevazione        |   0:N - 1:1   |
+| 9  | Responsabile  | Una persona è responsabile della rilevazione               | Persona, Rilevazione        |   0:N - 1:2   |
 | 10 | Contiene      | Nell’orto sono contenute diverse specie di piante          | Orto, Specie                |   1:3 - 1:N   |
 | 11 | Ospitate      | Nell’orto sono messe a dimora delle piante                 | Orto, Replica/Pianta        |   1:N - 1:1   |
 | 12 | Include       | Una specie include diversi piante                           | Specie, Replica/Pianta      |   1:N - 1:1   |
@@ -129,24 +129,40 @@ Non sono presenti generalizzazioni.
 Nella Ristrutturazione del modello ER sono state apportate le seguenti modifiche:
 
 - L'attributo multiplo "Ruolo" dell'entità Persona è stato sostituito con l'entità Ruolo, in modo da evitare la ripetizione di valori, ed è stato aggiunto l'attributo "Tipo" per descrivere meglio il tipo ruolo.
-- L'attributo multiplo "Parametri del suolo" dell'entità Rilevazione è stato sostituito con attributi singoli direttamente sull'entità:
+- L'attributo multiplo "Parametri del suolo" dell'entità Rilevazione è stato sostituito con un entità Parametri in relazione con l'entità Rilevazioni, contente i sefuenti attirbuti:
+
   - Temperatura
   - PH
   - Umidità
-- L'attributo multiplo "Altre" dell'entità Rilevazione è stato sostituito con attributi singoli direttamente sull'entità:
-  - Danni
-  - Fioritura
-  - Biomassa
-  - Distruttura
-  - Fruttificazione
+- L'attributo multiplo "Altre" dell'entità Rilevazione è stato sostituito con 3 nuove entità e relativi attributi:
+
+  - Danni:
+    - ID
+    - N_Foglie_Danneggiate
+    - %_Superficie_Foglie_Danneggiate
+  - Fruttificazione:
+    - ID
+    - N_Frutti
+    - N_Fiori
+    - Peso_Secco_Radici
+    - Peso_Fresco_Radici
+  - Biomassa:
+    - ID
+    - Peso_Secco
+    - Peso_Fresco
+    - Altezza_Pianta
+    - Lunghezza_Radice
+    - Larghezza_Foglia
+    - Lunghezza_Foglia
 - L'attributo multiplo "Esposizione" dell'entità Replica/Pianta è stato sostituito con attributi singoli direttamente sull'entità:
+
   - Sole
   - Mezz'ombra
   - Ombra
 
 ### 3.3 - Modifiche ai Vincoli
 
-//TODO - Verificare possibili cambiamenti ai vincoli
+Non sto state effettuate modifiche ai vincoli precedenti.
 
 ### 3.4 - Modifiche alle generalizzazioni
 
@@ -156,34 +172,40 @@ Non erano presenti generalizzazioni nello scheam concettuale, quindi non sono st
 
 Entità:
 
-1. Classe (<u>Sezione</u>, <u>cod_Meccanografico</u><sup>Scuola</sup>, Ordine, TipoScuola)
-2. Scuola (<u>cod_Meccanografico</u>, NomeScuola, Ciclo_istruzione, Collabora<sub>o</sub>, Provincia, Comune)
-3. Progetto (<u>ID</u>, Finanziamento<sub>o</sub>, Nome)
-4. Persona (<u>Email</u>, Telefono<sub>o</sub>, Nome, Cognome)
+1. Classe (<u>Sezione </u>, <u>cod_Meccanografico </u><sup>Scuola </sup>, Ordine, TipoScuola)
+2. Scuola (<u>cod_Meccanografico </u>, NomeScuola, Ciclo_istruzione, Collabora <sub>o </sub>, Provincia, Comune)
+3. Progetto (<u>ID </u>, Finanziamento <sub>o </sub>, Nome)
+4. Persona (<u>Email </u>, Telefono <sub>o </sub>, Nome, Cognome)
 5. Ruolo (Tipo)
-6. Orto (<u>Nome</u>, <u>Coordinate_GPS</u>, Superficie_mq, Posizione, Condinzione_Ambientale)
-7. Specie (<u>Nome_Scientifico</u>, Substrato)
-8. Replica / Pianta (<u>ID</u>, Nome_Comune, Data_Messa_A_Dimora, Scopo, Sole<sub>o</sub>, Mezz’ombra<sub>o</sub>, Ombra<sub>o</sub>)
-9. Gruppo (<u>ID</u>, Tipo)
-10. Rilevazione (<u>ID</u>, DataOra_Inserimento, DataOra_Rilevazione, Temperatura, Umidità, Ph, Danni, Fioritura, Biomassa, Struttura, Fruttificazione)
-11. Sensore (<u>ID</u>, Tipo, Acquisizione)
+6. Orto (<u>Nome </u>, <u>Coordinate_GPS </u>, Superficie_mq, Posizione, Condinzione_Ambientale)
+7. Specie (<u>Nome_Scientifico </u>, Substrato)
+8. Replica / Pianta (<u>ID </u>, Nome_Comune, Data_Messa_A_Dimora, Scopo, Sole <sub>o </sub>, Mezz’ombra <sub>o </sub>, Ombra <sub>o </sub>)
+9. Gruppo (<u>ID </u>, Tipo)
+10. Rilevazione (<u>ID </u>, DataOra_Inserimento, DataOra_Rilevazione, Temperatura, Umidità, Ph, Danni, Fioritura, Biomassa, Struttura, Fruttificazione)
+11. Sensore (<u>ID </u>, Tipo, Acquisizione)
+12. Parametri (<u>ID </u>, Temperatura, Umidità, Ph)
+13. Danni (<u>ID </u>, N_Foglie_Danneggiate, %_Superficie_Foglie_Danneggiate)
+14. Fioritura (<u>ID </u>, N_Fiori, N_Frutti, Peso_Secco_Radici, Peso_Fresco_Radici)
+15. Biomassa (<u>ID </u>, Peso_Secco, Peso_Fresco, Altezza_Pianta, Lunghezza_Radice, Larghezza_Foglia, Lunghezza_Foglia)
 
-Relazioni:
+Relazioni:Rappresentata (<u>Sezione </u><sup>Classe </sup>, <u>cod_Meccanografico </u><sup>Scuola </sup>, <u>Email </u>)
 
-1. Rappresentata (<u>Sezione</u><sup>Classe</sup>, <u>cod_Meccanografico</u><sup>Scuola</sup>, <u>Email</u>)
-2. Coltiva (<u>Sezione</u><sup>Classe</sup>, <u>cod_Meccanografico</u><sup>Scuola</sup>, <u>ID</u><sup>Replica/Pianta</sup>)
-3. Afferisce (<u>Sezione</u><sup>Classe</sup>, <u>cod_Meccanografico</u><sup>Scuola</sup>)
-4. Appartiene (<u>Email</u><sup>Persona</sup>, <u>cod_Meccanografico</u><sup>Scuola</sup>)
-5. Iscritta (<u>cod_Meccanografico</u><sup>Scuola</sup>, <u>ID</u><sup>Progetto</sup>)
-6. Utilizza (<u>cod_Meccanografico</u><sup>Scuola</sup>, <u>Nome</u><sup>Orto</sup>, <u>Coordinate_GPS</u><sup>Orto</sup>)
-7. Possiede (<u>cod_Meccanografico</u><sup>Scuola</sup>, <u>Nome</u><sup>Orto</sup>, <u>Coordinate_GPS</u><sup>Orto</sup>)
-8. Partecipa (<u>Email</u><sup>Persona</sup>, <u>ID</u><sup>Progetto</sup>, Tipo<sup>Ruolo</sup>)
-9. Responsabile (<u>Email</u><sup>Persona</sup>, <u>ID</u><sup>Rilevazione</sup>)
-10. Contiene (<u>Nome</u><sup>Orto</sup>, <u>Coordinate_GPS</u><sup>Orto</sup>, <u>Nome_Scientifico</u><sup>Specie</sup>)
-11. Ospitate (<u>Nome</u><sup>Orto</sup>, <u>Coordinate_GPS</u><sup>Orto</sup>, <u>ID</u><sup>Replica/Pianta</sup>)
-12. Include (<u>Nome_Scientifico</u><sup>Specie</sup>, <u>ID</u><sup></sup>Replica/Pianta)
-13. Contenuta (<u>ID</u><sup>Replica/Pianta</sup>, <u>ID</u><sup>Gruppo</sup>)
-14. Effettuata (<u>ID</u><sup>Replica/Pianta</sup>, <u>ID</u><sup>Rilevazione</sup>)
-15. Rilevata (<u>ID</u><sup>Rilevata</sup>, <u>ID</u><sup>Sensore</sup>)
+1. Coltiva (<u>Sezione </u><sup>Classe </sup>, <u>cod_Meccanografico </u><sup>Scuola </sup>, <u>ID </u><sup>Replica/Pianta </sup>)
+2. Afferisce (<u>Sezione </u><sup>Classe </sup>, <u>cod_Meccanografico </u><sup>Scuola </sup>)
+3. Appartiene (<u>Email </u><sup>Persona </sup>, <u>cod_Meccanografico </u><sup>Scuola </sup>)
+4. Iscritta (<u>cod_Meccanografico </u><sup>Scuola </sup>, <u>ID </u><sup>Progetto </sup>)
+5. Utilizza (<u>cod_Meccanografico </u><sup>Scuola </sup>, <u>Nome </u><sup>Orto </sup>, <u>Coordinate_GPS </u><sup>Orto </sup>)
+6. Possiede (<u>cod_Meccanografico </u><sup>Scuola </sup>, <u>Nome </u><sup>Orto </sup>, <u>Coordinate_GPS </u><sup>Orto </sup>)
+7. Partecipa (<u>Email </u><sup>Persona </sup>, <u>ID </u><sup>Progetto </sup>, Tipo <sup>Ruolo </sup>)
+8. Responsabile (<u>Email </u><sup>Persona </sup>, <u>ID </u><sup>Rilevazione </sup>)
+9. Contiene (<u>Nome </u><sup>Orto </sup>, <u>Coordinate_GPS </u><sup>Orto </sup>, <u>Nome_Scientifico </u><sup>Specie </sup>)
+10. Ospitate (<u>Nome </u><sup>Orto </sup>, <u>Coordinate_GPS </u><sup>Orto </sup>, <u>ID </u><sup>Replica/Pianta </sup>)
+11. Include (<u>Nome_Scientifico </u><sup>Specie </sup>, <u>ID </u><sup></sup>Replica/Pianta)
+12. Contenuta (<u>ID </u><sup>Replica/Pianta </sup>, <u>ID </u><sup>Gruppo </sup>)
+13. Effettuata (<u>ID </u><sup>Replica/Pianta </sup>, <u>ID </u><sup>Rilevazione </sup>)
+14. Rilevata (<u>ID </u><sup>Rilevata </sup>, <u>ID </u><sup>Sensore </sup>)
+15. Dati (<u>ID </u><sup>Rilevazione </sup>, <u>ID </u><sup>Parametri </sup>,<u>ID </u><sup>Danni </sup>,<u>ID </u><sup>Fruttificazione </sup>,<u>ID </u><sup>BIomassa </sup>)
 
 ### 3.6 - Verifica della correttezza e della qualità dello schema logico e del modello ER ristrutturato
+
+Tutte le relazioni, a parte POSSIEDE (Persona, Ruolo) e AFFERISCE (Classe, Scuola), sono in forma normale di Boyce-Codd, e tutte sono in terza forma normale.

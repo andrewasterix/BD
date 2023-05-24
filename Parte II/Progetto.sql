@@ -1,4 +1,4 @@
--- Active: 1684932917946@@127.0.0.1@5432@postgres@OrtiScolastici
+DROP SCHEMA IF EXISTS "OrtiScolastici" CASCADE;
 CREATE SCHEMA IF NOT EXISTS "OrtiScolastici";
 SET search_path TO 'OrtiScolastici';
 SET datestyle TO 'MDY';
@@ -9,15 +9,15 @@ DROP TABLE IF EXISTS Parametri;
 DROP TABLE IF EXISTS Danni;
 DROP TABLE IF EXISTS Fruttificazione;
 DROP TABLE IF EXISTS Biomassa;
-DROP TABLE IF EXISTS Orto;
+DROP TABLE IF EXISTS Orto CASCADE;
 DROP TABLE IF EXISTS Piante;
 DROP TABLE IF EXISTS Gruppo;
-DROP TABLE IF EXISTS Specie;
+DROP TABLE IF EXISTS Specie CASCADE;
 DROP TABLE IF EXISTS Classe;
 DROP TABLE IF EXISTS Persona;
-DROP TABLE IF EXISTS Scuola;
+DROP TABLE IF EXISTS Scuola CASCADE;
 DROP TABLE IF EXISTS Ruolo;
-DROP TABLE IF EXISTS Progetto;
+DROP TABLE IF EXISTS Progetto CASCADE;
 
 CREATE TABLE IF NOT EXISTS Progetto (
     id_progetto BIGINT NOT NULL,
@@ -95,8 +95,11 @@ CREATE TABLE IF NOT EXISTS Piante (
     mezz_ombra BOOLEAN NOT NULL,
     scopo TEXT NOT NULL CHECK (scopo IN ('Biomonitoraggio', 'Fitobotanica')),
     gruppo BIGINT REFERENCES Gruppo (id_gruppo),
-    orto TEXT REFERENCES Orto (nome_orto),
-    specie TEXT REFERENCES Specie (nome_scientifico),	
+    orto_nome_orto TEXT NOT NULL,
+    orto_latitudine FLOAT NOT NULL,
+    orto_longitudine FLOAT NOT NULL,
+    FOREIGN KEY (orto_nome_orto, orto_latitudine, orto_longitudine) REFERENCES Orto (nome_orto, latitudine, longitudine),
+    specie TEXT REFERENCES Specie (nome_scientifico), 
     PRIMARY KEY (id_pianta)
 );
 
@@ -120,7 +123,8 @@ CREATE TABLE IF NOT EXISTS Biomassa (
     peso_fresco FLOAT NOT NULL,
     peso_secco FLOAT NOT NULL,
     altezza_pianta FLOAT NOT NULL,
-    lunghezza_radice FLOAT NOT NULL,   
+    lunghezza_radice FLOAT NOT NULL,
+    rilevazione BIGINT REFERENCES Rilevazioni (id_rilevazione),   
     PRIMARY KEY (id_biomassa)
 );
 
@@ -130,6 +134,7 @@ CREATE TABLE IF NOT EXISTS Fruttificazione (
     peso_secco_radici FLOAT NOT NULL,
     num_fiori INT NOT NULL,
     num_frutti INT NOT NULL,
+    rilevazione BIGINT REFERENCES Rilevazioni (id_rilevazione), 
     PRIMARY KEY (id_fruttificazione)
 );
 
@@ -137,6 +142,7 @@ CREATE TABLE IF NOT EXISTS Danni (
     id_danni BIGINT NOT NULL,
     num_foglie_danneggiate INT NOT NULL,
     percent_superficie_foglie_danneggiate FLOAT NOT NULL,
+    rilevazione BIGINT REFERENCES Rilevazioni (id_rilevazione),
     PRIMARY KEY (id_danni)
 );
 
@@ -145,6 +151,7 @@ CREATE TABLE IF NOT EXISTS Parametri (
     temperatura FLOAT NOT NULL,
     umidita FLOAT NOT NULL,
     ph INT NOT NULL,
+    rilevazione BIGINT REFERENCES Rilevazioni (id_rilevazione),
     PRIMARY KEY (id_parametri)
 );
 

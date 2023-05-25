@@ -113,16 +113,6 @@ CREATE TABLE IF NOT EXISTS Rilevazioni (
     UNIQUE (data_ora_inserimento, data_ora_rilevazione)
 );
 
-
-CREATE TABLE IF NOT EXISTS Parametri (
-    id_parametri BIGINT NOT NULL,
-    temperatura FLOAT NOT NULL,--
-    umidita FLOAT NOT NULL,--
-    ph INT NOT NULL,--
-    rilevazione BIGINT REFERENCES Rilevazioni (id_rilevazione),
-    PRIMARY KEY (id_parametri)
-);
-
 CREATE TABLE IF NOT EXISTS Dati(
     id_dato BIGINT NOT NULL,
     lunghezza_foglia FLOAT NOT NULL,
@@ -140,7 +130,7 @@ CREATE TABLE IF NOT EXISTS Dati(
 
 CREATE TABLE IF NOT EXISTS Sensore (
     id_sensore BIGINT,
-    tipo CHAR NOT NULL CHECK (tipo IN ('arduino', 'sensore')),
+    tipo TEXT NOT NULL CHECK (tipo IN ('arduino', 'sensore')),
     acquisizione TEXT NOT NULL CHECK (acquisizione IN ('BD', 'App')),
     PRIMARY KEY (id_sensore)
 );
@@ -219,12 +209,20 @@ INSERT INTO Rilevazioni VALUES (01,'2021-09-10 10:30:00','2021-09-10 10:45:00','
 INSERT INTO Rilevazioni VALUES (02,'2021-05-02 12:30:00','2021-05-02 12:45:00','Ugo456@gmail.com',2);
 INSERT INTO Rilevazioni VALUES (03,'2021-04-06 14:30:00','2021-04-06 14:45:00','Fiona79@gmail.com',3);
 INSERT INTO Rilevazioni VALUES (04,'2021-02-07 16:30:00','2021-02-07 16:45:00','Laura659@gmail.com',4);
---
+
+
+--Dati
+INSERT INTO Dati VALUES (1, 10.5, 20.5, 5, 10, 2, 0.5, 20.5, 30.5, 7, 01);
+INSERT INTO Dati VALUES (2, 11.5, 21.5, 6, 11, 3, 0.6, 21.5, 31.5, 8, 02);
+INSERT INTO Dati VALUES (3, 12.5, 22.5, 7, 12, 4, 0.7, 22.5, 32.5, 9, 03);
+INSERT INTO Dati VALUES (4, 13.5, 23.5, 8, 13, 5, 0.8, 23.5, 33.5, 10, 04);
+
+
 --Sensore
-INSERT INTO Sensore VALUES (010,'arduino','BD');
-INSERT INTO Sensore VALUES (020,'sensore','App');
-INSERT INTO Sensore VALUES (030,'arduino','BD');
-INSERT INTO Sensore VALUES (040,'sensore','App');
+INSERT INTO Sensore VALUES (10,'arduino','BD');
+INSERT INTO Sensore VALUES (20,'sensore','App');
+INSERT INTO Sensore VALUES (30,'arduino','BD');
+INSERT INTO Sensore VALUES (40,'sensore','App');
 
 
 

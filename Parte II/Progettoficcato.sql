@@ -5,10 +5,7 @@ SET datestyle TO 'MDY';
 
 DROP TABLE IF EXISTS Rilevazioni;
 DROP TABLE IF EXISTS Sensore;
-DROP TABLE IF EXISTS Parametri;
-DROP TABLE IF EXISTS Danni;
-DROP TABLE IF EXISTS Fruttificazione;
-DROP TABLE IF EXISTS Biomassa;
+DROP TABLE IF EXISTS Dati;
 DROP TABLE IF EXISTS Orto CASCADE;
 DROP TABLE IF EXISTS Piante;
 DROP TABLE IF EXISTS Gruppo;
@@ -116,43 +113,29 @@ CREATE TABLE IF NOT EXISTS Rilevazioni (
     UNIQUE (data_ora_inserimento, data_ora_rilevazione)
 );
 
-CREATE TABLE IF NOT EXISTS Biomassa (
-    id_biomassa BIGINT NOT NULL,
-    lunghezza_foglia FLOAT NOT NULL,
-    larghezza_foglia FLOAT NOT NULL,
-    peso_fresco FLOAT NOT NULL,
-    peso_secco FLOAT NOT NULL,
-    altezza_pianta FLOAT NOT NULL,
-    lunghezza_radice FLOAT NOT NULL,
-    rilevazione BIGINT REFERENCES Rilevazioni (id_rilevazione),   
-    PRIMARY KEY (id_biomassa)
-);
-
-CREATE TABLE IF NOT EXISTS Fruttificazione (
-    id_fruttificazione BIGINT NOT NULL,
-    peso_fresco_radici FLOAT NOT NULL,
-    peso_secco_radici FLOAT NOT NULL,
-    num_fiori INT NOT NULL,
-    num_frutti INT NOT NULL,
-    rilevazione BIGINT REFERENCES Rilevazioni (id_rilevazione), 
-    PRIMARY KEY (id_fruttificazione)
-);
-
-CREATE TABLE IF NOT EXISTS Danni (
-    id_danni BIGINT NOT NULL,
-    num_foglie_danneggiate INT NOT NULL,
-    percent_superficie_foglie_danneggiate FLOAT NOT NULL,
-    rilevazione BIGINT REFERENCES Rilevazioni (id_rilevazione),
-    PRIMARY KEY (id_danni)
-);
 
 CREATE TABLE IF NOT EXISTS Parametri (
     id_parametri BIGINT NOT NULL,
-    temperatura FLOAT NOT NULL,
-    umidita FLOAT NOT NULL,
-    ph INT NOT NULL,
+    temperatura FLOAT NOT NULL,--
+    umidita FLOAT NOT NULL,--
+    ph INT NOT NULL,--
     rilevazione BIGINT REFERENCES Rilevazioni (id_rilevazione),
     PRIMARY KEY (id_parametri)
+);
+
+CREATE TABLE IF NOT EXISTS Dati(
+    id_dato BIGINT NOT NULL,
+    lunghezza_foglia FLOAT NOT NULL,
+    altezza_pianta FLOAT NOT NULL,
+    num_fiori INT NOT NULL,
+    num_frutti INT NOT NULL,
+    num_foglie_danneggiate INT NOT NULL,
+    percent_superficie_foglie_danneggiate FLOAT NOT NULL,
+     temperatura FLOAT NOT NULL,
+    umidita FLOAT NOT NULL,
+    ph INT NOT NULL,
+    rilevazione BIGINT REFERENCES Rilevazioni (id_rilevazione),    
+    PRIMARY KEY (id_dato)
 );
 
 CREATE TABLE IF NOT EXISTS Sensore (
@@ -236,7 +219,7 @@ INSERT INTO Rilevazioni VALUES (01,'2021-09-10 10:30:00','2021-09-10 10:45:00','
 INSERT INTO Rilevazioni VALUES (02,'2021-05-02 12:30:00','2021-05-02 12:45:00','Ugo456@gmail.com',2);
 INSERT INTO Rilevazioni VALUES (03,'2021-04-06 14:30:00','2021-04-06 14:45:00','Fiona79@gmail.com',3);
 INSERT INTO Rilevazioni VALUES (04,'2021-02-07 16:30:00','2021-02-07 16:45:00','Laura659@gmail.com',4);
-
+--
 --Sensore
 INSERT INTO Sensore VALUES (010,'arduino','BD');
 INSERT INTO Sensore VALUES (020,'sensore','App');

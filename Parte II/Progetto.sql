@@ -1,3 +1,4 @@
+-- Active: 1684932917946@@127.0.0.1@5432@postgres
 DROP SCHEMA IF EXISTS "OrtiScolastici" CASCADE;
 CREATE SCHEMA IF NOT EXISTS "OrtiScolastici";
 SET search_path TO 'OrtiScolastici';
@@ -26,11 +27,6 @@ CREATE TABLE IF NOT EXISTS Progetto (
 	PRIMARY KEY (id_progetto)
 );
 
-CREATE TABLE IF NOT EXISTS Ruolo (
-    Tipo_ruolo TEXT NOT NULL CHECK (Tipo_ruolo IN ('Docente', 'Referente', 'Rilevatore Esterno', 'Studente')),
-	PRIMARY KEY (Tipo_ruolo)
-);
-
 CREATE TABLE IF NOT EXISTS Scuola (
     codice_meccanografico VARCHAR(10) NOT NULL,
     nome_scuola TEXT NOT NULL,
@@ -49,8 +45,13 @@ CREATE TABLE IF NOT EXISTS Persona (
     cognome TEXT NOT NULL,
     telefono BIGINT,
     scuola VARCHAR(10) REFERENCES Scuola (codice_meccanografico),
-    ruolo TEXT REFERENCES Ruolo (Tipo_ruolo),
-	PRIMARY KEY (email)
+    PRIMARY KEY (email)
+);
+
+CREATE TABLE IF NOT EXISTS Ruolo (
+    Tipo_ruolo TEXT NOT NULL CHECK (Tipo_ruolo IN ('Docente', 'Referente', 'Rilevatore Esterno', 'Studente')),
+	email TEXT NOT NULL REFERENCES Persona (email),
+    PRIMARY KEY (Tipo_ruolo)
 );
 
 CREATE TABLE IF NOT EXISTS Classe (
@@ -104,7 +105,7 @@ CREATE TABLE IF NOT EXISTS Piante (
 );
 
 CREATE TABLE IF NOT EXISTS Rilevazioni (
-    id_rilevazione BIGINT,
+    id_rilevazione BIGINT NOT NULL,
     data_ora_inserimento TIMESTAMP NOT NULL,
     data_ora_rilevazione TIMESTAMP NOT NULL,
     responsabile TEXT REFERENCES Persona (email),
@@ -116,43 +117,28 @@ CREATE TABLE IF NOT EXISTS Rilevazioni (
     UNIQUE (data_ora_inserimento, data_ora_rilevazione)
 );
 
-CREATE TABLE IF NOT EXISTS Biomassa (
-    id_biomassa BIGINT NOT NULL,
-    lunghezza_foglia FLOAT NOT NULL,
-    larghezza_foglia FLOAT NOT NULL,
-    peso_fresco FLOAT NOT NULL,
-    peso_secco FLOAT NOT NULL,
-    altezza_pianta FLOAT NOT NULL,
-    lunghezza_radice FLOAT NOT NULL,
-    rilevazione BIGINT REFERENCES Rilevazioni (id_rilevazione),   
-    PRIMARY KEY (id_biomassa)
+CREATE TABLE IF NOT EXISTS Responsabile (
+    id_responsabile BIGINT NOT NULL,
+    responsabile_inserimento TEXT NULL,
+    responsavile_rilevazione TEXT NULL,
+
+    CONSTRAINT IF
+    PRIMARY KEY (id_responsabile)
 );
 
-CREATE TABLE IF NOT EXISTS Fruttificazione (
-    id_fruttificazione BIGINT NOT NULL,
-    peso_fresco_radici FLOAT NOT NULL,
-    peso_secco_radici FLOAT NOT NULL,
+CREATE TABLE IF NOT EXISTS Dati(
+    id_dato BIGINT NOT NULL,
+    lunghezza_foglia FLOAT NOT NULL,
+    altezza_pianta FLOAT NOT NULL,
     num_fiori INT NOT NULL,
     num_frutti INT NOT NULL,
-    rilevazione BIGINT REFERENCES Rilevazioni (id_rilevazione), 
-    PRIMARY KEY (id_fruttificazione)
-);
-
-CREATE TABLE IF NOT EXISTS Danni (
-    id_danni BIGINT NOT NULL,
     num_foglie_danneggiate INT NOT NULL,
     percent_superficie_foglie_danneggiate FLOAT NOT NULL,
-    rilevazione BIGINT REFERENCES Rilevazioni (id_rilevazione),
-    PRIMARY KEY (id_danni)
-);
-
-CREATE TABLE IF NOT EXISTS Parametri (
-    id_parametri BIGINT NOT NULL,
     temperatura FLOAT NOT NULL,
     umidita FLOAT NOT NULL,
     ph INT NOT NULL,
-    rilevazione BIGINT REFERENCES Rilevazioni (id_rilevazione),
-    PRIMARY KEY (id_parametri)
+    rilevazione BIGINT REFERENCES Rilevazioni (id_rilevazione),    
+    PRIMARY KEY (id_dato)
 );
 
 CREATE TABLE IF NOT EXISTS Sensore (

@@ -33,7 +33,6 @@
 <p>Per ogni specifica <font color="#539165">pianta</font> <font color="#DE3163">(stessa entità di relazione, indicata come 'Pianta')</font> messa a dimora, verrà memorizzata la <font color="#F7C04A">specie</font> <font color="#DE3163">(indicato dalla relazione tra Specie e Pianta)</font>, il <font color="#F7C04A">numero di replica</font> <font color="#DE3163">(indicato come ID)</font>, il <font color="#F7C04A">gruppo</font> <font color="#DE3163">(indicato dalla relazione tra Gruppo e Pianta)</font>, <font color="#F7C04A">l’orto</font> <font color="#DE3163">(indicato dalla relazione tra Orto e Pianta)</font>, <font color="#F7C04A">l’esposizione specifica</font>, la <font color="#F7C04A">data di messa a dimora</font> e la <font color="#F7C04A">classe</font> <font color="#DE3163">(indicato dalla relazione tra Classe e Pianta)</font> che l’ha messa a dimora.</p>
 <p>Le <font color="#539165">rilevazioni</font> (osservazioni) <font color="#FF00FF">vengono effettuate</font> <font color="#DE3163">(relazione tra Pianta e Rilevazione)</font> sulle specifiche piante (repliche) e le informazioni acquisite memorizzate con <font color="#F7C04A">data e ora della rilevazione</font>, <font color="#F7C04A">data e ora dell’inserimento</font>, <font color="#F7C04A">responsabile della rilevazione</font> <font color="#DE3163">(indicato dalla relazione tra Rilevazione e Perosna)</font> (può essere un individuo o una classe) e responsabile dell’inserimento (se diverso da quello della rilevazione e anche in questo caso può essere un individuo o una classe).</p>
 <p>Le <font color="#6495ED">informazioni ambientali relative a pH, umidità e temperatura</font> vengono acquisite mediante <font color="#539165">sensori o schede Arduino</font> <font color="#DE3163">(indicati come unica entità 'Sensore')</font>, si vogliono memorizzare <font color="#F7C04A">numero</font> e <font color="#F7C04A">tipo</font> di sensori presenti in ogni orto (e le repliche associate a quel sensore). Le informazioni possono essere rilevate tramite app e inserite nella base di dati oppure essere trasmesse direttamente da schede Arduino alla base di dati. Si vuole tenere traccia della <font color="#F7C04A">modalità di acquisizione</font> delle informazioni.</p></div>
-<br>
 
 ## 2 - Progettazione Concettuale
 
@@ -53,7 +52,7 @@
 |    |             |                                           | Ciclo_Istruzione      | La scuola è del primo ciclo d’istruzione o il secondo                                 | Primo, Secondo                                         |
 |    |             |                                           | Collabora             | La scuola collabora con altre (True) o no (False)                                       | BOOLEAN                                                |
 |    |             |                                           | Provincia             | Sigla della provincia di appartenza                                                     | CHAR(2)                                                |
-|    |             |                                           | Comune                | Comune dov’è la scuola                                                                | TEXT                                                   |
+|    |             |                                           | Comune                | Comune dov'è la scuola                                                                 | TEXT                                                   |
 | 3  | Classe      | Indica le classi che aderiscono           | Sezione               | Chiave primaria;<br />Nome della classe es. 4E,4ART,4E-I                                | VARCHAR(5)                                             |
 |    |             |                                           | Ordine                | Ordine della classe (primo, secondo); Opzionale                                         | 1, 2                                                   |
 |    |             |                                           | Tipo                  | Scientifico, Classico, Agrario, ...                                                     | TEXT                                                   |
@@ -145,7 +144,7 @@ Nella Ristrutturazione del modello ER sono state apportate le seguenti modifiche
   - N_Fiori
   - Altezza_Pianta
   - Lunghezza_Radice
-- L'attributo multiplo "Esposizione" dell'entità Pianta è stato sostituito con entità singola con attributo composto Nome_Comune, Numero_Replica (derivato da Pianta, ed è chiave) e l'attributo Tipo.
+- L'attributo multiplo "Esposizione" dell'entità Pianta è stato sostituito con entità singola con attributo composto Nome_Comune, Numero_Replica (derivato da Pianta, ed è chiave) e l'attributo Tipo (Sole, Mezzombra, Ombra).
 
 ### 3.3 - Modifiche ai Vincoli
 
@@ -157,27 +156,95 @@ La generalizzazione per l'entità Responsabile è stata riorganizzata aggiungend
 
 ### 3.5 - Schema Logico
 
-Entità:
-
-<ol type="1">
+<ol type="1" style="text-align: left;">
   <li> Progetto (<u>ID</u>, Finanziamento<sub>O</sub>, Nome) </li>
-  <li> Scuola (<u>cod_Meccanografico</u>, NomeScuola, Ciclo_istruzione, Collabora<sub>O</sub>, Provincia, Comune, Progetto<sup>Progetto</sup>) </li>
+  <li> Persona (<u>Email</u>, Nome, Cognome, Telefono<sub>O</sub>, RilevatoreEsterno<sub>O</sub>)</li>  
+  <li> Scuola (<u>cod_Meccanografico</u>, Nome, Ciclo_istruzione, Comune, Provincia, Collabora<sub>O</sub>, Dirigente<sup>Persona</sup>) </li>
+  <li> Aderisce (<u>Scuola</u><sup>Scuola</sup>, <u>Progetto</u><sup>Progetto</sup>, Referente<sup>Persona</sup>)</li>
   <br>
-  <li> Persona (<u>Email</u>, Telefono <sub>O</sub>, Nome, Cognome)</li>  
-  <li> Ruolo (<u>Email</u><sup>Persona</sup>,Tipo)</li>
-  <br>
-  <li> Classe (<u>Sezione</u>, <u>cod_Meccanografico</u><sup>Scuola</sup>, Ordine, TipoScuola, Docente<sup>Persona</sup>)</li>
+  <li> Classe (<u>ID</u>, <i>Sezione</i>, <i>Scuola</i><sup><i>Scuola</i></sup>, Ordine, TipoScuola, Docente<sup>Persona</sup>)</li>
+  <li> Studente (<u>Alunno</u><sup>Persona</sup>, Classe<sup>Classe</sup>)</li>
   <br>
   <li> Specie (<u>Nome_Scientifico</u>, Substrato)</li>
-  <li> Orto (<u>Nome</u>, <u>Coordinate_GPS</u>, Superficie_mq, Posizione, Condinzione_Ambientale, Scuola<sup>Scuola</sup>, Specie<sup>Specie</sup>)</li>
-  <li> Pianta (<u>ID</u>, Nome_Comune, Data_Messa_A_Dimora, Scopo, Specie<sup>Specie</sup>, Classe<sup>Classe</sup>, Scuola<sup>Classe</sup>)</li>
+  <li> Orto (<u>Nome</u>, <u>Latitudine</u>, <u>Longitudine</u>, Superficie_mq, Posizione, CondizioneAmbientale, Scuola<sup>Scuola</sup>, Specie<sup>Specie</sup>)</li>
+  <li> Pianta (<u>NumeroReplica</u>, <u>NomeComune</u>, DataMessaADimora, Scopo, Specie<sup>Specie</sup>, Classe<sup>Classe</sup>)</li>
   <li> Gruppo (<u>ID</u>, Tipo, Pianta<sup>Pianta</sup>, NumeroReplica<sup>Pianta</sup>)</li>
   <li> Esposizione (Pianta<sup>Pianta</sup>, NumeroReplica<sup>Pianta</sup>, Tipo)</li>
   <br>
   <li> Rilevazione (<u>ID</u>, DataOra_Inserimento, DataOra_Rilevazione, Pianta<sup>Pianta</sup>, NumeroReplica<sup>Pianta</sup>)</li>
   <li> Sensore (<u>ID</u>, Tipo, Acquisizione, ID_Rilevazione<sup>Rilevazione</sup>)</li>
   <li> Dati (<u>ID</u><sup>Rilevazione</sup>, Temperatura, PH, Umidità, N_Foglie_Danneggiate, %_Superficie_Foglie_Danneggiate, N_Frutti<sub>O</sub>, N_Fiori, Altezza_Pianta, Lunghezza_Radice)</li>
-  <li> Responsabile (<u>ID</u><sup>Rilevazione</sup>, Inserimento<sub>O</sub><sup>Persona</sup>, Rilevatore<sup>Persona</sup>)</li>
+  <li> Responsabile (<u>ID</u><sup>Rilevazione</sup>, Inserimento<sub>O</sub><sup>Persona</sup>, Rilevatore<sup>Persona</sup>, Inserimento<sub>O</sub><sup>Classe</sup>, Rilevatore<sup>Classe</sup>)</li>
 </ol>
 
 ### 3.6 - Verifica della correttezza e della qualità dello schema logico e del modello ER ristrutturato
+
+<div style="text-align: left;">
+<b>Progetto (<u>ID</u>, Finanziamento<sub>O </sub>, Nome)</b><br>
+ID -> Finanziamento, Nome;<br>
+La relazione è <b>BCNF</b> dato che la chiave è unica e compare a sinistra.<br>
+<br>
+<b>Scuola (<u>cod_Meccanografico</u>, NomeScuola, Ciclo_istruzione, Collabora<sub>O</sub>, Provincia, Comune, Progetto<sup>Progetto</sup>)</b><br>
+cod_Meccanografico -> NomeScuola, Ciclo_istruzione; <br>
+... <br>
+cod_Meccanografico -> NomeScuola, Ciclo_istruzione, Collabora<sub>O</sub>, Provincia, Comune, Progetto<sup>Progetto</sup>;<br>
+La relazione è <b>BCNF</b>, l'unica chiave possibile è chiave primaria della Relazione.<br>
+<br>
+<b>Persona (<u>Email</u>, Telefono<sub>O</sub>, Nome, Cognome)</b><br>
+Email -> Nome, Cognome, Telefono;<br>
+La relazione è <b>BCNF</b>, l'unica chiave possibile è chiave primaria della Relazione.<br>
+<br>
+<b>Ruolo (<u>Email</u><sup>Persona</sup>,Tipo)</b><br>
+Email -> Tipo;<br>
+La relazione è <b>BCNF</b>, l'unica chiave possibile è chiave primaria della Relazione.<br>
+<br>
+<b>Classe (<u>Sezione</u>, <u>cod_Meccanografico</u><sup>Scuola</sup>, Ordine, TipoScuola, Docente<sup>Persona</sup>)</b><br>
+Sezione, cod_Meccanografico -> Ordine, TipoScuola;<br>
+...<br>
+Sezione, cod_Meccanografico -> Ordine, TipoScuola, Docente<sup>Persona</sup>;<br>
+La relazione è <b>BCNF</b>, dato che la chiave compare a sinistra.<br>
+<br>
+<b>Specie (<u>Nome_Scientifico</u>, Substrato)</b><br>
+Nome_Scientifico -> Substrato;<br>
+La relazione è <b>BCNF</b>, l'unica chiave possibile è chiave primaria della Relazione.<br>
+<br>
+<b>Orto (<u>Nome</u>, <u>Coordinate_GPS</u>, Superficie_mq, Posizione, Condinzione_Ambientale, Scuola<sup>Scuola</sup>, Specie<sup>Specie</sup>)</b><br>
+Nome, Coordinate_GPS -> Superficie_mq, Posizione;<br>
+...<br>
+Nome, Coordinate_GPS -> Superficie_mq, Posizione, Condinzione_Ambientale, Scuola<sup>Scuola</sup>, Specie<sup>Specie</sup>;<br>
+La relazione è <b>BCNF</b>, dato che la chiave compare a sinistra.<br>
+<br>
+<b>Pianta (<u>Numero_Replica</u>, <u>Nome_Comune</u>, Data_Messa_A_Dimora, Scopo, Specie<sup>Specie</sup>, Classe<sup>Classe</sup>, Scuola<sup>Classe</sup>)</b><br>
+Numero_Replica, Nome_Comune -> Data_Messa_A_Dimora, Scopo, Specie, Classe, Scuola;<br>
+La relazione è <b>BCNF</b>, l'unica chiave possibile è chiave primaria della Relazione.<br>
+<br>
+<b>Gruppo (<u>ID</u>, Tipo, Pianta<sup>Pianta</sup>, NumeroReplica<sup>Pianta</sup>)</b><br>
+ID -> Tipo, Pianta, NumeroReplica;<br>
+La relazione è <b>BCNF</b>, l'unica chiave possibile è chiave primaria della Relazione.<br>
+<br>
+<b>Esposizione (Pianta<sup>Pianta</sup>, NumeroReplica<sup>Pianta</sup>, Tipo)</b><br>
+Pianta, NumeroReplica -> Tipo;<br>
+La relazione è <b>BCNF</b>, dato che la chiave compare a sinistra.<br>
+<br>
+<b>Rilevazione (<u>ID</u>, DataOra_Inserimento, DataOra_Rilevazione, Pianta<sup>Pianta</sup>, NumeroReplica<sup>Pianta</sup>)</b><br>
+ID -> DataOra_Inserimento, DataOra_Rilevazione;<br>
+...<br>
+ID -> DataOra_Inserimento, DataOra_Rilevazione, Pianta, NumeroReplica;<br>
+La relazione è <b>BCNF</b>, dato che la chiave compare a sinistra.<br>
+<br>
+<b>Sensore (<u>ID</u>, Tipo, Acquisizione, ID_Rilevazione<sup>Rilevazione</sup>)</b><br>
+ID -> Tipo, Acquisizione, ID_Rilevazione;<br>
+La relazione è <b>BCNF</b>, l'unica chiave possibile è chiave primaria della Relazione.<br>
+<br>
+<b>Dati (<u>ID</u><sup>Rilevazione</sup>, Temperatura, PH, Umidità, N_Foglie_Danneggiate, %_Superficie_Foglie_Danneggiate, N_Frutti<sub>O</sub>, N_Fiori, Altezza_Pianta, Lunghezza_Radice)</b><br>
+ID -> Temperatura, PH, Umidità;<br>
+...<br>
+ID -> Temperatura, PH, Umidità, N_Foglie_Danneggiate, %_Superficie_Foglie_Danneggiate, N_Frutti, N_Fiori, Altezza_Pianta, Lunghezza_Radice;<br>
+La relazione è <b>BCNF</b>, dato che la chiave compare a sinistra.<br>
+<br>
+<b>Responsabile (<u>ID</u><sup>Rilevazione</sup>, Inserimento<sub>O</sub><sup>Persona</sup>, Rilevatore<sup>Persona</sup>)</b><br>
+ID -> Inserimento, Rilevatore;<br>
+La relazione è <b>BCNF</b>, dato che la chiave compare a sinistra.<br>
+<br>
+<b>Tutte le relazioni sono in forma normale di Boyce-Codd, e tutte sono in terza forma normale.</b>
+</div>

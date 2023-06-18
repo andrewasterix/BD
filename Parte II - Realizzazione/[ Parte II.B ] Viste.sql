@@ -1,4 +1,3 @@
--- Active: 1684932917946@@127.0.0.1@5432@Labo_BD@OrtiScolastici
 /*
 Parte II.B - Viste
 

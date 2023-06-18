@@ -34,9 +34,17 @@ Si fa riferimento al documento [Progetto di Basi di Dati 2023 - 12-CFU.pdf](Spec
 
 Sono presenti i file della parte 1 del progetto:
 
-- Diagramma ER non Ristrutturato (file `DiagrammaNonRistrutturato.drawio`)
-- Diagramma ER Ristrutturato (file `DiagrammaRistrutturato.drawio`)
-- La progettazione completa del database (file `[ Parte I ] Progettazione.pdf`)
+- Diagramma ER non Ristrutturato (`DiagrammaNonRistrutturato.jpg`)
+- Diagramma ER Ristrutturato (`DiagrammaRistrutturato.jpg`)
+- La progettazione completa del database (`[ Parte I ] Progettazione.pdf`)
+
+Aggiuntivi:
+
+- La progettazione completa del database (`[ Parte I ] Progettazione.md`)
+- Diagramma ER non Ristrutturato (`DiagrammaNonRistrutturato.drawio`)
+- Diagramma ER Ristrutturato (`DiagrammaRistrutturato.drawio`)
+- Diagramma ER non Ristrutturato (`DiagrammaNonRistrutturato.svg`)
+- Diagramma ER Ristrutturato (`DiagrammaRistrutturato.svg`)
 
 ### Parte 2 - Realizzazione
 
@@ -44,7 +52,7 @@ Sono presenti i file della parte 2 del progetto:
 
 - Il file `[ Parte II.A.A ] BaseDati.sql` che contiene lo schema SQL del database.
 - Il file `[ Parte II.A.B ] Popolamento.sql` che contiene le istruzioni SQL per popolare il database.
-- Il file `[ Parte II.A.C ] Query.sql` che contiene le istruzioni SQL per eseguire le query richieste.
+- Il file `[ Parte II.A.C ] DataGrip.jpg` che contiene la schermata di DataGrip con il database popolato.
 - Il file `[ Parte II.B ] Viste.sql` che contiene le istruzioni SQL per creare le viste richieste.
 - Il file `[ Parte II.C ] Interrogazionie.sql` che contiene le istruzioni SQL per eseguire le interrogazioni richieste.
 - Il file `[ Parte II.D ] Funzioni.sql` che contiene le istruzioni SQL per creare le funzioni richieste.
@@ -58,3 +66,16 @@ Inoltre, sono presenti i file:
 ### Parte 3 - Progettazione Fisica
 
 Sono presenti i file della parte 3 del progetto:
+
+## Programmi Utilizzati
+
+- VSCode (https://code.visualstudio.com/) con estensione PostgreSQL (https://marketplace.visualstudio.com/items?itemName=cweijan.vscode-mysql-client)
+- Draw.io (https://app.diagrams.net/)
+- pgAdmin 4 (https://www.pgadmin.org/)
+- PostgreSQL (https://www.postgresql.org/)
+
+## Autori
+
+- **Andrea Franceschetti** - 4357070
+- **William Chen** - 4827847
+- **Alessio De Vincenzi** - 4878315

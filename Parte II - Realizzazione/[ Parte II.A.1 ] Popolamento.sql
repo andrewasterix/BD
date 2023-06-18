@@ -1,5 +1,13 @@
+/*
+Parte II.A.1 - Popolamento Base di Dati
+
+Andrea Franceschetti - 4357070
+William Chen - 4827847
+Alessio De Vincenzi - 4878315
+*/
 SET search_path TO 'OrtiScolastici';
 SET datestyle TO 'MDY';
+SET timezone TO 'GMT';
 
 -- Inserimento Persone come Rilevatore Esterno
 INSERT INTO Persona (Email, Nome, Cognome, Telefono, RilevatoreEsterno)
@@ -416,94 +424,94 @@ VALUES (1, 'Controllo', 1, 'RosaCanina'),
     (2, 'Monitoraggio', 5, 'Lavanda'),
     (2, 'Monitoraggio', 6, 'Lavanda');
 INSERT INTO Gruppo (IdGruppo, TipoGruppo, NumeroReplica, NomeComune)
-VALUES (1, 'Controllo', 1, 'Olivo'),
-    (1, 'Controllo', 2, 'Olivo'),
-    (1, 'Controllo', 3, 'Olivo'),
-    (2, 'Monitoraggio', 4, 'Olivo'),
-    (2, 'Monitoraggio', 5, 'Olivo'),
-    (2, 'Monitoraggio', 6, 'Olivo'),
-    (1, 'Controllo', 1, 'Fico'),
-    (1, 'Controllo', 2, 'Fico'),
-    (1, 'Controllo', 3, 'Fico'),
-    (2, 'Monitoraggio', 4, 'Fico'),
-    (2, 'Monitoraggio', 5, 'Fico'),
-    (2, 'Monitoraggio', 6, 'Fico');
+VALUES (3, 'Controllo', 1, 'Olivo'),
+    (3, 'Controllo', 2, 'Olivo'),
+    (3, 'Controllo', 3, 'Olivo'),
+    (4, 'Monitoraggio', 4, 'Olivo'),
+    (4, 'Monitoraggio', 5, 'Olivo'),
+    (4, 'Monitoraggio', 6, 'Olivo'),
+    (3, 'Controllo', 1, 'Fico'),
+    (3, 'Controllo', 2, 'Fico'),
+    (3, 'Controllo', 3, 'Fico'),
+    (4, 'Monitoraggio', 4, 'Fico'),
+    (4, 'Monitoraggio', 5, 'Fico'),
+    (4, 'Monitoraggio', 6, 'Fico');
 INSERT INTO Gruppo (IdGruppo, TipoGruppo, NumeroReplica, NomeComune)
-VALUES (1, 'Controllo', 1, 'Salvia'),
-    (1, 'Controllo', 2, 'Salvia'),
-    (1, 'Controllo', 3, 'Salvia'),
-    (2, 'Monitoraggio', 4, 'Salvia'),
-    (2, 'Monitoraggio', 5, 'Salvia'),
-    (2, 'Monitoraggio', 6, 'Salvia'),
-    (1, 'Controllo', 1, 'Melissa'),
-    (1, 'Controllo', 2, 'Melissa'),
-    (1, 'Controllo', 3, 'Melissa'),
-    (2, 'Monitoraggio', 4, 'Melissa'),
-    (2, 'Monitoraggio', 5, 'Melissa'),
-    (2, 'Monitoraggio', 6, 'Melissa');
+VALUES (5, 'Controllo', 1, 'Salvia'),
+    (5, 'Controllo', 2, 'Salvia'),
+    (5, 'Controllo', 3, 'Salvia'),
+    (6, 'Monitoraggio', 4, 'Salvia'),
+    (6, 'Monitoraggio', 5, 'Salvia'),
+    (6, 'Monitoraggio', 6, 'Salvia'),
+    (5, 'Controllo', 1, 'Melissa'),
+    (5, 'Controllo', 2, 'Melissa'),
+    (5, 'Controllo', 3, 'Melissa'),
+    (6, 'Monitoraggio', 4, 'Melissa'),
+    (6, 'Monitoraggio', 5, 'Melissa'),
+    (6, 'Monitoraggio', 6, 'Melissa');
 INSERT INTO Gruppo (IdGruppo, TipoGruppo, NumeroReplica, NomeComune)
-VALUES (1, 'Controllo', 1, 'Pomodoro'),
-    (1, 'Controllo', 2, 'Pomodoro'),
-    (1, 'Controllo', 3, 'Pomodoro'),
-    (2, 'Monitoraggio', 4, 'Pomodoro'),
-    (2, 'Monitoraggio', 5, 'Pomodoro'),
-    (2, 'Monitoraggio', 6, 'Pomodoro'),
-    (1, 'Controllo', 1, 'Limone'),
-    (1, 'Controllo', 2, 'Limone'),
-    (1, 'Controllo', 3, 'Limone'),
-    (2, 'Monitoraggio', 4, 'Limone'),
-    (2, 'Monitoraggio', 5, 'Limone'),
-    (2, 'Monitoraggio', 6, 'Limone');
+VALUES (7, 'Controllo', 1, 'Pomodoro'),
+    (7, 'Controllo', 2, 'Pomodoro'),
+    (7, 'Controllo', 3, 'Pomodoro'),
+    (8, 'Monitoraggio', 4, 'Pomodoro'),
+    (8, 'Monitoraggio', 5, 'Pomodoro'),
+    (8, 'Monitoraggio', 6, 'Pomodoro'),
+    (7, 'Controllo', 1, 'Limone'),
+    (7, 'Controllo', 2, 'Limone'),
+    (7, 'Controllo', 3, 'Limone'),
+    (8, 'Monitoraggio', 4, 'Limone'),
+    (8, 'Monitoraggio', 5, 'Limone'),
+    (8, 'Monitoraggio', 6, 'Limone');
 INSERT INTO Gruppo (IdGruppo, TipoGruppo, NumeroReplica, NomeComune)
-VALUES (1, 'Controllo', 1, 'Menta'),
-    (1, 'Controllo', 2, 'Menta'),
-    (1, 'Controllo', 3, 'Menta'),
-    (2, 'Monitoraggio', 4, 'Menta'),
-    (2, 'Monitoraggio', 5, 'Menta'),
-    (2, 'Monitoraggio', 6, 'Menta'),
-    (1, 'Controllo', 1, 'Rosmarino'),
-    (1, 'Controllo', 2, 'Rosmarino'),
-    (1, 'Controllo', 3, 'Rosmarino'),
-    (2, 'Monitoraggio', 4, 'Rosmarino'),
-    (2, 'Monitoraggio', 5, 'Rosmarino'),
-    (2, 'Monitoraggio', 6, 'Rosmarino');
+VALUES (9, 'Controllo', 1, 'Menta'),
+    (9, 'Controllo', 2, 'Menta'),
+    (9, 'Controllo', 3, 'Menta'),
+    (10, 'Monitoraggio', 4, 'Menta'),
+    (10, 'Monitoraggio', 5, 'Menta'),
+    (10, 'Monitoraggio', 6, 'Menta'),
+    (9, 'Controllo', 1, 'Rosmarino'),
+    (9, 'Controllo', 2, 'Rosmarino'),
+    (9, 'Controllo', 3, 'Rosmarino'),
+    (10, 'Monitoraggio', 4, 'Rosmarino'),
+    (10, 'Monitoraggio', 5, 'Rosmarino'),
+    (10, 'Monitoraggio', 6, 'Rosmarino');
 INSERT INTO Gruppo (IdGruppo, TipoGruppo, NumeroReplica, NomeComune)
-VALUES (1, 'Controllo', 1, 'Ciliegio'),
-    (1, 'Controllo', 2, 'Ciliegio'),
-    (1, 'Controllo', 3, 'Ciliegio'),
-    (2, 'Monitoraggio', 4, 'Ciliegio'),
-    (2, 'Monitoraggio', 5, 'Ciliegio'),
-    (2, 'Monitoraggio', 6, 'Ciliegio'),
-    (1, 'Controllo', 1, 'Cetriolo'),
-    (1, 'Controllo', 2, 'Cetriolo'),
-    (1, 'Controllo', 3, 'Cetriolo'),
-    (2, 'Monitoraggio', 4, 'Cetriolo'),
-    (2, 'Monitoraggio', 5, 'Cetriolo'),
-    (2, 'Monitoraggio', 6, 'Cetriolo');
+VALUES (11, 'Controllo', 1, 'Ciliegio'),
+    (11, 'Controllo', 2, 'Ciliegio'),
+    (11, 'Controllo', 3, 'Ciliegio'),
+    (12, 'Monitoraggio', 4, 'Ciliegio'),
+    (12, 'Monitoraggio', 5, 'Ciliegio'),
+    (12, 'Monitoraggio', 6, 'Ciliegio'),
+    (11, 'Controllo', 1, 'Cetriolo'),
+    (11, 'Controllo', 2, 'Cetriolo'),
+    (11, 'Controllo', 3, 'Cetriolo'),
+    (12, 'Monitoraggio', 4, 'Cetriolo'),
+    (12, 'Monitoraggio', 5, 'Cetriolo'),
+    (12, 'Monitoraggio', 6, 'Cetriolo');
 
 -- Insetimento dati nella tabella Sensore
 INSERT INTO Sensore (idSensore, TipoSensore, TipoAcquisizione)
 VALUES (1, 'Arduino', 'Arduino'),
-		(2, 'Sensore', 'App'),
-		(3, 'Arduino', 'App'),
-		(4, 'Sensore', 'Arduino'),
-		(5, 'Arduino', 'App'),
-		(6, 'Arduino', 'Arduino'),
-		(7, 'Arduino', 'Arduino'),
-		(8, 'Sensore', 'App'),
-		(9, 'Arduino', 'App'),
-		(10, 'Sensore', 'Arduino'),
-		(11, 'Arduino', 'App'),
-		(12, 'Arduino', 'Arduino'),
-		(13, 'Arduino', 'Arduino'),
-		(14, 'Sensore', 'App'),
-		(15, 'Arduino', 'App'),
-		(16, 'Sensore', 'Arduino'),
-		(17, 'Arduino', 'App'),
-		(18, 'Arduino', 'Arduino'),
-		(19, 'Arduino', 'Arduino'),
-		(20, 'Sensore', 'App'),
-		(21, 'Arduino', 'App');
+	(2, 'Sensore', 'App'),
+	(3, 'Arduino', 'App'),
+	(4, 'Sensore', 'Arduino'),
+	(5, 'Arduino', 'App'),
+	(6, 'Arduino', 'Arduino'),
+	(7, 'Arduino', 'Arduino'),
+	(8, 'Sensore', 'App'),
+	(9, 'Arduino', 'App'),
+	(10, 'Sensore', 'Arduino'),
+	(11, 'Arduino', 'App'),
+	(12, 'Arduino', 'Arduino'),
+	(13, 'Arduino', 'Arduino'),
+	(14, 'Sensore', 'App'),
+	(15, 'Arduino', 'App'),
+	(16, 'Sensore', 'Arduino'),
+	(17, 'Arduino', 'App'),
+	(18, 'Arduino', 'Arduino'),
+	(19, 'Arduino', 'Arduino'),
+	(20, 'Sensore', 'App'),
+	(21, 'Arduino', 'App');
 
 -- Inserimento dati nella tabella Rilevazione
 INSERT INTO Rilevazione (IdRilevazione, DataOraRilevazione, DataOraInserimento, NumeroReplica, NomeComune, Sensore)

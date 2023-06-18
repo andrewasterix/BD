@@ -1,7 +1,15 @@
+/*
+Parte II.A - Base di Dati
+
+Andrea Franceschetti - 4357070
+William Chen - 4827847
+Alessio De Vincenzi - 4878315
+*/
 DROP SCHEMA IF EXISTS "OrtiScolastici" CASCADE;
 CREATE SCHEMA IF NOT EXISTS "OrtiScolastici";
 SET search_path TO 'OrtiScolastici';
 SET datestyle TO 'MDY';
+SET timezone TO 'GMT';
 
 DROP TABLE IF EXISTS "Progetto", "Scuola", "Persona", "Ruolo", "Classe" CASCADE;
 DROP TABLE IF EXISTS "Specie", "Orto", "Pianta", "Esposizione", "Gruppo", "Sensore", "Dati", "Rilevazione", "Responsabile" CASCADE;

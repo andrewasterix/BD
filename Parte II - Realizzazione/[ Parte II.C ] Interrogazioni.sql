@@ -6,8 +6,8 @@ William Chen - 4827847
 Alessio De Vincenzi - 4878315
 */
 SET search_path TO 'OrtiScolastici';
-
 SET datestyle TO 'MDY';
+SET timezone TO 'GMT';
 
 -- A. Determinare le scuole che, pur avendo un finanziamento per il progetto, non hanno inserito rilevazioni in questo anno scolastico;
 

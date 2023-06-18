@@ -14,7 +14,7 @@ SET timezone TO 'GMT';
     A. Verifica del vincolo che ogni scuola dovrebbe concentrarsi su tre specie e ogni gruppo dovrebbe contenere 20 repliche
     -- [TESTATA E FUNZIONANTE]
 */
--- Trigge di verifica del vincolo -> Specie <= 3 per Scuola
+-- Trigger di verifica del vincolo -> Specie <= 3 per Scuola
 CREATE OR REPLACE FUNCTION verifica_numero_specie()
 RETURNS TRIGGER AS $$
 DECLARE
@@ -69,3 +69,32 @@ EXECUTE FUNCTION verifica_numero_repliche();
     quando viene rilevato un valore decrescente per un parametro di biomassa.
     -- [TESTATA E FUNZIONANTE]
 */
+-- Per tenere traccia dei log in una tabella apposita abbiamo bisogno di una tabella LogWarning
+CREATE TABLE IF NOT EXISTS LogWarning (
+    IdLog SERIAL PRIMARY KEY, -- Chiave Primaria per la Tabella 
+    Messaggio TEXT, -- Messaggio di Warning
+    DataOra TIMESTAMP DEFAULT NOW() -- Data e Ora di inserimento del Messaggio
+);
+-- Trigger di verifica del vincolo -> Biomassa decrescente
+CREATE OR REPLACE FUNCTION verifica_biomassa_decrescente()
+RETURNS TRIGGER AS $$
+BEGIN
+	IF NEW.AltezzaPianta < OLD.AltezzaPianta THEN
+		INSERT INTO LogWarning (Messaggio)
+        	VALUES ('Valore di Biomassa (Altezza Pianta) decrescente rilevato!');
+    END IF;
+	
+	IF NEW.LunghezzaRadice < OLD.LunghezzaRadice THEN
+		INSERT INTO LogWarning (Messaggio)
+        VALUES ('Valore di Biomassa (Lunghezza Radice) decresente rilevato!');
+	END IF;
+
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Creazione del Trigger inserisce il messaggio di Warning in una Tabella apposita per tenere traccia dei Log
+CREATE OR REPLACE TRIGGER controllo_biomassa_decrescente
+BEFORE UPDATE ON Dati
+FOR EACH ROW
+EXECUTE FUNCTION verifica_biomassa_decrescente();

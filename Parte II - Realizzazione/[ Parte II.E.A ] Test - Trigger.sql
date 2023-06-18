@@ -1,3 +1,10 @@
+/*
+Parte II.E.A - Test - Trigger
+
+Andrea Franceschetti - 4357070
+William Chen - 4827847
+Alessio De Vincenzi - 4878315
+*/
 SET search_path TO 'OrtiScolastici';
 SET datestyle TO 'MDY';
 SET timezone TO 'GMT';

@@ -1,3 +1,4 @@
+-- Active: 1684932917946@@127.0.0.1@5432@Labo_BD@OrtiScolastici
 /*
 Parte II.B - Viste
 
@@ -15,31 +16,46 @@ SET timezone TO 'GMT';
     - su base mensile, il valore medio dei parametri ambientali e di crescita delle piante
         (selezionare almeno tre parametri, quelli che si ritengono più significativi)
 */
-CREATE VIEW BiomonitoringSummary AS
-SELECT Gruppo.IdGruppo, Gruppo.TipoGruppo, COUNT(DISTINCT Pianta.NumeroReplica) AS NumberOfPlants, 
-    Specie.NomeScientifico AS Species, Orto.NomeOrto AS Garden, 
-    AVG(Dati.Temperatura) AS AvgTemperature, 
-    AVG(Dati.Umidita) AS AvgHumidity, 
-    AVG(Dati.AltezzaPianta) AS AvgPlantHeight
-FROM Gruppo
-JOIN Pianta ON Gruppo.NumeroReplica = Pianta.NumeroReplica
-JOIN Specie ON Pianta.Specie = Specie.NomeScientifico
-JOIN Orto ON Gruppo.IdGruppo = Orto.IdOrto
-JOIN Dati ON Pianta.NumeroReplica = Dati.Rilevazione
-GROUP BY Gruppo.IdGruppo, Gruppo.TipoGruppo, Specie.NomeScientifico, Orto.NomeOrto;
 
-CREATE VIEW VistaBiomonitoraggio AS
-SELECT g.IdGruppo, g.TipoGruppo, g.NumeroReplica AS ReplicaGruppo, g.NomeComune AS ComuneGruppo,
-       c.NumeroReplica AS ReplicaControllo, c.NomeComune AS ComuneControllo,
-       p.NumeroReplica AS NumeroPiante, p.Specie, o.NomeOrto,
-       AVG(d.Temperatura) AS MediaTemperatura, AVG(d.Umidita) AS MediaUmidita, AVG(d.AltezzaPianta) AS MediaAltezzaPianta
-FROM Gruppo g
-JOIN Pianta p ON g.NumeroReplica = p.NumeroReplica AND g.NomeComune = p.NomeComune
-JOIN Specie s ON p.Specie = s.NomeScientifico
-JOIN Orto o ON o.Specie = s.NomeScientifico
-JOIN Rilevazione r ON p.NumeroReplica = r.NumeroReplica AND p.NomeComune = r.NomeComune
-JOIN Dati d ON r.IdRilevazione = d.Rilevazione
-JOIN Gruppo c ON g.IdGruppo = c.IdGruppo -- Corrispondente gruppo di controllo
-GROUP BY g.IdGruppo, g.TipoGruppo, g.NumeroReplica, g.NomeComune,
-         c.NumeroReplica, c.NomeComune,
-         p.NumeroReplica, p.Specie, o.NomeOrto;
+-- Vista per confrontare il numero di repliche tra gruppi di controllo e monitoraggio
+DROP VIEW IF EXISTS ConfrontoGruppi CASCADE;
+CREATE OR REPLACE VIEW ConfrontoGruppi AS
+SELECT DISTINCT G.IdGruppo AS Controllo, G1.IdGruppo AS Monitoraggio, G.NomeComune AS Pianta
+FROM Gruppo AS G
+JOIN Gruppo AS G1 ON G.NomeComune = G1.NomeComune AND G.TipoGruppo = 'Controllo' AND G1.TipoGruppo = 'Monitoraggio'
+ORDER BY G.IdGruppo, G1.IdGruppo;
+
+-- Vista per collegare la Piante - Orto - Gruppo
+DROP VIEW IF EXISTS PianteOrtoGruppo CASCADE;
+CREATE OR REPLACE VIEW PianteOrtoGruppo AS
+SELECT COUNT(DISTINCT P.NumeroReplica) AS Repliche, P.NomeComune AS Pianta, P.Specie AS Specie, 
+    O.NomeOrto AS Orto,
+    G.Controllo, G.Monitoraggio
+FROM Pianta AS P
+JOIN Orto AS O ON P.Specie = O.Specie
+JOIN ConfrontoGruppi AS G ON P.NomeComune = G.Pianta
+GROUP BY P.NomeComune, P.Specie, O.NomeOrto, G.Controllo, G.Monitoraggio
+ORDER BY G.Controllo, G.Monitoraggio;
+
+-- TODO fino a qui fa belle cose dopo da rivedere per unire più rilevazioni in base ai gruppi (Unire gruppi e rilevazioni)
+
+-- Vista per collegare la Rilevazione ai Dati (Temperatura, Umidità, Ph, AltezzaPianta, LunghezzaRadice)
+DROP VIEW IF EXISTS DatiRilevazione CASCADE;
+CREATE OR REPLACE VIEW DatiRilevazione AS
+SELECT D.Rilevazione, R.NumeroReplica, R.NomeComune, R.DataOraRilevazione, 
+    D.Temperatura AS Temperatura, D.Umidita AS Umidita, D.Ph AS Ph, 
+    D.AltezzaPianta AS AltezzaPianta, D.LunghezzaRadice AS LunghezzaRadice
+FROM Dati AS D
+JOIN Rilevazione AS R ON D.Rilevazione = R.IdRilevazione;
+
+-- Vista per collegare la pianta alla sua rilevazione
+DROP VIEW IF EXISTS RiassuntoInformazioni CASCADE;
+CREATE OR REPLACE VIEW RiassuntoInformazioni AS
+SELECT P.Repliche, P.Pianta AS Pianta, P.Specie AS Specie, P.Orto AS Orto, P.Controllo AS Controllo, P.Monitoraggio AS Monitoraggio,
+    DATE_TRUNC('month', D.DataOraRilevazione) AS Mese, 
+    AVG(D.Temperatura) AS Temperatura, AVG(D.Umidita) AS Umidita, AVG(D.Ph) AS Ph, AVG(D.altezzapianta) AS AltezzaPianta, 
+    AVG(D.LunghezzaRadice) AS LunghezzaRadice
+FROM PianteOrtoGruppo AS P
+JOIN DatiRilevazione AS D ON P.Repliche = D.NumeroReplica AND P.Pianta = D.NomeComune
+GROUP BY P.Repliche, P.Pianta, P.Specie, P.Orto, DATE_TRUNC('month', D.DataOraRilevazione), P.Controllo, P.Monitoraggio
+ORDER BY P.Controllo, P.Monitoraggio;

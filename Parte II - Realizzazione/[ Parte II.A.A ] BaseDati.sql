@@ -1,5 +1,5 @@
 /*
-Parte II.A - Base di Dati
+Parte II.A.A - Base di Dati
 
 Andrea Franceschetti - 4357070
 William Chen - 4827847

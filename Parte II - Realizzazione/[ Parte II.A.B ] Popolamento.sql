@@ -1,5 +1,5 @@
 /*
-Parte II.A.1 - Popolamento Base di Dati
+Parte II.A.B - Popolamento Base di Dati
 
 Andrea Franceschetti - 4357070
 William Chen - 4827847

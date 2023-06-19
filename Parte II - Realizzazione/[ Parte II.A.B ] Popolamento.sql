@@ -23,101 +23,31 @@ INSERT INTO Persona (Email, Nome, Cognome, Telefono) -- Scuola Primaria Giovanni
 VALUES ('mario.rossi@example.com', 'Mario', 'Rossi', 1234567890), -- Dirigente 
     ('giulia.bianchi@example.com', 'Giulia', 'Bianchi', NULL), -- Docente
     ('andrea.verdi@example.com', 'Andrea', 'Verdi', 9876543210); -- Docente
-INSERT INTO Persona (Email, Nome, Cognome, Telefono)
-VALUES ('mario.acquilino@studenti.example.com', 'Mario', 'Acquilino', NULL), -- Studente 1 5A
-    ('giulia.agosti@studenti.example.com', 'Giulia', 'Agosti', NULL), -- Studente 2 5A
-    ('andrea.apostu@studenti.example.com', 'Andrea', 'Apostu', NULL), -- Studente 3 5A
-    ('luca.araghi@studenti.example.com', 'Luca', 'Araghi', NULL), -- Studente 4 5A
-    ('silvia.baghino@studenti.example.com', 'Silvia', 'Baghino', NULL); -- Studente 5 5A
-INSERT INTO Persona (Email, Nome, Cognome, Telefono)
-VALUES ('francesca.bardi@studenti.example.com', 'Francesca', 'Bardi', NULL), -- Studente 1 5B
-    ('luca.baretto@studenti.example.com', 'Luca', 'Barretto', NULL), -- Studente 2 5B
-    ('sara.barragan@studenti.example.com', 'Sara', 'Barragan', NULL), -- Studente 3 5B
-    ('giorgio.barrara@studenti.example.com', 'Giorgio', 'Barrara', NULL), -- Studente 4 5B
-    ('elena.bernardini@studenti.example.com', 'Elena', 'Bernardini', NULL); -- Studente 5 5B
 
 INSERT INTO Persona (Email, Nome, Cognome, Telefono) -- Scuola Secondaria di Primo Grado Leonardo da Vinci
 VALUES ('giorgio.bianchi@example.com', 'Giorgio', 'Bianchi', NULL), -- Dirigente
     ('elena.verdi@example.com', 'Elena', 'Verdi', NULL), -- Docente
     ('matteo.ferrari@example.com', 'Matteo', 'Ferrari', 4567890123); -- Docente
-INSERT INTO Persona (Email, Nome, Cognome, Telefono)
-VALUES ('matteo.borracino@studenti.example.com', 'Matteo', 'Borracino', NULL), -- Studente 1 1A
-    ('anna.bosso@studenti.example.com', 'Anna', 'Bosso', NULL), -- Studente 2 1A
-    ('valentina.bouras@studenti.example.com', 'Valentina', 'Bouras', NULL), -- Studente 3 1A
-    ('giovanni.bronzetti@studenti.example.com', 'Giovanni', 'Bronzetti', NULL), -- Studente 4 1A
-    ('giulia.bruzzone@studenti.example.com', 'Giulia', 'Bruzzone', NULL); -- Studente 5 1A
-INSERT INTO Persona (Email, Nome, Cognome, Telefono)
-VALUES ('mario.bulgari@studenti.example.com', 'Mario', 'Bulgari', NULL), -- Studente 1 1B
-    ('maria.cani@studenti.example.com', 'Maria', 'Cani', NULL), -- Studente 2 1B
-    ('laura.carena@studenti.example.com', 'Laura', 'Carena', NULL), -- Studente 3 1B
-    ('paolo.casagrande@studenti.example.com', 'Paolo', 'Casagrande', NULL), -- Studente 4 1B
-    ('giuseppe.catania@studenti.example.com', 'Giuseppe', 'Catania', NULL); -- Studente 5 1B
 
 INSERT INTO Persona (Email, Nome, Cognome, Telefono) -- Scuola Secondaria di Secondo Grado Galileo Galilei
 VALUES ('giulia.verdi@example.com', 'Giulia', 'Verdi', 6666666666), -- Dirigente
     ('mario.bianchi@example.com', 'Mario', 'Bianchi', 7777777777), -- Docente
     ('maria.bianchi@example.com', 'Maria', 'Bianchi', NULL); -- Docente
-INSERT INTO Persona (Email, Nome, Cognome, Telefono)
-VALUES ('marco.cavalca@studenti.example.com', 'Marco', 'Cavalca', NULL), -- Studente 1 2A
-    ('claudia.cavalli@studenti.example.com', 'Claudia', 'Cavalli', NULL), -- Studente 2 2A
-    ('giorgia.cavicchia@studenti.example.com', 'Giorgia', 'Cavicchia', NULL), -- Studente 3 2A
-    ('gabriele.caviglia@studenti.example.com', 'Gabriele', 'Caviglia', NULL), -- Studente 4 2A
-    ('luca.caviglia@studenti.example.com', 'Luca', 'Caviglia', NULL); -- Studente 5 2A
-INSERT INTO Persona (Email, Nome, Cognome, Telefono)
-VALUES ('elena.celotto@studenti.example.com', 'Elena', 'Celotto', NULL), -- Studente 1 2B
-    ('michele.centoze@studenti.example.com', 'Michele', 'Centoze', NULL), -- Studente 2 2B
-    ('anna.chen@studenti.example.com', 'Anna', 'Chen', NULL), -- Studente 3 2B
-    ('gabriele.chen@studenti.example.com', 'Gabriele', 'Chen', NULL), -- Studente 4 2B
-    ('valentina.chicco@studenti.example.com', 'Valentina', 'Chicco', NULL); -- Studente 5 2B
+
 INSERT INTO Persona (Email, Nome, Cognome, Telefono) -- Scuola Primaria Giuseppe Verdi
 VALUES ('laura.rossi@example.com', 'Laura', 'Rossi', 8888888888), -- Dirigente
     ('paolo.verdi@example.com', 'Paolo', 'Verdi', 9999999999), -- Docente
     ('giuseppe.bianchi@example.com', 'Giuseppe', 'Bianchi', 1111111111); -- Docente
-INSERT INTO Persona (Email, Nome, Cognome, Telefono)
-VALUES ('simone.chicco@studenti.example.com', 'Simone', 'Chicco', NULL), -- Studente 1 4A
-    ('francesco.chiola@studenti.example.com', 'Francesco', 'Chiola', NULL), -- Studente 2 4A
-    ('laura.ciarlo@studenti.example.com', 'Laura', 'Ciarlo', NULL), -- Studente 3 4A
-    ('matteo.civati@studenti.example.com', 'Matteo', 'Civati', NULL), -- Studente 4 4A
-    ('elisa.corbo@studenti.example.com', 'Elisa', 'Corbo', NULL); -- Studente 5 4A
-INSERT INTO Persona (Email, Nome, Cognome, Telefono)
-VALUES('gabriele.alessandro@studenti.example.com', 'Gabriele', 'Alessandro', NULL), -- Studente 1 4B
-    ('giulia.devincenzi@studenti.example.com', 'Giulia', 'De Vincenzi', NULL), -- Studente 2 4B
-    ('paola.delvigo@studenti.example.com', 'Paola', 'Del Vigo', NULL), -- Studente 3 4B
-    ('luca.derqui@studenti.example.com', 'Luca', 'Derqui', NULL), -- Studente 4 4B
-    ('silvia.dicriscio@studenti.example.com', 'Silvia', 'Di Criscio', NULL); -- Studente 5 4B
+
 INSERT INTO Persona (Email, Nome, Cognome, Telefono) -- Scuola Secondaria di Primo Grado Alessandro Volta
 VALUES ('francesca.rossi@example.com', 'Francesca', 'Rossi', NULL), -- Dirigente 
     ('luca.ferrari@example.com', 'Luca', 'Ferrari', 2345678901), -- Docente
     ('sara.rossi@example.com', 'Sara', 'Rossi', NULL); -- Docente
-INSERT INTO Persona (Email, Nome, Cognome, Telefono)
-VALUES ('francesco.disabatino@studenti.example.com', 'Francesco', 'Di Sabatino', NULL), -- Studente 1 3A
-    ('marco.dufour@studenti.example.com', 'Marco', 'Dufour', NULL), -- Studente 2 3A
-    ('elisa.durante@studenti.example.com', 'Elisa', 'Durante', NULL), -- Studente 3 3A
-    ('michele.elezi@studenti.example.com', 'Michele', 'Elezi', NULL), -- Studente 4 3A
-    ('claudia.emuze@studenti.example.com', 'Claudia', 'Emuze', NULL); -- Studente 5 3A
-INSERT INTO Persona (Email, Nome, Cognome, Telefono)
-VALUES ('simone.etna@studenti.example.com', 'Simone', 'Etna', NULL), -- Studente 1 3B
-    ('giorgia.fabbri@studenti.example.com', 'Giorgia', 'Fabbri', NULL), -- Studente 2 3B
-    ('paola.falcone@studenti.example.com', 'Paola', 'Falcone', NULL), -- Studente 3 3B
-    ('gabriele.fancellu@studenti.example.com', 'Gabriele', 'Fancellu', NULL), -- Studente 4 3B
-    ('giulia.fasce@studenti.example.com', 'Giulia', 'Fasce', NULL); -- Studente 5 3B
 	
 INSERT INTO Persona (Email, Nome, Cognome, Telefono) -- Scuola Secondaria di Secondo Grado Giuseppe Garibaldi
 VALUES ('anna.verdi@example.com', 'Anna', 'Verdi', 1234567890), -- Dirigente
     ('valentina.rossi@example.com', 'Valentina', 'Rossi', NULL), -- Docente
     ('giovanni.rossi@example.com', 'Giovanni', 'Rossi', 9876543210);-- Docente
-INSERT INTO Persona (Email, Nome, Cognome, Telefono)
-VALUES ('giulia.fazio@studenti.example.com', 'Giulia', 'Fazio', NULL), -- Studente 1 1A
-    ('andrea.fazio@studenti.example.com', 'Andrea', 'Fazio', NULL), -- Studente 2 1A
-    ('elisa.fazzeri@studenti.example.com', 'Elisa', 'Fazzeri', NULL), -- Studente 3 1A
-    ('simone.ferrari@studenti.example.com', 'Simone', 'Ferrari', NULL), -- Studente 4 1A
-    ('giorgia.fontana@studenti.example.com', 'Giorgia', 'Fontana', NULL); -- Studente 5 1A
-INSERT INTO Persona (Email, Nome, Cognome, Telefono)
-VALUES ('paola.giampietro@studenti.example.com', 'Paola', 'Giampietro', NULL), -- Studente 1 1B
-    ('gabriele.giusto@studenti.example.com', 'Gabriele', 'Giusto', NULL), -- Studente 2 1B
-    ('giulia.guan@studenti.example.com', 'Giulia', 'Guan', NULL), -- Studente 3 1B
-    ('andrea.guiso@studenti.example.com', 'Andrea', 'Guiso', NULL), -- Studente 4 1B
-    ('elisa.lamperti@studenti.example.com', 'Elisa', 'Lamperti', NULL); -- Studente 5 1B
 
 -- Inserimento dati nella tabella Scuola
 INSERT INTO Scuola (Cod_Meccanografico, NomeScuola, CicloIstruzione, Comune, Provincia, Collabora, Dirigente, Finanziamento, Referente)
@@ -143,81 +73,6 @@ VALUES (7, '4A', 'QRST56789E', 2, 'Scuola Primaria', 'paolo.verdi@example.com'),
     (10, '3B', 'UVWX34567F', 2, 'Scuola Secondaria di Primo Grado', 'sara.rossi@example.com'),
     (11, '1A', 'CDEF90123H', 2, 'Istituto Agrario', 'valentina.rossi@example.com'),
     (12, '1B', 'CDEF90123H', 2, 'Istituto Agrario', 'giovanni.rossi@example.com');
-
--- Inserimento dati nella tabella Studente
-INSERT INTO Studente (Classe, Alunno) -- 5A ABCD12345A
-VALUES ( 1, 'mario.acquilino@studenti.example.com'),
-    ( 1, 'giulia.agosti@studenti.example.com'), 
-    ( 1, 'andrea.apostu@studenti.example.com'), 
-    ( 1, 'luca.araghi@studenti.example.com'), 
-    ( 1, 'silvia.baghino@studenti.example.com');
-INSERT INTO Studente (Classe, Alunno) -- 5B ABCD12345A
-VALUES ( 2, 'francesca.bardi@studenti.example.com'), 
-    ( 2, 'luca.baretto@studenti.example.com'), 
-    ( 2, 'sara.barragan@studenti.example.com'),
-    ( 2, 'giorgio.barrara@studenti.example.com'),
-    ( 2, 'elena.bernardini@studenti.example.com');
-INSERT INTO Studente (Classe, Alunno) -- 1A EFGH67890B
-VALUES ( 3, 'matteo.borracino@studenti.example.com'),
-    ( 3, 'anna.bosso@studenti.example.com'),
-    ( 3, 'valentina.bouras@studenti.example.com'),
-    ( 3, 'giovanni.bronzetti@studenti.example.com'),
-    ( 3, 'giulia.bruzzone@studenti.example.com');
-INSERT INTO Studente (Classe, Alunno) -- 1B EFGH67890B
-VALUES ( 4, 'mario.bulgari@studenti.example.com'),
-    ( 4, 'maria.cani@studenti.example.com'),
-    ( 4, 'laura.carena@studenti.example.com'),
-    ( 4, 'paolo.casagrande@studenti.example.com'),
-    ( 4, 'giuseppe.catania@studenti.example.com');
-INSERT INTO Studente (Classe, Alunno) -- 2A MNOP23456D
-VALUES ( 5, 'marco.cavalca@studenti.example.com'),
-    ( 5, 'claudia.cavalli@studenti.example.com'),
-    ( 5, 'giorgia.cavicchia@studenti.example.com'),
-    ( 5, 'gabriele.caviglia@studenti.example.com'),
-    ( 5, 'luca.caviglia@studenti.example.com');
-INSERT INTO Studente (Classe, Alunno) -- 2B MNOP23456D
-VALUES ( 6, 'elena.celotto@studenti.example.com'),
-    ( 6, 'michele.centoze@studenti.example.com'),
-    ( 6, 'anna.chen@studenti.example.com'),
-    ( 6, 'gabriele.chen@studenti.example.com'),
-    ( 6, 'valentina.chicco@studenti.example.com');
-INSERT INTO Studente (Classe, Alunno) -- 4A QRST56789E   
-VALUES ( 7, 'simone.chicco@studenti.example.com'),
-    ( 7, 'francesco.chiola@studenti.example.com'),
-    ( 7, 'laura.ciarlo@studenti.example.com'),
-    ( 7, 'matteo.civati@studenti.example.com'),
-    ( 7, 'elisa.corbo@studenti.example.com');
-INSERT INTO Studente (Classe, Alunno) -- 4B QRST56789E
-VALUES ( 8, 'gabriele.alessandro@studenti.example.com'),
-    ( 8, 'giulia.devincenzi@studenti.example.com'),
-    ( 8, 'paola.delvigo@studenti.example.com'),
-    ( 8, 'luca.derqui@studenti.example.com'),
-    ( 8, 'silvia.dicriscio@studenti.example.com');
-INSERT INTO Studente (Classe, Alunno) -- 3A UVWX34567F
-VALUES ( 9, 'francesco.disabatino@studenti.example.com'),
-    ( 9, 'marco.dufour@studenti.example.com'),
-    ( 9, 'elisa.durante@studenti.example.com'),
-    ( 9, 'michele.elezi@studenti.example.com'),
-    ( 9, 'claudia.emuze@studenti.example.com');
-INSERT INTO Studente (Classe, Alunno) -- 3B UVWX34567F
-VALUES (10, 'simone.etna@studenti.example.com'),
-    (10, 'giorgia.fabbri@studenti.example.com'),
-    (10, 'paola.falcone@studenti.example.com'),
-    (10, 'gabriele.fancellu@studenti.example.com'),
-    (10, 'giulia.fasce@studenti.example.com');
-INSERT INTO Studente (Classe, Alunno) -- 1A CDEF90123H
-VALUES (11, 'giulia.fazio@studenti.example.com'),
-    (11, 'andrea.fazio@studenti.example.com'),
-    (11, 'elisa.fazzeri@studenti.example.com'),
-    (11, 'simone.ferrari@studenti.example.com'),
-    (11, 'giorgia.fontana@studenti.example.com');
-INSERT INTO Studente (Classe, Alunno) -- 1B CDEF90123H
-VALUES (12, 'paola.giampietro@studenti.example.com'),
-    (12, 'gabriele.giusto@studenti.example.com'),
-    (12, 'giulia.guan@studenti.example.com'),
-    (12, 'andrea.guiso@studenti.example.com'),
-    (12, 'elisa.lamperti@studenti.example.com');
-
 
 -- Inserimento dati nella tabella Specie
 INSERT INTO Specie (NomeScientifico, Substrato)

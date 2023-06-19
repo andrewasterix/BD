@@ -2,9 +2,9 @@
 
 ## Componenti del Gruppo
 
-- Andrea Franceschetti - 4357070
-- William Chen -
-- Alessio De Vincenzi - 4878315
+- **Andrea Franceschetti** - 4357070
+- **William Chen** - 4827847
+- **Alessio De Vincenzi** - 4878315
 
 ## Parte 1 - Requisiti e Progettazione Concettuale
 

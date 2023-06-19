@@ -2,11 +2,19 @@
 
 ## Componenti del Gruppo
 
-- Andrea Franceschetti - 4357070
-- William Chen -
-- Alessio De Vincenzi - 4878315
+- **Andrea Franceschetti** - 4357070
+- **William Chen** - 4827847
+- **Alessio De Vincenzi**s - 4878315
 
 ## Progettazione Fisica
+
+Per verificare il corretto funzionamento delle interrogazioni a pieno carico, si è deciso di creare un database di test con un numero di tuple molto alto, in modo da poter valutare le prestazioni delle interrogazioni a pieno carico.
+
+Al fine di fare ciò abbiamo creato uno Notebook in Python che genera un numero elevato di dati in modo dinamico e casuale e li inserisce direttamente nel database.
+
+Lo script, creando valori di dati in modo altamente casuale nel momento della creazione del database, permette di ottenere un database di test diverso ad ogni esecuzione.
+
+**Nota:** Lo script è stato creato per essere eseguito su un database vuoto, quindi se si vuole eseguire nuovamente lo script, è necessario eliminare il database e ricrearlo con il file SQL '[ Parte II.A.A ] BaseDati.sql'.
 
 ### Interrogazioni a pieno carico
 
@@ -137,30 +145,27 @@ SELECT COUNT(*) FROM Classe/Scuola/Pianta/Rilevazione/Dati;
 ##### Piano esecuzione prima dell'indice
 
 - Analisi
-![Analisi Prima Interrogazione](Aggiuntivi\Senza_Indici\1\Analisi.jpg "Analisi Prima Interrogazione")
-
+  ![Analisi Prima Interrogazione](Aggiuntivi\Senza_Indici\1\Analisi.jpg "Analisi Prima Interrogazione")
 - Grafico
-![Grafico Prima Interrogazione](Aggiuntivi\Senza_Indici\1\Grafico.jpg "Grafico Prima Interrogazione")
+  ![Grafico Prima Interrogazione](Aggiuntivi\Senza_Indici\1\Grafico.jpg "Grafico Prima Interrogazione")
 
 #### Interrogazione 2 - Condizione Complessa
 
 ##### Piano esecuzione prima dell'indice
 
 - Analisi
-![Analisi Seconda Interrogazione](Aggiuntivi\Senza_Indici\2\Analisi.jpg "Analisi Seconda Interrogazione")
-
+  ![Analisi Seconda Interrogazione](Aggiuntivi\Senza_Indici\2\Analisi.jpg "Analisi Seconda Interrogazione")
 - Grafico
-![Grafico Prima Interrogazione](Aggiuntivi\Senza_Indici\2\Grafico.jpg "Grafico Seconda Interrogazione")
+  ![Grafico Prima Interrogazione](Aggiuntivi\Senza_Indici\2\Grafico.jpg "Grafico Seconda Interrogazione")
 
 #### Interrogazione 3 - Funzione Generica
 
 ##### Piano esecuzione prima dell'indice
 
 - Analisi
-![Analisi Terza Interrogazione](Aggiuntivi\Senza_Indici\2\Analisi.jpg "Analisi Terza Interrogazione")
-
+  ![Analisi Terza Interrogazione](Aggiuntivi\Senza_Indici\2\Analisi.jpg "Analisi Terza Interrogazione")
 - Grafico
-![Grafico Terza Interrogazione](Aggiuntivi\Senza_Indici\2\Grafico.jpg "Grafico Terza Interrogazione")
+  ![Grafico Terza Interrogazione](Aggiuntivi\Senza_Indici\2\Grafico.jpg "Grafico Terza Interrogazione")
 
 ## Controllo degli Accessi
 

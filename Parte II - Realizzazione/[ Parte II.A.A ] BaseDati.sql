@@ -54,20 +54,10 @@ CREATE TABLE IF NOT EXISTS Classe (
     FOREIGN KEY (Docente) REFERENCES Persona(Email) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
--- Associazione Studente
-CREATE TABLE IF NOT EXISTS Studente (
-    Classe BIGINT NOT NULL,
-    FOREIGN KEY (Classe) REFERENCES Classe(IdClasse) ON DELETE CASCADE ON UPDATE CASCADE,
-    Alunno VARCHAR(100) NOT NULL,
-    FOREIGN KEY (Alunno) REFERENCES Persona(Email) ON DELETE CASCADE ON UPDATE CASCADE,
-
-    PRIMARY KEY (Classe, Alunno)
-);
-
 -- Tabella Specie
 CREATE TABLE IF NOT EXISTS Specie (
     NomeScientifico VARCHAR(100) NOT NULL PRIMARY KEY,
-    Substrato VARCHAR(100) NOT NULL
+    Substrato VARCHAR(100) NOT NULL CHECK(Substrato IN ('TerriccioRinvaso', 'SuoloPreEsistente'))
 );
 
 -- Tabella Orto

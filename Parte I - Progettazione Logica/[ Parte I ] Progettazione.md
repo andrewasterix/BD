@@ -38,7 +38,7 @@
 
 ### 2.1 - Diagramma ER
 
-![Modello ER - Non Ristrutturato](DiagrammaNonRistrutturato.svg "Modello ER non ristrutturato")
+![Modello ER - Non Ristrutturato](DiagrammaNonRistrutturato.jpg "Modello ER non ristrutturato")
 
 ### 2.2 - Domini e Entità
 
@@ -125,7 +125,7 @@ Esite una generalizzazione per l'entità Responsabile, che può essere Responsab
 
 ### 3.1 - Schema Relazionale Ristrutturato
 
-![Modello ER - Ristrutturato](DiagrammaRistrutturato.svg "Modello ER ristrutturato")
+![Modello ER - Ristrutturato](DiagrammaRistrutturato.jpg "Modello ER ristrutturato")
 
 ### 3.2 - Modifiche ad Entità, Associazioni e Vincoli
 

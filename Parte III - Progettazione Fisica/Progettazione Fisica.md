@@ -134,15 +134,33 @@ SELECT COUNT(*) FROM Classe/Scuola/Pianta/Rilevazione/Dati;
 
 #### Interrogazione 1 - JOIN
 
-Pippo
+##### Piano esecuzione prima dell'indice
+
+- Analisi
+![Analisi Prima Interrogazione](Aggiuntivi\Senza_Indici\1\Analisi.jpg "Analisi Prima Interrogazione")
+
+- Grafico
+![Grafico Prima Interrogazione](Aggiuntivi\Senza_Indici\1\Grafico.jpg "Grafico Prima Interrogazione")
 
 #### Interrogazione 2 - Condizione Complessa
 
-PLUTO
+##### Piano esecuzione prima dell'indice
+
+- Analisi
+![Analisi Seconda Interrogazione](Aggiuntivi\Senza_Indici\2\Analisi.jpg "Analisi Seconda Interrogazione")
+
+- Grafico
+![Grafico Prima Interrogazione](Aggiuntivi\Senza_Indici\2\Grafico.jpg "Grafico Seconda Interrogazione")
 
 #### Interrogazione 3 - Funzione Generica
 
-TOPOLINO
+##### Piano esecuzione prima dell'indice
+
+- Analisi
+![Analisi Terza Interrogazione](Aggiuntivi\Senza_Indici\2\Analisi.jpg "Analisi Terza Interrogazione")
+
+- Grafico
+![Grafico Terza Interrogazione](Aggiuntivi\Senza_Indici\2\Grafico.jpg "Grafico Terza Interrogazione")
 
 ## Controllo degli Accessi
 

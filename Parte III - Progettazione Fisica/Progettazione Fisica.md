@@ -10,7 +10,7 @@
 
 Per verificare il corretto funzionamento delle interrogazioni a pieno carico, si è deciso di creare un database di test con un numero di tuple molto alto, in modo da poter valutare le prestazioni delle interrogazioni a pieno carico.
 
-Al fine di fare ciò abbiamo creato uno Notebook in Python che genera un numero elevato di dati in modo dinamico e casuale e li inserisce direttamente nel database.
+Al fine di fare ciò abbiamo creato uno Notebook in Python che genera un elevato numero di dati in modo dinamico e casuale, inserendoli direttamente nel database.
 
 Lo script, creando valori di dati in modo altamente casuale nel momento della creazione del database, permette di ottenere un database di test diverso ad ogni esecuzione.
 
@@ -103,10 +103,9 @@ Gli indici clusterizzati sulla colonna "Scuola" nella tabella "Classe", sulla co
 
 ### Tabella riassuntivo del carico di lavoro
 
-Dati ottenuti tramite le seguenti query:
+Dati ottenuti tramite la seguente query:
 
-- Per estrazione del numero di pagine:
-  (**N.B**: La query estrae i valori richiesti per tutte le tabelle del database)
+**Nota:** La query estrae i valori richiesti per tutte le tabelle del database
 
 ```sql
 SELECT
@@ -123,19 +122,13 @@ ORDER BY
   t.relname;
 ```
 
-- Per estrazione del numero di tuple:
-
-```sql
-SELECT COUNT(*) FROM Classe/Scuola/Pianta/Rilevazione/Dati;
-```
-
 <table>
 <tr><td>Tabella</td><td>Numero Tuple</td><td>Dimensione Blocchi Singolo</td><td>Dimensione Totale</td>
-<tr style="text-align: center;"><td>Classe</td><td>12</td><td>8192 byte</td><td>24 kb</td>
-<tr style="text-align: center;"><td>Scuola</td><td>6</td><td>8192 byte</td><td>32 kb</td>
-<tr style="text-align: center;"><td>Pianta</td><td>72</td><td>8192 byte</td><td>24 kb</td>
-<tr style="text-align: center;"><td>Rilevazione</td><td>72</td><td>8192 byte</td><td>24 kb</td>
-<tr style="text-align: center;"><td>Dati</td><td>72</td><td>8192 byte</td><td>24 kb</td>
+<tr style="text-align: center;"><td>Classe</td><td>19</td><td>8192 byte</td><td>24 kb</td>
+<tr style="text-align: center;"><td>Scuola</td><td>10</td><td>8192 byte</td><td>32 kb</td>
+<tr style="text-align: center;"><td>Pianta</td><td>100</td><td>16 kb</td><td>56 kb</td>
+<tr style="text-align: center;"><td>Rilevazione</td><td>100</td><td>8192 byte</td><td>24 kb</td>
+<tr style="text-align: center;"><td>Dati</td><td>100</td><td>8192 byte</td><td>24 kb</td>
 </table>
 
 ### Piani di esecuzione delle interrogazioni a pieno carico scelti dal Sistema

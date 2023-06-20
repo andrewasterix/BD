@@ -8,13 +8,13 @@
 
 ## Progettazione Fisica
 
-Per verificare il corretto funzionamento delle interrogazioni a pieno carico, si è deciso di creare un database di test con un numero di tuple molto alto, in modo da poter valutare le prestazioni delle interrogazioni a pieno carico.
+Al fine di verificare il corretto funzionamento delle interrogazioni a pieno carico, si è deciso di creare un database di test con un elevato numero di tuple, in modo da valutare le prestazioni delle interrogazioni in situazioni di carico massimo. 
 
-Al fine di fare ciò abbiamo creato uno Notebook in Python che genera un elevato numero di dati in modo dinamico e casuale, inserendoli direttamente nel database.
+Per fare ciò, abbiamo creato un Notebook in Python che genera un elevato numero di dati in modo dinamico e casuale, inserendoli direttamente nel database.
 
-Lo script, creando valori di dati in modo altamente casuale nel momento della creazione del database, permette di ottenere un database di test diverso ad ogni esecuzione.
+Lo script, generando valori di dati in modo altamente casuale durante la creazione del database, permette di ottenere un database di test diverso ad ogni esecuzione.
 
-**Nota:** Lo script è stato creato per essere eseguito su un database vuoto, quindi se si vuole eseguire nuovamente lo script, è necessario eliminare il database e ricrearlo con il file SQL '[ Parte II.A.A ] BaseDati.sql'.
+**Nota:** Lo script è stato creato per essere eseguito su un database vuoto, quindi se si vuole eseguirlo nuovamente, è necessario eliminare il database e ricrearlo utilizzando il file SQL '[ Parte II.A.A ] BaseDati.sql'.
 
 ### Interrogazioni a pieno carico
 

@@ -159,6 +159,25 @@ ORDER BY
 - Grafico
   ![Grafico Prima Interrogazione](Aggiuntivi\Senza_Indici\1\Grafico.jpg "Grafico Prima Interrogazione")
 
+#### Piano esecuzione dopo l'indice
+
+- Analisi
+  ![Analisi Prima Interrogazione](Aggiuntivi\Con_Indici\1\Analisi.jpg "Analisi Prima Interrogazione")
+- Grafico
+  ![Grafico Prima Interrogazione](Aggiuntivi\Con_Indici\1\Grafico.jpg "Grafico Prima Interrogazione")
+
+#### Conclusioni
+
+Con l'introduzione degli indici clusterizzati, il piano di esecuzione fisico cambia di poco, ma le prestazioni peggiorano leggermente. Infatti, il tempo di esecuzione della query è di 0.3 ms senza indici e di 0.4 ms con indici.
+
+Questo perchè essendo una query di JOIN, il sistema deve comunque eseguire un'operazione di JOIN tra le tabelle, quindi l'indice clusterizzato non ha un impatto significativo sulle prestazioni.
+
+Il piano di esecuzione fisico per eseguire il JOIN sceglie di eseguire un'operazione di Hash Join tra le tabelle "Classe" e "Persona", utilizzando l'indice clusterizzato sulla colonna "Docente" nella tabella "Classe" e l'indice clusterizzato sulla colonna "Email" nella tabella "Persona".
+
+Dopo aver eseguito l'operazione di Hash Join, il sistema esegue un'operazione di Hash Join tra le tabelle "Scuola" e "Classe", utilizzando l'indice clusterizzato sulla colonna "Cod_Meccanografico" nella tabella "Scuola" e l'indice clusterizzato sulla colonna "Scuola" nella tabella "Classe".
+
+Infine, il sistema esegue un'operazione di Hash Join tra le tabelle "Orto" e "Scuola", utilizzando l'indice clusterizzato sulla colonna "Cod_Meccanografico" nella tabella "Scuola" e l'indice clusterizzato sulla colonna "Scuola" nella tabella "Orto".
+
 #### Interrogazione 2 - Condizione Complessa
 
 ##### Piano esecuzione prima dell'indice
@@ -168,18 +187,52 @@ ORDER BY
 - Grafico
   ![Grafico Prima Interrogazione](Aggiuntivi\Senza_Indici\2\Grafico.jpg "Grafico Seconda Interrogazione")
 
+#### Piano esecuzione dopo l'indice
+
+- Analisi
+  ![Analisi Seconda Interrogazione](Aggiuntivi\Con_Indici\2\Analisi.jpg "Analisi Seconda Interrogazione")
+- Grafico
+  ![Grafico Prima Interrogazione](Aggiuntivi\Con_Indici\2\Grafico.jpg "Grafico Seconda Interrogazione")
+
+#### Conclusioni
+
+Con l'introduzione degli indici clusterizzati, il piano di esecuzione fisico non cambia e le prestazioni rimangono le stesse. Infatti, il tempo di esecuzione della query è di 0.1 ms sia senza indici che con indici.
+
+Questo perchè essendo una query di JOIN, il sistema deve comunque eseguire un'operazione di JOIN tra le tabelle, quindi l'indice clusterizzato non ha un impatto significativo sulle prestazioni.
+
+Il piano di esecuzione fisico per eseguire il JOIN sceglie di eseguire un'operazione di Hash Join tra le tabelle "Rilevazione" e "Dati", utilizzando l'indice clusterizzato sulla colonna "Rilevazione" nella tabella "Dati".
+
 #### Interrogazione 3 - Funzione Generica
 
 ##### Piano esecuzione prima dell'indice
 
 - Analisi
-  ![Analisi Terza Interrogazione](Aggiuntivi\Senza_Indici\2\Analisi.jpg "Analisi Terza Interrogazione")
+  ![Analisi Terza Interrogazione](Aggiuntivi\Senza_Indici\3\Analisi.jpg "Analisi Terza Interrogazione")
 - Grafico
-  ![Grafico Terza Interrogazione](Aggiuntivi\Senza_Indici\2\Grafico.jpg "Grafico Terza Interrogazione")
+  ![Grafico Terza Interrogazione](Aggiuntivi\Senza_Indici\3\Grafico.jpg "Grafico Terza Interrogazione")
 
-## Controllo degli Accessi
+#### Piano esecuzione dopo l'indice
 
-### Gerarchia dei Ruoli
+- Analisi
+  ![Analisi Terza Interrogazione](Aggiuntivi\Con_Indici\3\Analisi.jpg "Analisi Terza Interrogazione")
+- Grafico
+  ![Grafico Terza Interrogazione](Aggiuntivi\Con_Indici\3\Grafico.jpg "Grafico Terza Interrogazione")
+
+#### Conclusioni
+
+Con l'introduzione degli indici clusterizzati, il piano di esecuzione fisico cambia di poco, ma le prestazioni peggiorano leggermente. Infatti, il tempo di esecuzione della query è di 0.2 ms senza indici e di 0.1 ms con indici.
+
+Questo perchè essendo una query di JOIN, il sistema deve comunque eseguire un'operazione di JOIN tra le tabelle, quindi l'indice clusterizzato non ha un impatto significativo sulle prestazioni.
+
+Il piano di esecuzione fisico per eseguire il JOIN sceglie di eseguire un'operazione di Hash Join tra le tabelle "Classe" e "Scuola", utilizzando l'indice clusterizzato sulla colonna "Scuola" nella tabella "Classe" e l'indice clusterizzato sulla colonna "Cod_Meccanografico" nella tabella "Scuola".
+
+Dopo aver eseguito l'operazione di Hash Join, il sistema esegue un'operazione di Hash Join tra le tabelle "Pianta" e "Classe", utilizzando l'indice clusterizzato sulla colonna "Classe" nella tabella "Pianta" e l'indice clusterizzato sulla colonna "IdClasse" nella tabella "Classe".
+
+Infine, il sistema esegue un'operazione di Hash Join tra le tabelle "Pianta" e "Specie", utilizzando l'indice clusterizzato sulla colonna "Specie" nella tabella "Pianta" e l'indice clusterizzato sulla colonna "NomeSpecie" nella tabella "Specie".
+
+## Progettazione Fisica - Sicurezza
+
+### Controllo degli Accessi Gerarchia dei Ruoli
 
 Il successivo elenco mostra la gerarchia dei ruoli in ordine decrescente di privilegi:
 

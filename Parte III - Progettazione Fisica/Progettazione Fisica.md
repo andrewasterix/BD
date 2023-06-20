@@ -10,7 +10,7 @@
 
 Per verificare il corretto funzionamento delle interrogazioni a pieno carico, si è deciso di creare un database di test con un numero di tuple molto alto, in modo da poter valutare le prestazioni delle interrogazioni a pieno carico.
 
-Al fine di fare ciò abbiamo creato uno Notebook in Python che genera un numero elevato di dati in modo dinamico e casuale e li inserisce direttamente nel database.
+Al fine di fare ciò abbiamo creato uno Notebook in Python che genera un elevato numero di dati in modo dinamico e casuale, inserendoli direttamente nel database.
 
 Lo script, creando valori di dati in modo altamente casuale nel momento della creazione del database, permette di ottenere un database di test diverso ad ogni esecuzione.
 
@@ -68,9 +68,14 @@ Tuttavia, abbiamo tenuto presente che l'utilizzo di indici clusterizzati può co
 Questo indice è stato creato per velocizzare la query di JOIN.
 
 ```sql
-CREATE CLUSTER INDEX idx_Classe_Docente ON Classe USING btree(Docente);
-CREATE CLUSTER INDEX idx_Scuola_Cod_Meccanografico ON Scuola USING btree(Cod_Meccanografico);
-CREATE CLUSTER INDEX idx_Scuola_Finanziamento ON Scuola USING btree(Finanziamento);
+CREATE INDEX idx_Classe_Docente ON Classe USING btree(Docente);
+CLUSTER Classe USING idx_Classe_Docente;
+
+CREATE INDEX idx_Scuola_Cod_Meccanografico ON Scuola USING btree(Cod_Meccanografico);
+CLUSTER Scuola USING idx_Scuola_Cod_Meccanografico;
+
+CREATE INDEX idx_Scuola_Finanziamento ON Scuola USING btree(Finanziamento);
+CLUSTER Scuola USING idx_Scuola_Finanziamento;
 ```
 
 La creazione di indici clusterizzati sulla colonna "Docente" nella tabella "Classe" e sulle colonne "Cod_Meccanografico" e "Finanziamento" nella tabella "Scuola", ci permette di accedere direttamente ai dati di nostro interesse, accelerando conseguentemente i le operazioni di JOIN tra le tabelle.
@@ -80,9 +85,14 @@ La creazione di indici clusterizzati sulla colonna "Docente" nella tabella "Clas
 Questo indice è stato creato per velocizzare la query di Condizione Complessa.
 
 ```sql
-CREATE CLUSTER INDEX idx_Rilevazione_DataOraRilevazione ON Rilevazione USING btree(DataOraRilevazione);
-CREATE CLUSTER INDEX idx_Dati_Rilevazione ON Dati USING btree(Rilevazione);
-CREATE CLUSTER INDEX idx_Dati_Temperatura_Umidita ON Dati USING btree(Temperatura, Umidita);
+CREATE INDEX idx_Rilevazione_DataOraRilevazione ON Rilevazione USING btree(DataOraRilevazione);
+CLUSTER Rilevazione USING idx_Rilevazione_DataOraRilevazione;
+
+CREATE INDEX idx_Dati_Rilevazione ON Dati USING btree(Rilevazione);
+CLUSTER Dati USING idx_Dati_Rilevazione;
+
+CREATE INDEX idx_Dati_Temperatura_Umidita ON Dati USING btree(Temperatura, Umidita);
+CLUSTER Dati USING idx_Dati_Temperatura_Umidita;
 ```
 
 L'indice clusterizzato sulla colonna "DataOraRilevazione" nella tabella "Rilevazione" organizza fisicamente le righe di dati in base ai valori di questa colonna.
@@ -93,20 +103,26 @@ Gli indici clusterizzati sulla colonna "Rilevazione" nella tabella "Dati" e sull
 Questo indice è stato creato per velocizzare la query di Funzione Generica.
 
 ```sql
-CREATE CLUSTER INDEX idx_Classe_Scuola ON Classe USING btree(Scuola);
-CREATE CLUSTER INDEX idx_Pianta_Classe ON Pianta USING btree(Classe);
-CREATE CLUSTER INDEX idx_Scuola_NomeScuola ON Scuola USING btree(NomeScuola);
-CREATE CLUSTER INDEX idx_Pianta_Specie ON Pianta USING btree(Specie);
+CREATE INDEX idx_Classe_Scuola ON Classe USING btree(Scuola);
+CLUSTER Classe USING idx_Classe_Scuola;
+
+CREATE INDEX idx_Pianta_Classe ON Pianta USING btree(Classe);
+CLUSTER Pianta USING idx_Pianta_Classe;
+
+CREATE INDEX idx_Scuola_NomeScuola ON Scuola USING btree(NomeScuola);
+CLUSTER Scuola USING idx_Scuola_NomeScuola;
+
+CREATE INDEX idx_Pianta_Specie ON Pianta USING btree(Specie);
+CLUSTER Pianta USING idx_Pianta_Specie;
 ```
 
 Gli indici clusterizzati sulla colonna "Scuola" nella tabella "Classe", sulla colonna "Classe" nella tabella "Pianta", sulla colonna "NomeScuola" nella tabella "Scuola" e sulla colonna "Specie" nella tabella "Pianta" organizzano fisicamente le righe di dati in base ai valori di queste colonne, migliorando le prestazioni delle query che coinvolgono tali colonne.
 
 ### Tabella riassuntivo del carico di lavoro
 
-Dati ottenuti tramite le seguenti query:
+Dati ottenuti tramite la seguente query:
 
-- Per estrazione del numero di pagine:
-  (**N.B**: La query estrae i valori richiesti per tutte le tabelle del database)
+**Nota:** La query estrae i valori richiesti per tutte le tabelle del database
 
 ```sql
 SELECT
@@ -123,19 +139,13 @@ ORDER BY
   t.relname;
 ```
 
-- Per estrazione del numero di tuple:
-
-```sql
-SELECT COUNT(*) FROM Classe/Scuola/Pianta/Rilevazione/Dati;
-```
-
 <table>
 <tr><td>Tabella</td><td>Numero Tuple</td><td>Dimensione Blocchi Singolo</td><td>Dimensione Totale</td>
-<tr style="text-align: center;"><td>Classe</td><td>12</td><td>8192 byte</td><td>24 kb</td>
-<tr style="text-align: center;"><td>Scuola</td><td>6</td><td>8192 byte</td><td>32 kb</td>
-<tr style="text-align: center;"><td>Pianta</td><td>72</td><td>8192 byte</td><td>24 kb</td>
-<tr style="text-align: center;"><td>Rilevazione</td><td>72</td><td>8192 byte</td><td>24 kb</td>
-<tr style="text-align: center;"><td>Dati</td><td>72</td><td>8192 byte</td><td>24 kb</td>
+<tr style="text-align: center;"><td>Classe</td><td>19</td><td>8192 byte</td><td>24 kb</td>
+<tr style="text-align: center;"><td>Scuola</td><td>10</td><td>8192 byte</td><td>32 kb</td>
+<tr style="text-align: center;"><td>Pianta</td><td>100</td><td>16 kb</td><td>56 kb</td>
+<tr style="text-align: center;"><td>Rilevazione</td><td>100</td><td>8192 byte</td><td>24 kb</td>
+<tr style="text-align: center;"><td>Dati</td><td>100</td><td>8192 byte</td><td>24 kb</td>
 </table>
 
 ### Piani di esecuzione delle interrogazioni a pieno carico scelti dal Sistema

@@ -67,6 +67,17 @@ Inoltre, sono presenti i file:
 
 Sono presenti i file della parte 3 del progetto:
 
+- Il file `[ Parte III.A.A ] Interrogazione.sql` che contiene le interrogazioni aggiuntive richieste.
+- Il file `[ Parte III.A.B ] Indici.sql` che contiene le istruzioni SQL per creare gli indici richiesti.
+- Il file `[ Parte III.B.C ] Controllo Accessi.sql` che contiene il controllo degli accessi richiesto.
+- Il file `Progettazione Fisica.pdf` che contiene la progettazione fisica del database.
+- Il file `Progettazione Fisica.md` che contiene la progettazione fisica del database.
+
+Aggiuntivi:
+
+- Le foto delle statistiche delle interrogazioni aggiuntive richieste divise in cartelle "Senza Indici" e "Con Indici".
+- Il file `DataGenerator.ipynb` che contiene il codice per generare i dati casuali.
+
 ## Programmi Utilizzati
 
 - VSCode (https://code.visualstudio.com/) con estensione PostgreSQL (https://marketplace.visualstudio.com/items?itemName=cweijan.vscode-mysql-client)

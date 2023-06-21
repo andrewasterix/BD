@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2023-06-21T08:02:49.188Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36" etag="uM9IjBEK9lcc06v_PbiU" version="21.5.0" type="device">
+<mxfile host="app.diagrams.net" modified="2023-06-21T08:50:18.276Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36" etag="5_rF211KjYmWLCi5Bgxn" version="21.5.0" type="device">
   <diagram name="Pagina-1" id="All7uzV2OwWNBoKM_PWa">
     <mxGraphModel dx="1050" dy="1718" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" background="#ffffff" math="0" shadow="0">
       <root>
@@ -322,9 +322,6 @@
         <mxCell id="KA5vXZ2nPaFK-a-9JE_G-65" value="Collabora" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=15;fontFamily=Helvetica;labelBackgroundColor=none;rounded=1;fontColor=#143642;" parent="1" vertex="1">
           <mxGeometry x="1558" y="-450" width="90" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="KA5vXZ2nPaFK-a-9JE_G-67" value="Tipo" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=15;fontFamily=Helvetica;labelBackgroundColor=none;rotation=0;rounded=1;fontColor=#143642;" parent="1" vertex="1">
-          <mxGeometry x="1562.75" y="-425" width="50" height="30" as="geometry" />
-        </mxCell>
         <mxCell id="KA5vXZ2nPaFK-a-9JE_G-68" value="Comune" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=15;fontFamily=Helvetica;labelBackgroundColor=none;rounded=1;fontColor=#143642;" parent="1" vertex="1">
           <mxGeometry x="1556" y="-473" width="80" height="30" as="geometry" />
         </mxCell>
@@ -511,12 +508,6 @@
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="1553" y="-409" as="sourcePoint" />
             <mxPoint x="1658" y="-405" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="KA5vXZ2nPaFK-a-9JE_G-165" style="edgeStyle=none;shape=connector;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;labelBackgroundColor=none;fontFamily=Helvetica;fontSize=15;fontColor=default;endArrow=oval;endFill=0;entryX=0.021;entryY=0.538;entryDx=0;entryDy=0;entryPerimeter=0;strokeColor=#A8201A;exitX=1;exitY=0.75;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="IGpdcPXpx3QODBAOmaDT-8" target="KA5vXZ2nPaFK-a-9JE_G-67" edge="1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="1534" y="-404" as="sourcePoint" />
-            <mxPoint x="1599" y="-378" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="KA5vXZ2nPaFK-a-9JE_G-167" style="edgeStyle=none;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=oval;endFill=1;labelBackgroundColor=none;fontFamily=Helvetica;fontSize=15;fontColor=default;shape=connector;strokeColor=#A8201A;entryX=0.053;entryY=0.983;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.816;exitY=1.015;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="IGpdcPXpx3QODBAOmaDT-8" target="KA5vXZ2nPaFK-a-9JE_G-64" edge="1">

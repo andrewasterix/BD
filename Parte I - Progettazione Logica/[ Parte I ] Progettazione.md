@@ -1,4 +1,4 @@
-# Progetto di Base Dati 2023 - "Orti Scolastici" - 12 CFU
+# Basi di Dati 2023 - 12 CFU - "Orti Scolastici"
 
 ## Componenti del Gruppo
 
@@ -33,6 +33,7 @@
 <p>Per ogni specifica <font color="#539165">pianta</font> <font color="#DE3163">(stessa entità di relazione, indicata come 'Pianta')</font> messa a dimora, verrà memorizzata la <font color="#F7C04A">specie</font> <font color="#DE3163">(indicato dalla relazione tra Specie e Pianta)</font>, il <font color="#F7C04A">numero di replica</font> <font color="#DE3163">(indicato come ID)</font>, il <font color="#F7C04A">gruppo</font> <font color="#DE3163">(indicato dalla relazione tra Gruppo e Pianta)</font>, <font color="#F7C04A">l’orto</font> <font color="#DE3163">(indicato dalla relazione tra Orto e Pianta)</font>, <font color="#F7C04A">l’esposizione specifica</font>, la <font color="#F7C04A">data di messa a dimora</font> e la <font color="#F7C04A">classe</font> <font color="#DE3163">(indicato dalla relazione tra Classe e Pianta)</font> che l’ha messa a dimora.</p>
 <p>Le <font color="#539165">rilevazioni</font> (osservazioni) <font color="#FF00FF">vengono effettuate</font> <font color="#DE3163">(relazione tra Pianta e Rilevazione)</font> sulle specifiche piante (repliche) e le informazioni acquisite memorizzate con <font color="#F7C04A">data e ora della rilevazione</font>, <font color="#F7C04A">data e ora dell’inserimento</font>, <font color="#F7C04A">responsabile della rilevazione</font> <font color="#DE3163">(indicato dalla relazione tra Rilevazione e Perosna)</font> (può essere un individuo o una classe) e responsabile dell’inserimento (se diverso da quello della rilevazione e anche in questo caso può essere un individuo o una classe).</p>
 <p>Le <font color="#6495ED">informazioni ambientali relative a pH, umidità e temperatura</font> vengono acquisite mediante <font color="#539165">sensori o schede Arduino</font> <font color="#DE3163">(indicati come unica entità 'Sensore')</font>, si vogliono memorizzare <font color="#F7C04A">numero</font> e <font color="#F7C04A">tipo</font> di sensori presenti in ogni orto (e le repliche associate a quel sensore). Le informazioni possono essere rilevate tramite app e inserite nella base di dati oppure essere trasmesse direttamente da schede Arduino alla base di dati. Si vuole tenere traccia della <font color="#F7C04A">modalità di acquisizione</font> delle informazioni.</p></div>
+<div style="page-break-after: always;"></div>
 
 ## 2 - Progettazione Concettuale
 
@@ -42,8 +43,12 @@
 
 ### 2.2 - Domini e Entità
 
-<table>
-<tr><td>#</td><td>Entità</td><td>Descrizione</td><td>Attributi</td><td>Descrizione</td><td>Dominio</td></tr>
+<div style="width: 100%;">
+<table style="width: 100%; margin: left 35%; position: relative">
+<thead>
+<tr><th>#</th><th>Entità</th><th>Descrizione</th><th>Attributi</th><th>Descrizione</th><th>Dominio</th></tr>
+</thead>
+<tbody>
 <tr><td>1</td><td>Scuola</td><td>Identifica la scuola</td><td>cod_Meccanografico</td><td>Chiave primaria;<br />Identifica il codice meccanografico della scuola</td><td>VARCHAR(10)</td></tr>
 <tr><td></td><td></td><td></td><td>Nome</td><td>Indica il nome della scuola</td><td>VARCHAR(100)</td></tr>
 <tr><td></td><td></td><td></td><td>Ciclo_Istruzione</td><td>La scuola è del primo ciclo d’istruzione o il secondo</td><td>INT (1, 2)</td></tr>
@@ -65,7 +70,7 @@
 <tr><td></td><td></td><td></td><td>Collocazione</td><td>L'orto è in terra o in vaso.</td><td>VARCHAR (Vaso, Terra)</td></tr>
 <tr><td></td><td></td><td></td><td>Superficie_mq</td><td>Superficie in metri quadrati</td><td>FLOAT</td></tr>
 <tr><td>5</td><td>Specie</td><td>Specie della pianta coltivata</td><td>Nome_Scientifico</td><td>Chiave primaria;<br />Nome della famiglia della pianta</td><td>VARCHAR(100)</td></tr>
-<tr><td></td><td></td><td></td><td>Substrato</td><td>Tipo di terra in cui è coltivata la specie, terriccio da rinvaso o suolo pre-esistente</td><td>VARCHAR (TerriccioRinvaso, (SuoloPreEsistente)</td></tr>
+<tr><td></td><td></td><td></td><td>Substrato</td><td>Tipo di terra in cui è coltivata la specie, terriccio da rinvaso o suolo pre-esistente</td><td>VARCHAR (TerriccioRinvaso, SuoloPreEsistente)</td></tr>
 <tr><td>6</td><td>Pianta</td><td>Piante che vengono coltivate</td><td>Nome_Comune</td><td>Chiave Primaria;<br />Nome comune della pianta</td><td>VARCHAR(100)</td></tr>
 <tr><td></td><td></td><td></td><td>Numero_Replica</td><td>Chiave Primaria;<br />Identificativo della replica della pianta</td><td>BIGINT</td></tr>
 <tr><td></td><td></td><td></td><td>Scopo</td><td>Scopo della specie, Fitobonifica o Biomonitoraggio.</td><td>VARCHAR (Fitobonifica, Biomonitoraggio)</td></tr>
@@ -83,12 +88,16 @@
 <tr><td>10</td><td>Sensore</td><td>Sensori per le rilevazioni</td><td>ID</td><td>Chiave primaria;<br />Identificatore univoco</td><td>BIGINT</td></tr>
 <tr><td></td><td></td><td></td><td>Tipo</td><td>Tipo del sensore: SchedaArduino o Sensore</td><td>VARCHAR (SchedaArduino, Sensore)</td></tr>
 <tr><td></td><td></td><td></td><td>Acquisizione</td><td>Tipo di acquisizione delle informazioni</td><td>VARCHAR (Arduino, App)</td></tr>
+</tbody>
 </table>
+</div>
 
 ### 2.3 - Associazioni
 
-<table>
-<tr><td>#</td><td>Associazione</td><td>Descrizione</td><td>Entità</td><td>Molteplicità</td></tr>
+<div style="width: 100%; margin: left 45%">
+<table style="width: 100%; margin: left 45%; position: relative">
+<thead><tr><th>#</th><th>Associazione</th><th>Descrizione</th><th>Entità</th><th>Molteplicità</th></tr></thead>
+<tbody>
 <tr><td>1</td><td>Docente</td><td>La classe è rappresentata da un docente</td><td>Classe, Persona</td><td>1:1 - 0:1</td></tr>
 <tr><td>2</td><td>Coltiva</td><td>La classe coltiva delle piante</td><td>Classe, Pianta</td><td>1:N - 1:1</td></tr>
 <tr><td>3</td><td>Afferisce</td><td>La classe fa parte di una scuola</td><td>Classe, Scuola</td><td>1:1 - 1:N</td></tr>
@@ -104,22 +113,30 @@
 <tr><td>13</td><td>Effettuata</td><td>Sulle piante/repliche sono effettuate delle rilevazioni</td><td>Pianta, Rilevazione</td><td>1:N - 1:N</td></tr>
 <tr><td>14</td><td>Rilevata</td><td>I sensiori fanno le rilevazioni dei dati</td><td>Sensore, Rilevazione</td><td>1:N - 1:N</td></tr>
 <tr><td>15</td><td>Esegue</td><td>La persona fa Rileva o Inserisce i dati</td><td>Responsabile, Rilevazione</td><td>1:1 - 1:2</td></tr>
+</tbody>
 </table>
+</div>
+<div style="page-break-after: always;"></div>
 
 ### 2.4 - Vincoli
 
-<table>
-<tr><td>#</td><td>Entità</td><td>Vincolo</td><td>Descrizione</td><td>Tipo</td></tr>
+<div style="width: 100%; margin: left 45%">
+<table style="width: 100%; margin: left 45%; position: relative">
+<thead><tr><th>#</th><th>Entità</th><th>Vincolo</th><th>Descrizione</th><th>Tipo</th></tr></thead>
+<tbody>
 <tr><td>1</td><td>Scuola</td><td>Se la scuola riceve un finanziamento per un progetto, si memorizzerà una Persona con ruolo "Referente"</td><td>Trigger</td></tr>
 <tr><td>2</td><td>Orto</td><td>Se l'orto della scuola ha come Condizione Ambientale "Pulito", allora può essere adatto per fare da controllo per orti di altre scuole</td><td>Check</td></tr>
 <tr><td>3</td><td>Scuola</td><td>Se la scuola utilizza un orto con Condizione Ambientale "Pulito", allora può essere collaborare con altre scuole</td><td>Check</td></tr>
 <tr><td>4</td><td>Pianta</td><td>Se lo Scopo è "Biomonitoraggio" allora il Numero di Repliche del Gruppo di Controllo devono essere uguali a quelle del Gruppo di Monitoraggio</td><td>Check</td></tr>
 <tr><td>5</td><td>Rilevamento</td><td>Se il responsabile dell'Inserimento è diverso da quello della Rilevazione allora dobbiamo inserire due Persone o Classi per la stessa rilevazione.</td><td>Trigger</td></tr>
+</tbody>
 </table>
+</div>
 
 ### 2.5 - Generalizzazioni
 
 Esiste una generalizzazione per l'entità Responsabile, che può essere Responsabile di Rilevazione o Responsabile di Inserimento.
+<div style="page-break-after: always;"></div>
 
 ## 3 - Progettazione Logica
 
@@ -128,26 +145,30 @@ Esiste una generalizzazione per l'entità Responsabile, che può essere Responsa
 ![Modello ER - Ristrutturato](DiagrammaRistrutturato.jpg "Modello ER ristrutturato")
 
 ### 3.2 - Modifiche ad Entità, Associazioni e Vincoli
-
-Nella Ristrutturazione del modello ER sono state apportate le seguenti modifiche:
-
-- L'attributo multiplo "Ruolo" dell'entità Persona è stato sostituito con chiavi esterne sulle entità di riferimento:
-
-  - Scuola -> Referente, Dirigente
-  - Classe -> Docente
-- Gli atributi multipli "Parametri del suolo" e "Altre Informazioni" sono stati sostituiti dall'entità "Dati" e nuovi attributi più espicativi:
-
-  - ID
-  - Temperatura
-  - PH
-  - Umidità
-  - N_Foglie_Danneggiate
-  - %_Superficie_Foglie_Danneggiate
-  - N_Frutti
-  - N_Fiori
-  - Altezza_Pianta
-  - Lunghezza_Radice
-- L'attributo multiplo "Esposizione" dell'entità Pianta è stato sostituito con entità singola con attributo composto Nome_Comune, Numero_Replica (derivato da Pianta, ed è chiave) e l'attributo Tipo (Sole, Mezzombra, Ombra).
+<div style="text-align: justify;">
+<p>Nella Ristrutturazione del modello ER sono state apportate le seguenti modifiche:</p>
+<ul>
+  <li>L'attributo multiplo "Ruolo" dell'entità Persona è stato sostituito con chiavi esterne sulle entità di riferimento:
+    <ul>
+      <li>Scuola -> Referente, Dirigente</li>
+      <li>Classe -> Docente</li>
+    </ul>
+  </li>
+  <li> Gli atributi multipli "Parametri del suolo" e "Altre Informazioni" sono stati sostituiti dall'entità "Dati" e nuovi attributi più espicativi:
+    <ul>
+      <li>ID</li>
+      <li>Temperatura</li>
+      <li>PH</li>
+      <li>Umidità</li>
+      <li>Foglie_Danneggiate</li>
+      <li>Superficie_Foglie_Danneggiate</li>
+      <li>Frutti</li>
+      <li>Fiori</li>
+      <li>Altezza_Pianta</li>
+      <li>Lunghezza_Radice</li>
+    </ul>
+  </li>
+  <li>L'attributo multiplo "Esposizione" dell'entità Pianta è stato sostituito con entità singola con attributo composto Nome_Comune, Numero_Replica (derivato da Pianta, ed è chiave) e l'attributo Tipo (Sole, Mezzombra, Ombra).</li>
 
 ### 3.3 - Modifiche ai Vincoli
 
@@ -162,15 +183,12 @@ La generalizzazione per l'entità Responsabile è stata riorganizzata aggiungend
 <ol type="1" style="text-align: left;">
   <li> Persona (<u>Email</u>, Nome, Cognome, Telefono<sub>O</sub>, RilevatoreEsterno<sub>O</sub>)</li>  
   <li> Scuola (<u>cod_Meccanografico</u>, Nome, Ciclo_istruzione, Comune, Provincia, Collabora<sub>O</sub>, Finanziamento<sub>O</sub>, Dirigente<sup>Persona</sup>, Referente<sup>Persona</sup>) </li>
-  <br>
   <li> Classe (<u>Sezione</u>, <u>Scuola</u><sup>Scuola</sup>, Ordine, TipoScuola, Docente<sup>Persona</sup>)</li>
-  <br>
   <li> Specie (<u>Nome_Scientifico</u>, Substrato)</li>
   <li> Orto (<u>Nome</u>, <u>Latitudine</u>, <u>Longitudine</u>, Superficie_mq, Collocazione, CondizioneAmbientale, Scuola<sup>Scuola</sup>, Specie<sup>Specie</sup>)</li>
   <li> Pianta (<u>NumeroReplica</u>, <u>NomeComune</u>, DataMessaADimora, Scopo, Specie<sup>Specie</sup>, Classe<sup>Classe</sup>)</li>
   <li> Gruppo (<u>ID</u>, Tipo, Pianta<sup>Pianta</sup>, NumeroReplica<sup>Pianta</sup>)</li>
   <li> Esposizione (<u>Pianta<sup></u>Pianta</sup>, <u>NumeroReplica</u><sup>Pianta</sup>, <u>Tipo</u>)</li>
-  <br>
   <li> Rilevazione (<u>ID</u>, DataOra_Inserimento, DataOra_Rilevazione, Pianta<sup>Pianta</sup>, NumeroReplica<sup>Pianta</sup>)</li>
   <li> Sensore (<u>ID</u>, Tipo, Acquisizione)</li>
   <li> Dati (<u>ID</u><sup>Rilevazione</sup>, Temperatura, PH, Umidità, Foglie_Danneggiate, Superficie_Foglie_Danneggiate, Frutti<sub>O</sub>, Fiori, Altezza_Pianta, Lunghezza_Radice)</li>
@@ -188,10 +206,6 @@ La relazione è <b>BCNF</b>, l'unica chiave possibile è chiave primaria della R
 <br>
 <b>Persona (<u>Email</u>, Telefono<sub>O</sub>, Nome, Cognome)</b><br>
 Email -> Nome, Cognome, Telefono;<br>
-La relazione è <b>BCNF</b>, l'unica chiave possibile è chiave primaria della Relazione.<br>
-<br>
-<b>Ruolo (<u>Email</u><sup>Persona</sup>,Tipo)</b><br>
-Email -> Tipo;<br>
 La relazione è <b>BCNF</b>, l'unica chiave possibile è chiave primaria della Relazione.<br>
 <br>
 <b>Classe (<u>Sezione</u>, <u>cod_Meccanografico</u><sup>Scuola</sup>, Ordine, TipoScuola, Docente<sup>Persona</sup>)</b><br>

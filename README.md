@@ -2,7 +2,7 @@
 
 ## Descrizione del Progetto
 
-### Dominio applicativo – Specifiche e Descrizione
+### Specifiche e Descrizione
 
 Si veda il documento [Progetto di Basi di Dati 2023 - 12-CFU.pdf](Specifiche.pdf).
 
@@ -27,6 +27,8 @@ Si veda il documento [Progetto di Basi di Dati 2023 - 12-CFU.pdf](Specifiche.pdf
 ### Altro ed Eventuali
 
 Si fa riferimento al documento [Progetto di Basi di Dati 2023 - 12-CFU.pdf](Specifiche.pdf).
+
+<div style="page-break-after: always;"></div>
 
 ## Descrizione del Repository
 
@@ -78,9 +80,12 @@ Aggiuntivi:
 - Le foto delle statistiche delle interrogazioni aggiuntive richieste divise in cartelle "Senza Indici" e "Con Indici".
 - Il file `DataGenerator.ipynb` che contiene il codice per generare i dati casuali.
 
+<div style="page-break-after: always;"></div>
+
 ## Programmi Utilizzati
 
-- VSCode (https://code.visualstudio.com/) con estensione PostgreSQL (https://marketplace.visualstudio.com/items?itemName=cweijan.vscode-mysql-client)
+- VSCode (https://code.visualstudio.com/) 
+- VSCode - PostgreSQL (https://marketplace.visualstudio.com/items?itemName=cweijan.vscode-mysql-client)
 - Draw.io (https://app.diagrams.net/)
 - pgAdmin 4 (https://www.pgadmin.org/)
 - PostgreSQL (https://www.postgresql.org/)

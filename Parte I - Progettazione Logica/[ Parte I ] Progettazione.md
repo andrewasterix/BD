@@ -131,7 +131,10 @@ Esiste una generalizzazione per l'entità Responsabile, che può essere Responsa
 
 Nella Ristrutturazione del modello ER sono state apportate le seguenti modifiche:
 
-- L'attributo multiplo "Ruolo" dell'entità Persona è stato sostituito con l'entità Ruolo, in modo da evitare la ripetizione di valori, ed è stato aggiunto l'attributo "Tipo" per descrivere meglio il tipo ruolo.
+- L'attributo multiplo "Ruolo" dell'entità Persona è stato sostituito con chiavi esterne sulle entità di riferimento:
+
+  - Scuola -> Referente, Dirigente
+  - Classe -> Docente
 - Gli atributi multipli "Parametri del suolo" e "Altre Informazioni" sono stati sostituiti dall'entità "Dati" e nuovi attributi più espicativi:
 
   - ID
@@ -152,42 +155,35 @@ Non sto state effettuate modifiche ai vincoli precedenti.
 
 ### 3.4 - Modifiche alle generalizzazioni
 
-La generalizzazione per l'entità Responsabile è stata riorganizzata aggiungendo due attibruti alla stessa entità.
+La generalizzazione per l'entità Responsabile è stata riorganizzata aggiungendo due attibruti alla stessa entità che indentificano chi ha efffettuato l'inserimento o il rilevamento della Rilevazione associata.
 
 ### 3.5 - Schema Logico
 
 <ol type="1" style="text-align: left;">
-  <li> Progetto (<u>ID</u>, Finanziamento<sub>O</sub>, Nome) </li>
   <li> Persona (<u>Email</u>, Nome, Cognome, Telefono<sub>O</sub>, RilevatoreEsterno<sub>O</sub>)</li>  
-  <li> Scuola (<u>cod_Meccanografico</u>, Nome, Ciclo_istruzione, Comune, Provincia, Collabora<sub>O</sub>, Dirigente<sup>Persona</sup>) </li>
-  <li> Aderisce (<u>Scuola</u><sup>Scuola</sup>, <u>Progetto</u><sup>Progetto</sup>, Referente<sup>Persona</sup>)</li>
+  <li> Scuola (<u>cod_Meccanografico</u>, Nome, Ciclo_istruzione, Comune, Provincia, Collabora<sub>O</sub>, Finanziamento<sub>O</sub>, Dirigente<sup>Persona</sup>, Referente<sup>Persona</sup>) </li>
   <br>
-  <li> Classe (<u>ID</u>, <i>Sezione</i>, <i>Scuola</i><sup><i>Scuola</i></sup>, Ordine, TipoScuola, Docente<sup>Persona</sup>)</li>
-  <li> Studente (<u>Alunno</u><sup>Persona</sup>, Classe<sup>Classe</sup>)</li>
+  <li> Classe (<u>Sezione</u>, <u>Scuola</u><sup>Scuola</sup>, Ordine, TipoScuola, Docente<sup>Persona</sup>)</li>
   <br>
   <li> Specie (<u>Nome_Scientifico</u>, Substrato)</li>
-  <li> Orto (<u>Nome</u>, <u>Latitudine</u>, <u>Longitudine</u>, Superficie_mq, Posizione, CondizioneAmbientale, Scuola<sup>Scuola</sup>, Specie<sup>Specie</sup>)</li>
+  <li> Orto (<u>Nome</u>, <u>Latitudine</u>, <u>Longitudine</u>, Superficie_mq, Collocazione, CondizioneAmbientale, Scuola<sup>Scuola</sup>, Specie<sup>Specie</sup>)</li>
   <li> Pianta (<u>NumeroReplica</u>, <u>NomeComune</u>, DataMessaADimora, Scopo, Specie<sup>Specie</sup>, Classe<sup>Classe</sup>)</li>
   <li> Gruppo (<u>ID</u>, Tipo, Pianta<sup>Pianta</sup>, NumeroReplica<sup>Pianta</sup>)</li>
-  <li> Esposizione (Pianta<sup>Pianta</sup>, NumeroReplica<sup>Pianta</sup>, Tipo)</li>
+  <li> Esposizione (<u>Pianta<sup></u>Pianta</sup>, <u>NumeroReplica</u><sup>Pianta</sup>, <u>Tipo</u>)</li>
   <br>
   <li> Rilevazione (<u>ID</u>, DataOra_Inserimento, DataOra_Rilevazione, Pianta<sup>Pianta</sup>, NumeroReplica<sup>Pianta</sup>)</li>
-  <li> Sensore (<u>ID</u>, Tipo, Acquisizione, ID_Rilevazione<sup>Rilevazione</sup>)</li>
-  <li> Dati (<u>ID</u><sup>Rilevazione</sup>, Temperatura, PH, Umidità, N_Foglie_Danneggiate, %_Superficie_Foglie_Danneggiate, N_Frutti<sub>O</sub>, N_Fiori, Altezza_Pianta, Lunghezza_Radice)</li>
-  <li> Responsabile (<u>ID</u><sup>Rilevazione</sup>, Inserimento<sub>O</sub><sup>Persona</sup>, Rilevatore<sup>Persona</sup>, Inserimento<sub>O</sub><sup>Classe</sup>, Rilevatore<sup>Classe</sup>)</li>
+  <li> Sensore (<u>ID</u>, Tipo, Acquisizione)</li>
+  <li> Dati (<u>ID</u><sup>Rilevazione</sup>, Temperatura, PH, Umidità, Foglie_Danneggiate, Superficie_Foglie_Danneggiate, Frutti<sub>O</sub>, Fiori, Altezza_Pianta, Lunghezza_Radice)</li>
+  <li> Responsabile (<u>ID</u><sup>Rilevazione</sup>, Inserimento<sub>O</sub><sup>Persona</sup>, Rilevatore<sub>O</sub><sup>Persona</sup>, Inserimento<sub>O</sub><sup>Classe</sup>, Rilevatore<sub>O</sub><sup>Classe</sup>)</li>
 </ol>
 
 ### 3.6 - Verifica della correttezza e della qualità dello schema logico e del modello ER ristrutturato
 
 <div style="text-align: left;">
-<b>Progetto (<u>ID</u>, Finanziamento<sub>O </sub>, Nome)</b><br>
-ID -> Finanziamento, Nome;<br>
-La relazione è <b>BCNF</b> dato che la chiave è unica e compare a sinistra.<br>
-<br>
-<b>Scuola (<u>cod_Meccanografico</u>, NomeScuola, Ciclo_istruzione, Collabora<sub>O</sub>, Provincia, Comune, Progetto<sup>Progetto</sup>)</b><br>
+<b>Scuola (<u>cod_Meccanografico</u>, NomeScuola, Ciclo_istruzione, Collabora<sub>O</sub>, Provincia, Comune, Finanziamento<sub>O</sub>, Dirigente<sup>Persona</sup>, Referente<sup>Persona</sup>)</b><br>
 cod_Meccanografico -> NomeScuola, Ciclo_istruzione; <br>
 ... <br>
-cod_Meccanografico -> NomeScuola, Ciclo_istruzione, Collabora<sub>O</sub>, Provincia, Comune, Progetto<sup>Progetto</sup>;<br>
+cod_Meccanografico -> NomeScuola, Ciclo_istruzione, Collabora<sub>O</sub>, Provincia, Comune, Finanziamento<sub>O</sub>, Dirigente<sup>Persona</sup>, Referente<sup>Persona</sup>;<br>
 La relazione è <b>BCNF</b>, l'unica chiave possibile è chiave primaria della Relazione.<br>
 <br>
 <b>Persona (<u>Email</u>, Telefono<sub>O</sub>, Nome, Cognome)</b><br>

@@ -42,84 +42,84 @@
 
 ### 2.2 - Domini e Entità
 
-| #  | ENTITA'     | DESCRIZIONE                               | ATTRIBUTI             | DESCRIZIONE                                                                             | DOMINIO                                                |
-| :- | :---------- | :---------------------------------------- | :-------------------- | :-------------------------------------------------------------------------------------- | :----------------------------------------------------- |
-| 1  | Progetto    | A cui la scuola partecipa                 | ID                    | Chiave primaria;<br />Identificativo                                                    | BIGINT                                                 |
-|    |             |                                           | Finanziamento         | Tipo di finanziamento se la Scuola ne beneficia                                         | TEXT                                                   |
-|    |             |                                           | Nome                  | Indica il nome                                                                          | TEXT                                                   |
-| 2  | Scuola      | Indentifica la scuola                     | cod_Meccanografico    | Chiave primaria;<br />Identifica il codice meccanografico della scuola                  | VARCHAR(10)                                            |
-|    |             |                                           | Nome                  | Indica il nome della scuola                                                             | TEXT                                                   |
-|    |             |                                           | Ciclo_Istruzione      | La scuola è del primo ciclo d’istruzione o il secondo                                 | Primo, Secondo                                         |
-|    |             |                                           | Collabora             | La scuola collabora con altre (True) o no (False)                                       | BOOLEAN                                                |
-|    |             |                                           | Provincia             | Sigla della provincia di appartenza                                                     | CHAR(2)                                                |
-|    |             |                                           | Comune                | Comune dov'è la scuola                                                                 | TEXT                                                   |
-| 3  | Classe      | Indica le classi che aderiscono           | Sezione               | Chiave primaria;<br />Nome della classe es. 4E,4ART,4E-I                                | VARCHAR(5)                                             |
-|    |             |                                           | Ordine                | Ordine della classe (primo, secondo); Opzionale                                         | 1, 2                                                   |
-|    |             |                                           | Tipo                  | Scientifico, Classico, Agrario, ...                                                     | TEXT                                                   |
-| 4  | Persona     | Coloro che partecipano                    | Email                 | Chiave primaria;<br /> Email della persona.                                             | TEXT                                                   |
-|    |             |                                           | Nome                  | Nome della persona                                                                      | TEXT                                                   |
-|    |             |                                           | Cognome               | Cognome della persona                                                                   | TEXT                                                   |
-|    |             |                                           | Ruolo                 | Ruolo della persona                                                                     | Dirigente, Docente, Referente, Rilevatore Esterno      |
-|    |             |                                           | Telefono              | Numero di telefono; Opzionale                                                           | NUMERIC(10)                                            |
-| 5  | Orto        | Orti delle scuole partecipanti            | Nome                  | Chiave primaria;<br />Nome dell'orto                                                    | TEXT                                                   |
-|    |             |                                           | Coordinate_GPS        | Chiave primaria;<br />Coordinate GPS dell'orto (Latitudine, Longitudine)                | FLOAT, FLOAT                                           |
-|    |             |                                           | Condizione_Ambientale | Condizioni ambientali dell'orto (Pulito, Inquinato)                                     | Pulito, Inquinato                                      |
-|    |             |                                           | Collocazione          | L'orto è in terra o in vaso.                                                           | Vaso, Terra                                            |
-|    |             |                                           | Superficie_mq         | Superficie in metri quadrati                                                            | FLOAT                                                  |
-| 6  | Specie      | Specie della pianta coltivata             | Nome_Scientifico      | Chiave primaria;<br />Nome della famiglia della pianta                                  | TEXT                                                   |
-|    |             |                                           | Substrato             | Tipo di terra in cui è coltivata la specie, terriccio da rinvaso o suolo pre-esistente | Terriccio_Rinvaso, Suolo_Pre-Esistente                 |
-| 7  | Pianta      | Piante che vengono coltivate              | Nome_Comune           | Nome comune della pianta                                                                | TEXT                                                   |
-|    |             |                                           | Scopo                 | Chiave Primaria;<br />Scopo della specie, Fitobonifica o Biomonitoraggio.               | Fitobonifica, Biomonitoraggio                          |
-|    |             |                                           | Data_Messa_A_Dimora   | Data in cui è stata piantata una replica                                               | DATE                                                   |
-|    |             |                                           | Esposizione           | Esposizione della replica                                                               | Sole, Mezz’ombra, Ombra                               |
-|    |             |                                           | Numero_Replica        | Chiave Primaria;<br />Identificativo della replica della pianta                         | BIGINT                                                 |
-| 8  | Gruppo      | Gruppo di piante per un determinato scopo | ID                    | Chiave primaria;<br />Identificatore del gruppo                                         | BIGINT                                                 |
-|    |             |                                           | Tipo                  | Il gruppo è Pulito o Inquinato                                                         | Controllo, Stress_Ambientale                           |
-| 9  | Rilevazione | Elenco dei dati registrati dai sensori    | ID                    | Chiave primaria;<br />Identificatore della rilevazione                                  | BIGINT                                                 |
-|    |             |                                           | DataOra_Rilevazione   | Data e Ora in cui viene eseguita la rilevazione                                         | TIMESTAMP                                              |
-|    |             |                                           | DataOra_Inserimento   | Data e Ora in cui viene eseguito l'inserimento nella base di dati                       | TIMESTAMP                                              |
-|    |             |                                           | Parametri del suolo   | Attributo composto;<br />Informazioni riguardanti il suolo                              | Temperatura, PH, Umidità                              |
-|    |             |                                           | Altre Informazioni    | Attributo composto;<br />Altre informazioni riguardanti le piante                       | Danni, Fioritura, Biomassa, Dtruttura, Fruttificazione |
-| 10 | Rilevatore  | Responsabile della rilevazione            | ID_Rilevazione        | Chiave primaria;<br />ID della rilevazione di riferimento                               | BIGINT                                                 |
-| 11 | Sensore     | Sensori per le rilevazioni                | ID                    | Chiave primaria;<br />Identificatore univoco                                            | BIGINT                                                 |
-|    |             |                                           | Tipo                  | Tipo del sensore: SchedaArduino o Sensore                                               | SchedaArduino, Sensore                                 |
-|    |             |                                           | Acquisizione          | Tipo di acquisizione delle informazioni                                                 | Arduino, App                                           |
+<table>
+<tr><td>#</td><td>Entità</td><td>Descrizione</td><td>Attributi</td><td>Descrizione</td><td>Dominio</td></tr>
+<tr><td>1</td><td>Scuola</td><td>Identifica la scuola</td><td>cod_Meccanografico</td><td>Chiave primaria;<br />Identifica il codice meccanografico della scuola</td><td>VARCHAR(10)</td></tr>
+<tr><td></td><td></td><td></td><td>Nome</td><td>Indica il nome della scuola</td><td>VARCHAR(100)</td></tr>
+<tr><td></td><td></td><td></td><td>Ciclo_Istruzione</td><td>La scuola è del primo ciclo d’istruzione o il secondo</td><td>INT (1, 2)</td></tr>
+<tr><td></td><td></td><td></td><td>Finanziamento</td><td>Tipo del Finanziamento ricevuto</td><td>VARCHAR(100)</td></tr>
+<tr><td></td><td></td><td></td><td>Collabora</td><td>La scuola collabora con altre (True) o no (False)</td><td>BOOLEAN</td></tr>
+<tr><td></td><td></td><td></td><td>Provincia</td><td>Sigla della provincia di appartenza</td><td>VARCHAR(100)</td></tr>
+<tr><td></td><td></td><td></td><td>Comune</td><td>Comune dov'è la scuola</td><td>VARCHAR(100)</td></tr>
+<tr><td>2</td><td>Classe</td><td>Indica le classi che aderiscono</td><td>Sezione</td><td>Chiave primaria;<br />Nome della classe es. 4E,4ART,4E-I</td><td>VARCHAR(5)</td></tr>
+<tr><td></td><td></td><td></td><td>Ordine</td><td>Ordine della classe (primo, secondo); Opzionale</td><td>INT(1, 2)</td></tr>
+<tr><td></td><td></td><td></td><td>Tipo</td><td>Scientifico, Classico, Agrario, ...</td><td>VARCHAR(100)</td></tr>
+<tr><td>3</td><td>Persona</td><td>Coloro che partecipano</td><td>Email</td><td>Chiave primaria;<br /> Email della persona.</td><td>VARCHAR(100)</td></tr>
+<tr><td></td><td></td><td></td><td>Nome</td><td>Nome della persona</td><td>VARCHAR(100)</td></tr>
+<tr><td></td><td></td><td></td><td>Cognome</td><td>Cognome della persona</td><td>VARCHAR(100)</td></tr>
+<tr><td></td><td></td><td></td><td>Ruolo</td><td>Ruolo della persona</td><td>Dirigente, Docente, Referente, Rilevatore Esterno</td></tr>
+<tr><td></td><td></td><td></td><td>Telefono</td><td>Numero di telefono; Opzionale</td><td>NUMERIC(10)</td></tr>
+<tr><td>4</td><td>Orto</td><td>Orti delle scuole partecipanti</td><td>Nome</td><td>Chiave primaria;<br />Nome dell'orto</td><td>VARCHAR(100)</td></tr>
+<tr><td></td><td></td><td></td><td>Coordinate_GPS</td><td>Chiave primaria;<br />Coordinate GPS dell'orto (Latitudine, Longitudine)</td><td>FLOAT, FLOAT</td></tr>
+<tr><td></td><td></td><td></td><td>Condizione_Ambientale</td><td>Condizioni ambientali dell'orto (Pulito, Inquinato)</td><td>VARCHAR (Pulito, Inquinato)</td></tr>
+<tr><td></td><td></td><td></td><td>Collocazione</td><td>L'orto è in terra o in vaso.</td><td>VARCHAR (Vaso, Terra)</td></tr>
+<tr><td></td><td></td><td></td><td>Superficie_mq</td><td>Superficie in metri quadrati</td><td>FLOAT</td></tr>
+<tr><td>5</td><td>Specie</td><td>Specie della pianta coltivata</td><td>Nome_Scientifico</td><td>Chiave primaria;<br />Nome della famiglia della pianta</td><td>VARCHAR(100)</td></tr>
+<tr><td></td><td></td><td></td><td>Substrato</td><td>Tipo di terra in cui è coltivata la specie, terriccio da rinvaso o suolo pre-esistente</td><td>VARCHAR (TerriccioRinvaso, (SuoloPreEsistente)</td></tr>
+<tr><td>6</td><td>Pianta</td><td>Piante che vengono coltivate</td><td>Nome_Comune</td><td>Chiave Primaria;<br />Nome comune della pianta</td><td>VARCHAR(100)</td></tr>
+<tr><td></td><td></td><td></td><td>Numero_Replica</td><td>Chiave Primaria;<br />Identificativo della replica della pianta</td><td>BIGINT</td></tr>
+<tr><td></td><td></td><td></td><td>Scopo</td><td>Scopo della specie, Fitobonifica o Biomonitoraggio.</td><td>VARCHAR (Fitobonifica, Biomonitoraggio)</td></tr>
+<tr><td></td><td></td><td></td><td>Data_Messa_A_Dimora</td><td>Data in cui è stata piantata una replica</td><td>DATE</td></tr>
+<tr><td></td><td></td><td></td><td>Esposizione</td><td>Esposizione della replica</td><td>VARCHAR (Sole, Mezz’ombra, Ombra)</td></tr>
+<tr><td></td><td></td><td></td><td>Numero_Replica</td><td>Chiave Primaria;<br />Identificativo della replica della pianta</td><td>BIGINT</td></tr>
+<tr><td>7</td><td>Gruppo</td><td>Gruppo di piante per un determinato scopo</td><td>ID</td><td>Chiave primaria;<br />Identificatore del gruppo</td><td>BIGINT</td></tr>
+<tr><td></td><td></td><td></td><td>Tipo</td><td>Il gruppo è Pulito o Inquinato</td><td>VARCHAR (Controllo, Stress_Ambientale)</td></tr>
+<tr><td>8</td><td>Rilevazione</td><td>Elenco dei dati registrati dai sensori</td><td>ID</td><td>Chiave primaria;<br />Identificatore della rilevazione</td><td>BIGINT</td></tr>
+<tr><td></td><td></td><td></td><td>DataOra_Rilevazione</td><td>Data e Ora in cui viene eseguita la rilevazione</td><td>TIMESTAMP</td></tr>
+<tr><td></td><td></td><td></td><td>DataOra_Inserimento</td><td>Data e Ora in cui viene eseguito l'inserimento nella base di dati</td><td>TIMESTAMP</td></tr>
+<tr><td></td><td></td><td></td><td>Parametri del suolo</td><td>Attributo composto;<br />Informazioni riguardanti il suolo</td><td>Temperatura, PH, Umidità</td></tr>
+<tr><td></td><td></td><td></td><td>Altre Informazioni</td><td>Attributo composto;<br />Altre informazioni riguardanti le piante</td><td>Danni, Fioritura, Biomassa, Dtruttura, Fruttificazione</td></tr>
+<tr><td>9</td><td>Responsabile</td><td>Responsabile della rilevazione</td><td>ID_Rilevazione</td><td>Chiave primaria;<br />ID della rilevazione di riferimento</td><td>BIGINT</td></tr>
+<tr><td>10</td><td>Sensore</td><td>Sensori per le rilevazioni</td><td>ID</td><td>Chiave primaria;<br />Identificatore univoco</td><td>BIGINT</td></tr>
+<tr><td></td><td></td><td></td><td>Tipo</td><td>Tipo del sensore: SchedaArduino o Sensore</td><td>VARCHAR (SchedaArduino, Sensore)</td></tr>
+<tr><td></td><td></td><td></td><td>Acquisizione</td><td>Tipo di acquisizione delle informazioni</td><td>VARCHAR (Arduino, App)</td></tr>
+</table>
 
 ### 2.3 - Associazioni
 
-| #  | ASSOCIAZIONE  | DESCRIZIONE                                                 | ENTITA'                 | MOLTEPLICITA' |
-| :- | :------------ | :---------------------------------------------------------- | :---------------------- | :-----------: |
-| 1  | Rappresentata | La classe è rappresentata da un docente                    | Classe, Persona         |   1:1 - 0:1   |
-| 2  | Coltiva       | La classe coltiva delle piante                              | Classe, Pianta          |   1:N - 1:1   |
-| 3  | Afferisce     | La classe fa parte di una scuola                            | Classe, Scuola          |   1:1 - 1:N   |
-| 4  | Appartiene    | Persone lavorano e/o appartengono alla scuola               | Persona, Scuola         |   0:1 - 1:N   |
-| 5  | Iscritta      | La scuola è iscritta a uno o più progetti                 | Scuola, Progetto        |   1:N - 1:N   |
-| 6  | Utilizza      | La scuola utilizza un orto di un’altra scuola              | Scuola, Orto            |   1:N - 0:N   |
-| 7  | Possiede      | La scuola possiede un orto                                  | Scuola, Orto            |   1:N - 1,1   |
-| 8  | Partecipa     | Una persona partecipa al progetto, con un determinato ruolo | Persona, Progetto       |   0:N - 1:N   |
-| 9  | Responsabile  | Una persona è responsabile della rilevazione               | Persona, Rilevazione    |   0:N - 1:2   |
-| 10 | Contiene      | Nell’orto sono contenute diverse specie di piante          | Orto, Specie            |   1:3 - 1:N   |
-| 11 | Ospitate      | Nell’orto sono messe a dimora delle piante                 | Orto, Pianta            |   1:N - 1:1   |
-| 12 | Include       | Una specie include diversi piante                           | Specie, Pianta          |   1:N - 1:1   |
-| 13 | Contenuta     | Le piante sono contenute in al massimo 2 diversi gruppi     | Pianta, Gruppo          |  1:1 - 1:20  |
-| 14 | Effettuata    | Sulle piante/repliche sono effettuate delle rilevazioni     | Pianta, Rilevazione     |   1:N - 1:N   |
-| 15 | Rilevata      | I sensiori fanno le rilevazioni dei dati                    | Sensore, Rilevazione    |   1:N - 1:N   |
-| 16 | Identificato  | La persona fa Rileva o Inserisce i dati                     | Persona, Responsabile   |   0:N - 0:2   |
-| 17 | Esegue        | Rilevatore esegue la rilevazione                            | Rilevatore, Rilevazione |   1:1 - 1:2   |
+<table>
+<tr><td>#</td><td>Associazione</td><td>Descrizione</td><td>Entità</td><td>Molteplicità</td></tr>
+<tr><td>1</td><td>Docente</td><td>La classe è rappresentata da un docente</td><td>Classe, Persona</td><td>1:1 - 0:1</td></tr>
+<tr><td>2</td><td>Coltiva</td><td>La classe coltiva delle piante</td><td>Classe, Pianta</td><td>1:N - 1:1</td></tr>
+<tr><td>3</td><td>Afferisce</td><td>La classe fa parte di una scuola</td><td>Classe, Scuola</td><td>1:1 - 1:N</td></tr>
+<tr><td>4</td><td>Dirigente</td><td>Persone lavorano e/o appartengono alla scuola</td><td>Persona, Scuola</td><td>0:1 - 1:1</td></tr>
+<tr><td>5</td><td>Referente</td><td>Referente della scuola che partecipa al progetto</td><td>Persona, Scuola</td><td>0:1 - 1:1</td></tr>
+<tr><td>6</td><td>Utilizza</td><td>La scuola utilizza un orto di un’altra scuola</td><td>Scuola, Orto</td><td>1:N - 0:N</td></tr>
+<tr><td>7</td><td>Possiede</td><td>La scuola possiede un orto</td><td>Scuola, Orto</td><td>1:N - 1,1</td></tr>
+<tr><td>8</td><td>Identificato</td><td>Una persona è responsabile della rilevazione</td><td>Persona, Responsabile</td><td>0:N - 0:2</td></tr>
+<tr><td>9</td><td>Contiene</td><td>Nell’orto sono contenute diverse specie di piante</td><td>Orto, Specie</td><td>1:3 - 1:N</td></tr>
+<tr><td>10</td><td>Ospita</td><td>Nell’orto sono messe a dimora delle piante</td><td>Orto, Pianta</td><td>1:N - 1:1</td></tr>
+<tr><td>11</td><td>Include</td><td>Una specie include diversi piante</td><td>Specie, Pianta</td><td>1:N - 1:1</td></tr>
+<tr><td>12</td><td>Contenuta</td><td>Le piante sono contenute in al massimo 2 diversi gruppi</td><td>Pianta, Gruppo</td><td>1:1 - 1:20</td></tr>
+<tr><td>13</td><td>Effettuata</td><td>Sulle piante/repliche sono effettuate delle rilevazioni</td><td>Pianta, Rilevazione</td><td>1:N - 1:N</td></tr>
+<tr><td>14</td><td>Rilevata</td><td>I sensiori fanno le rilevazioni dei dati</td><td>Sensore, Rilevazione</td><td>1:N - 1:N</td></tr>
+<tr><td>15</td><td>Esegue</td><td>La persona fa Rileva o Inserisce i dati</td><td>Responsabile, Rilevazione</td><td>1:1 - 1:2</td></tr>
+</table>
 
 ### 2.4 - Vincoli
 
-| # | ENTITÀ     | VINCOLO                                                                                                                                             | TIPO SQL  |
-| :- | :---------- | :-------------------------------------------------------------------------------------------------------------------------------------------------- | :-------- |
-| 1 | Progetto    | Se la scuola riceve un finanziamento per un progetto, si memorizzerà una Persona con ruolo "Referente"                                             | [TRIGGER] |
-| 2 | Orto        | Se l'orto della scuola ha come Condizione Ambientale "Pulito", allora può essere adatto per fare da controllo per orti di altre scuole             | [CHECK]   |
-| 3 | Scuola      | Se la scuola utilizza un orto con Condizione Ambientale "Pulito", allora può essere collaborare con altre scuole                                   | [CHECK]   |
-| 4 | Pianta      | Se lo Scopo è "Biomonitoraggio" allora il Numero di Repliche del Gruppo di Controllo devono essere uguali a quelle del Gruppo di Monitoraggio      | [CHECK]   |
-| 5 | Rilevamento | Se il responsabile dell'Inserimento è diverso da quello della Rilevazione allora dobbiamo inserire due Persone o Classi per la stessa rilevazione. | [TRIGGER] |
+<table>
+<tr><td>#</td><td>Entità</td><td>Vincolo</td><td>Descrizione</td><td>Tipo</td></tr>
+<tr><td>1</td><td>Scuola</td><td>Se la scuola riceve un finanziamento per un progetto, si memorizzerà una Persona con ruolo "Referente"</td><td>Trigger</td></tr>
+<tr><td>2</td><td>Orto</td><td>Se l'orto della scuola ha come Condizione Ambientale "Pulito", allora può essere adatto per fare da controllo per orti di altre scuole</td><td>Check</td></tr>
+<tr><td>3</td><td>Scuola</td><td>Se la scuola utilizza un orto con Condizione Ambientale "Pulito", allora può essere collaborare con altre scuole</td><td>Check</td></tr>
+<tr><td>4</td><td>Pianta</td><td>Se lo Scopo è "Biomonitoraggio" allora il Numero di Repliche del Gruppo di Controllo devono essere uguali a quelle del Gruppo di Monitoraggio</td><td>Check</td></tr>
+<tr><td>5</td><td>Rilevamento</td><td>Se il responsabile dell'Inserimento è diverso da quello della Rilevazione allora dobbiamo inserire due Persone o Classi per la stessa rilevazione.</td><td>Trigger</td></tr>
+</table>
 
 ### 2.5 - Generalizzazioni
 
-Esite una generalizzazione per l'entità Responsabile, che può essere Responsabile di Rilevazione o Responsabile di Inserimento.
+Esiste una generalizzazione per l'entità Responsabile, che può essere Responsabile di Rilevazione o Responsabile di Inserimento.
 
 ## 3 - Progettazione Logica
 

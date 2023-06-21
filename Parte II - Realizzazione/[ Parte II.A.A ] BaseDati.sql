@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS Scuola (
     CicloIstruzione INTEGER NOT NULL CHECK(CicloIstruzione >= 1 AND CicloIstruzione <= 2),
     Comune VARCHAR(100) NOT NULL,
     Provincia VARCHAR(100) NOT NULL,
-    Collabora BOOLEAN NOT NULL,
+    Collabora BOOLEAN NOT NULL DEFAULT FALSE,
 
     Finanziamento VARCHAR(100) NULL,
 

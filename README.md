@@ -69,6 +69,7 @@ Inoltre, sono presenti i file:
 
 Sono presenti i file della parte 3 del progetto:
 
+- Il file `[ Parte III.A ] PopolamentoLarge.sql` che contiene un possibile popolamento ottenuto dal notebook Python `DataGenerator.ipynb`.
 - Il file `[ Parte III.A.A ] Interrogazione.sql` che contiene le interrogazioni aggiuntive richieste.
 - Il file `[ Parte III.A.B ] Indici.sql` che contiene le istruzioni SQL per creare gli indici richiesti.
 - Il file `[ Parte III.B.C ] Controllo Accessi.sql` che contiene il controllo degli accessi richiesto.

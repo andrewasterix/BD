@@ -5,7 +5,9 @@
 <div style="text-align: justify;">
 <p> Al fine di verificare il corretto funzionamento delle interrogazioni a pieno carico, si è deciso di creare un database di test con un elevato numero di tuple, in modo da valutare le prestazioni delle interrogazioni in situazioni di carico massimo. </p>
 <p> Per fare ciò, abbiamo creato un Notebook in Python che genera un elevato numero di dati in modo casua- le, inserendoli direttamente nel database, questo ci permette di ottenere un database di test diverso ad ogni esecuzione.</p>
-<p> <b>Nota:</b> Lo script è stato creato per essere eseguito su un database vuoto, quindi se si vuole eseguirlo nuovamente, è necessario eliminare il database e ricrearlo <b>[ Parte II.A.A ] BaseDati.sql</b>.</p></div>
+<p> Inoltre genera il file <b>[ Parte III.A ] PopolamentoLarge.sql</b> dove vengono inserite le query che sono state appena eseguite sul database.</p>
+<p> <b>Nota<sup>1</sup>:</b> Lo script è stato creato per essere eseguito su un database vuoto, quindi se si vuole eseguirlo nuovamente, è necessario eliminare il database e ricrearlo <b>[ Parte II.A.A ] BaseDati.sql</b>.</p>
+<p> <b>Nota<sup>2</sup>:</b> In allegato è presente il file <b>[ Parte III.A ] PopolamentoLarge.sql</b> generato durante una nostra esecuzione di test.</p></div>
 
 ### **Interrogazioni a pieno carico**
 

@@ -1,6 +1,6 @@
-SET search_path TO 'OrtiScolastici'
-SET datestyle TO 'MDY'
-SET timezone TO 'GMT'
+SET search_path TO 'OrtiScolastici';
+SET datestyle TO 'MDY';
+SET timezone TO 'GMT';
 INSERT INTO Persona (Email, Nome, Cognome, Telefono, RilevatoreEsterno) VALUES ('carusogiacinto@example.com', 'Michela', 'Iannucci', '6470959059', False);
 INSERT INTO Persona (Email, Nome, Cognome, Telefono, RilevatoreEsterno) VALUES ('zaccardonino@example.org', 'Gastone', 'Iannotti', '6732926210', False);
 INSERT INTO Persona (Email, Nome, Cognome, Telefono, RilevatoreEsterno) VALUES ('giannapriuli@example.org', 'Puccio', 'Onio', '8811056082', True);
@@ -67,9 +67,9 @@ INSERT INTO Persona (Email, Nome, Cognome, Telefono, RilevatoreEsterno) VALUES (
 INSERT INTO Persona (Email, Nome, Cognome, Telefono, RilevatoreEsterno) VALUES ('pomponio39@example.net', 'Laura', 'Pausini', '9243369718', True);
 INSERT INTO Persona (Email, Nome, Cognome, Telefono, RilevatoreEsterno) VALUES ('carolinaluria@example.com', 'Guarino', 'Falcone', '1517206387', False);
 INSERT INTO Persona (Email, Nome, Cognome, Telefono, RilevatoreEsterno) VALUES ('jcristoforetti@example.org', 'Ruggiero', 'Gregorio', '1444922883', True);
-INSERT INTO Persona (Email, Nome, Cognome, Telefono, RilevatoreEsterno) VALUES ('matteo49@example.com', 'Nicolò', 'Peruzzi', '3716219984', False);
+INSERT INTO Persona (Email, Nome, Cognome, Telefono, RilevatoreEsterno) VALUES ('matteo49@example.com', 'Nicolï¿½', 'Peruzzi', '3716219984', False);
 INSERT INTO Persona (Email, Nome, Cognome, Telefono, RilevatoreEsterno) VALUES ('mpininfarina@example.com', 'Marina', 'Bodoni', '8902666223', False);
-INSERT INTO Persona (Email, Nome, Cognome, Telefono, RilevatoreEsterno) VALUES ('ferrarisubaldo@example.com', 'Niccolò', 'Marangoni', '8315818790', True);
+INSERT INTO Persona (Email, Nome, Cognome, Telefono, RilevatoreEsterno) VALUES ('ferrarisubaldo@example.com', 'Niccolï¿½', 'Marangoni', '8315818790', True);
 INSERT INTO Persona (Email, Nome, Cognome, Telefono, RilevatoreEsterno) VALUES ('vattimoarsenio@example.org', 'Santino', 'Micca', '9664191943', True);
 INSERT INTO Persona (Email, Nome, Cognome, Telefono, RilevatoreEsterno) VALUES ('bernardosperi@example.net', 'Temistocle', 'Ruberto', '2817554985', True);
 INSERT INTO Persona (Email, Nome, Cognome, Telefono, RilevatoreEsterno) VALUES ('cappelliennio@example.com', 'Gianfranco', 'Pistoletto', '1449666814', True);

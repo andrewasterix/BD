@@ -36,8 +36,6 @@ JOIN ConfrontoGruppi AS G ON P.NomeComune = G.Pianta
 GROUP BY P.NomeComune, P.Specie, O.NomeOrto, G.Controllo, G.Monitoraggio
 ORDER BY G.Controllo, G.Monitoraggio;
 
--- TODO fino a qui fa belle cose dopo da rivedere per unire più rilevazioni in base ai gruppi (Unire gruppi e rilevazioni)
-
 -- Vista per collegare la Rilevazione ai Dati (Temperatura, Umidità, Ph, AltezzaPianta, LunghezzaRadice)
 DROP VIEW IF EXISTS DatiRilevazione CASCADE;
 CREATE OR REPLACE VIEW DatiRilevazione AS

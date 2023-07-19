@@ -24,9 +24,9 @@
 ### 1.2 - Descrizione del dominio applicativo
 
 <div style="text-align: justify;">
-<p>Si vuole realizzare una base di dati a supporto dell’iniziativa di citizen science rivolta alle scuole “Dalla botanica ai big data” <font color="#DE3163">(che rappresenta l'intero scherma ER)</font>.</p>
-<p>L’iniziativa mira a costruire una rete di supporto per le scuole che partecipano a <font color="#539165">progetti</font> <font color="#DE3163">(gli attributi verrano specificati sucessivamente)</font> relativi agli orti scolastici. Per ogni <font color="#539165">scuola</font> si vogliono memorizzare il <font color="#F7C04A">nome dell’istituto scolastico</font>, il <font color="#F7C04A">codice meccanografico</font>, la <font color="#F7C04A">provincia</font>, il <font color="#F7C04A">ciclo di istruzione</font> (primo o secondo ciclo di istruzione) e se l’istituto beneficia o meno di un <font color="#F7C04A">finanziamento</font> <font color="#DE3163">(attributo dell'entità Progetti)</font> per <font color="#FF00FF">partecipare </font>all’iniziativa <font color="#DE3163">(relazione tra Scuola e Progetto)</font>, in tal caso ne memorizziamo il <font color="#F7C04A">tipo</font> <font color="#DE3163">(attributo dell'entità Progetti)</font>.</p>
-<p>Per ogni scuola c’è almeno una <font color="#539165">persona</font> di <font color="#FF00FF">riferimento</font> <font color="#DE3163">(relazione tra Progetto e Persona)</font> per l’iniziativa, ma <font color="#FF7F50">possono essercene diverse</font><font color="#DE3163"> (molteplicità sulla relazione precedente)</font>. Per ogni persona coinvolta vogliamo memorizzare <font color="#F7C04A">nome</font>, <font color="#F7C04A">cognome</font>, <font color="#F7C04A">indirizzo di email</font>, <font color="#FF7F50">opzionalmente</font> <font color="#DE3163">(molteplicità sull'attributo)</font> un contatto <font color="#F7C04A">telefonico</font> e il <font color="#F7C04A">ruolo</font> <font color="#FF7F50">(dirigente, animatore digitale, docente, ...)</font>. Nel caso la scuola sia titolare di finanziamento per partecipare all’iniziativa (es. finanziamento per progetto PON EduGreen) si vuole memorizzare se la persona sia il <font color="#FF00FF">referente</font> <font color="#DE3163">(relazione tra Pesona e Progetto)</font> e un <font color="#FF00FF">partecipante</font> <font color="#DE3163"> (relazione tra Persona e Scuola)</font> al progetto da cui deriva il finanziamento. All’interno della scuola, possono esserci più <font color="#539165">classi</font> partecipanti all’iniziativa. Per ognuna di esse si vuole memorizzare la <font color="#F7C04A">classe (es. 4E)</font> <font color="#DE3163">(indicato come Nome)</font>, <font color="#F7C04A">l’ordine</font> (es. primaria, secondaria di primo grado) o il <font color="#F7C04A">tipo di scuola</font> (es. liceo scienze applicate, agrario) e il <font color="#FF00FF">docente di riferimento per la partecipazione</font> <font color="#DE3163">(relazione tra Persona e Classe)</font> di tale classe.</p>
+<p>Si vuole realizzare una base di dati a supporto dell’iniziativa di citizen science rivolta alle scuole “Dalla botanica ai big data”.</p>
+<p>L’iniziativa mira a costruire una rete di supporto per le scuole che partecipano a progetti relativi agli orti scolastici. Per ogni <font color="#539165">scuola</font> si vogliono memorizzare il <font color="#F7C04A">nome dell’istituto scolastico</font>, il <font color="#F7C04A">codice meccanografico</font>, la <font color="#F7C04A">provincia</font>, il <font color="#F7C04A">ciclo di istruzione</font> (primo o secondo ciclo di istruzione) e se l’istituto beneficia o meno di un <font color="#F7C04A">finanziamento</font> <font color="#DE3163">(attributo dell'entità Scuola)</font> per partecipare all'iniziativa, in tal caso ne memorizziamo il <font color="#F7C04A">tipo</font> <font color="#DE3163">(attributo dell'entità Scuola, unito a Finanziamento)</font>.</p>
+<p>Per ogni scuola c’è almeno una <font color="#539165">persona</font> di <font color="#FF00FF">riferimento</font> <font color="#DE3163">(relazione tra Scuola e Persona)</font> per l’iniziativa, ma possono essercene diverse. Per ogni persona coinvolta vogliamo memorizzare <font color="#F7C04A">nome</font>, <font color="#F7C04A">cognome</font>, <font color="#F7C04A">indirizzo di email</font>, <font color="#FF7F50">opzionalmente</font> <font color="#DE3163">(molteplicità sull'attributo)</font> un contatto <font color="#F7C04A">telefonico</font> e il <font color="#F7C04A">ruolo</font> <font color="#FF7F50">(dirigente, animatore digitale, docente, ...)</font>. Nel caso la scuola sia titolare di finanziamento per partecipare all’iniziativa (es. finanziamento per progetto PON EduGreen) si vuole memorizzare se la persona sia il referente e un partecipante al progetto da cui deriva il finanziamento. All’interno della scuola, possono esserci più <font color="#539165">classi</font> partecipanti all’iniziativa. Per ognuna di esse si vuole memorizzare la <font color="#F7C04A">classe (es. 4E)</font> <font color="#DE3163">(indicato come Sezione)</font>, <font color="#F7C04A">l’ordine</font> (es. primaria, secondaria di primo grado) o il <font color="#F7C04A">tipo di scuola</font> (es. liceo scienze applicate, agrario) e il <font color="#FF00FF">docente di riferimento per la partecipazione</font> <font color="#DE3163">(relazione tra Persona e Classe)</font> di tale classe.</p>
 <p>Ogni scuola <font color="#FF00FF">ha</font> <font color="#DE3163">(relazione tra Scuola e Orto)</font> <font color="#FF7F50">uno o più</font> <font color="#DE3163">(molteplicità sulla relazione precedente)</font> <font color="#539165">orti</font>, identificati da un <font color="#F7C04A">nome</font> che identifica l’orto all’interno della scuola. Ogni orto può essere <font color="#F7C04A">in pieno campo o in vaso</font> <font color="#DE3163">(indicati come attributo 'Collocazione')</font>, ed è caratterizzato da <font color="#F7C04A">coordinate GPS</font> e una <font color="#F7C04A">superficie</font> in mq. Si vuole inoltre memorizzare se le <font color="#F7C04A">condizioni ambientali</font> dell’orto lo rendono adatto a fare da controllo per altri istituti (cioè se si trova in un contesto ambientale "pulito" e l’istituto è disposto a <font color="#F7C04A">collaborare</font> <font color="#DE3163">(attributo di Scuola indicato come 'Collabora')</font> con altri).</p>
 <p>Le piante vengono piantate con scopi di biomonitoraggio o fitobonifica. Con biomonitoraggio si intende il monitoraggio dell'inquinamento mediante organismi viventi. Le principali tecniche di biomonitoraggio consistono nell'uso di organismi bioaccumulatori per fornire informazioni sulla situazione ambientale. Fornisce stime sugli effetti combinati di più inquinanti sugli esseri viventi, ha costi di gestione limitati e consente di coprire vaste zone e territori diversificati, consentendo una adeguata mappatura del territorio. Con fitobonifica si intende l’utilizzo delle piante per disinquinare aria, acqua, sedimenti e suoli.</p>
 <p>Si considerano un certo numero di <font color="#539165">specie</font> per i diversi <font color="#F7C04A">scopi</font> e per ogni specie <font color="#FF00FF">vengono utilizzate</font> <font color="#DE3163">(relazione tra Specie e Pianta)</font> un certo numero di <font color="#539165">repliche</font> <font color="#DE3163">(indicata come entità 'Pianta')</font> (cioè esemplari veri e propri delle piante). In particolare, in caso di biomonitoraggio le repliche del <font color="#539165">gruppo</font> di <font color="#F7C04A">controllo</font> <font color="#DE3163">(indicato come attributo  'Tipo')</font> (“nel pulito”) <font color="#FF7F50">dovranno essere lo stesso numero di quelle del gruppo per cui vogliamo monitorare lo stress ambientale</font>. Le repliche di controllo potranno essere dislocate in un orto a disposizione dello stesso istituto o in un orto messo a disposizione da altro istituto e andrà mantenuto il collegamento tra gruppo per cui si monitora lo stress ambientale e il corrispondente gruppo di controllo. In particolare, <font color="#FF00FF">ogni scuola dovrebbe concentrarsi</font> <font color="#DE3163">(relazione tra Orto e Specie)</font> su <font color="#FF7F50">tre specie</font> <font color="#DE3163">(indicato come molteplicità sulla relazione precedente)</font> e ogni gruppo <font color="#FF00FF">dovrebbe contenere</font> <font color="#DE3163">(relazione tra Gruppo e Pianta)</font> <font color="#FF7F50">20 repliche</font>.</p>
@@ -43,7 +43,7 @@
 
 ### 2.2 - Domini e Entità
 
-<div style="width: 100%;">
+<div style="width: 100%; font-size: 9px; line-height: 11px">
 <table style="width: 100%; margin: left 35%; position: relative">
 <thead>
 <tr><th>#</th><th>Entità</th><th>Descrizione</th><th>Attributi</th><th>Descrizione</th><th>Dominio</th></tr>
@@ -91,38 +91,38 @@
 </tbody>
 </table>
 </div>
+<div style="page-break-after: always;"></div>
 
 ### 2.3 - Associazioni
 
-<div style="width: 100%; margin: left 45%">
+<div style="width: 100%; font-size: 9px; line-height: 11px">
 <table style="width: 100%; margin: left 45%; position: relative">
 <thead><tr><th>#</th><th>Associazione</th><th>Descrizione</th><th>Entità</th><th>Molteplicità</th></tr></thead>
 <tbody>
-<tr><td>1</td><td>Docente</td><td>La classe è rappresentata da un docente</td><td>Classe, Persona</td><td>1:1 - 0:1</td></tr>
-<tr><td>2</td><td>Coltiva</td><td>La classe coltiva delle piante</td><td>Classe, Pianta</td><td>1:N - 1:1</td></tr>
-<tr><td>3</td><td>Afferisce</td><td>La classe fa parte di una scuola</td><td>Classe, Scuola</td><td>1:1 - 1:N</td></tr>
-<tr><td>4</td><td>Dirigente</td><td>Persone lavorano e/o appartengono alla scuola</td><td>Persona, Scuola</td><td>0:1 - 1:1</td></tr>
-<tr><td>5</td><td>Referente</td><td>Referente della scuola che partecipa al progetto</td><td>Persona, Scuola</td><td>0:1 - 1:1</td></tr>
-<tr><td>6</td><td>Utilizza</td><td>La scuola utilizza un orto di un’altra scuola</td><td>Scuola, Orto</td><td>1:N - 0:N</td></tr>
-<tr><td>7</td><td>Possiede</td><td>La scuola possiede un orto</td><td>Scuola, Orto</td><td>1:N - 1,1</td></tr>
-<tr><td>8</td><td>Identificato</td><td>Una persona è responsabile della rilevazione</td><td>Persona, Responsabile</td><td>0:N - 0:2</td></tr>
-<tr><td>9</td><td>Contiene</td><td>Nell’orto sono contenute diverse specie di piante</td><td>Orto, Specie</td><td>1:3 - 1:N</td></tr>
-<tr><td>10</td><td>Ospita</td><td>Nell’orto sono messe a dimora delle piante</td><td>Orto, Pianta</td><td>1:N - 1:1</td></tr>
-<tr><td>11</td><td>Include</td><td>Una specie include diversi piante</td><td>Specie, Pianta</td><td>1:N - 1:1</td></tr>
-<tr><td>12</td><td>Contenuta</td><td>Le piante sono contenute in al massimo 2 diversi gruppi</td><td>Pianta, Gruppo</td><td>1:1 - 1:20</td></tr>
-<tr><td>13</td><td>Effettuata</td><td>Sulle piante/repliche sono effettuate delle rilevazioni</td><td>Pianta, Rilevazione</td><td>1:N - 1:N</td></tr>
-<tr><td>14</td><td>Rilevata</td><td>I sensiori fanno le rilevazioni dei dati</td><td>Sensore, Rilevazione</td><td>1:N - 1:N</td></tr>
-<tr><td>15</td><td>Esegue</td><td>La persona fa Rileva o Inserisce i dati</td><td>Responsabile, Rilevazione</td><td>1:1 - 1:2</td></tr>
+<tr><td>1</td><td>Docente</td><td>La classe è rappresentata da un docente</td><td>Classe, Persona</td><td style="text-align: center;">1:1 - 0:1</td></tr>
+<tr><td>2</td><td>Coltiva</td><td>La classe coltiva delle piante</td><td>Classe, Pianta</td><td style="text-align: center;">1:N - 1:1</td></tr>
+<tr><td>3</td><td>Afferisce</td><td>La classe fa parte di una scuola</td><td>Classe, Scuola</td><td style="text-align: center;">1:1 - 1:N</td></tr>
+<tr><td>4</td><td>Dirigente</td><td>Persone lavorano e/o appartengono alla scuola</td><td>Persona, Scuola</td><td style="text-align: center;">0:1 - 1:1</td></tr>
+<tr><td>5</td><td>Referente</td><td>Referente della scuola che partecipa al progetto</td><td>Persona, Scuola</td><td style="text-align: center;">0:1 - 1:1</td></tr>
+<tr><td>6</td><td>Utilizza</td><td>La scuola utilizza un orto di un’altra scuola</td><td>Scuola, Orto</td><td style="text-align: center;">1:N - 0:N</td></tr>
+<tr><td>7</td><td>Possiede</td><td>La scuola possiede un orto</td><td>Scuola, Orto</td><td style="text-align: center;">1:N - 1,1</td></tr>
+<tr><td>8</td><td>Identificato</td><td>Una persona è responsabile della rilevazione</td><td>Persona, Responsabile</td><td style="text-align: center;">0:N - 0:2</td></tr>
+<tr><td>9</td><td>Contiene</td><td>Nell’orto sono contenute diverse specie di piante</td><td>Orto, Specie</td><td style="text-align: center;">1:3 - 1:N</td></tr>
+<tr><td>10</td><td>Ospita</td><td>Nell’orto sono messe a dimora delle piante</td><td>Orto, Pianta</td><td style="text-align: center;">1:N - 1:1</td></tr>
+<tr><td>11</td><td>Include</td><td>Una specie include diversi piante</td><td>Specie, Pianta</td><td style="text-align: center;">1:N - 1:1</td></tr>
+<tr><td>12</td><td>Contenuta</td><td>Le piante sono contenute in al massimo 2 diversi gruppi</td><td>Pianta, Gruppo</td><td style="text-align: center;">1:1 - 1:20</td></tr>
+<tr><td>13</td><td>Effettuata</td><td>Sulle piante/repliche sono effettuate delle rilevazioni</td><td>Pianta, Rilevazione</td><td style="text-align: center;">1:N - 1:N</td></tr>
+<tr><td>14</td><td>Rilevata</td><td>I sensiori fanno le rilevazioni dei dati</td><td>Sensore, Rilevazione</td><td style="text-align: center;">1:N - 1:N</td></tr>
+<tr><td>15</td><td>Esegue</td><td>La persona fa Rileva o Inserisce i dati</td><td>Responsabile, Rilevazione</td><td style="text-align: center;">1:1 - 1:2</td></tr>
 </tbody>
 </table>
 </div>
-<div style="page-break-after: always;"></div>
 
 ### 2.4 - Vincoli
 
-<div style="width: 100%; margin: left 45%">
+<div style="width: 100%; font-size: 9px; line-height: 11px">
 <table style="width: 100%; margin: left 45%; position: relative">
-<thead><tr><th>#</th><th>Entità</th><th>Vincolo</th><th>Descrizione</th><th>Tipo</th></tr></thead>
+<thead><tr><th>#</th><th>Entità</th><th>Vincolo</th><th>Tipo</th></tr></thead>
 <tbody>
 <tr><td>1</td><td>Scuola</td><td>Se la scuola riceve un finanziamento per un progetto, si memorizzerà una Persona con ruolo "Referente"</td><td>Trigger</td></tr>
 <tr><td>2</td><td>Orto</td><td>Se l'orto della scuola ha come Condizione Ambientale "Pulito", allora può essere adatto per fare da controllo per orti di altre scuole</td><td>Check</td></tr>

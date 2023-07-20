@@ -52,6 +52,11 @@ Aggiuntivi:
 
 Sono presenti i file della parte 2 del progetto:
 
+- Il file `[ Parte II ] Realizzazione.sql` che contiene lo schema SQL del database e i requisiti richiesti dalle specifiche.
+- Il file `[ Parte II.A.C ] DataGrip.pdf` che contiene la schermata di DataGrip con il database popolato.
+
+Aggiuntivi:
+
 - Il file `[ Parte II.A.A ] BaseDati.sql` che contiene lo schema SQL del database.
 - Il file `[ Parte II.A.B ] Popolamento.sql` che contiene le istruzioni SQL per popolare il database.
 - Il file `[ Parte II.A.C ] DataGrip.jpg` che contiene la schermata di DataGrip con il database popolato.
@@ -59,9 +64,6 @@ Sono presenti i file della parte 2 del progetto:
 - Il file `[ Parte II.C ] Interrogazionie.sql` che contiene le istruzioni SQL per eseguire le interrogazioni richieste.
 - Il file `[ Parte II.D ] Funzioni.sql` che contiene le istruzioni SQL per creare le funzioni richieste.
 - Il file `[ Parte II.E ] Trigger.sql` che contiene le istruzioni SQL per creare i trigger richiesti.
-
-Inoltre, sono presenti i file:
-
 - Il file `[ Parte II.E.A ] Test - Trigger.pdf` che contiene i test effettuati sul primo trigger.
 - Il file `[ Parte II.E.B ] Test - Trigger.pdf` che contiene i test effettuati sul secondo trigger.
 
@@ -69,15 +71,16 @@ Inoltre, sono presenti i file:
 
 Sono presenti i file della parte 3 del progetto:
 
+- Il file `[ Parte III ] Progettazione Fisica.sql` che contiene lo schema SQL del database e i requisiti richiesti dalle specifiche.
+- Il file `Progettazione Fisica.pdf` che contiene la progettazione fisica del database.
+
+Aggiuntivi:
+
 - Il file `[ Parte III.A ] PopolamentoLarge.sql` che contiene un possibile popolamento ottenuto dal notebook Python `DataGenerator.ipynb`.
 - Il file `[ Parte III.A.A ] Interrogazione.sql` che contiene le interrogazioni aggiuntive richieste.
 - Il file `[ Parte III.A.B ] Indici.sql` che contiene le istruzioni SQL per creare gli indici richiesti.
 - Il file `[ Parte III.B.C ] Controllo Accessi.sql` che contiene il controllo degli accessi richiesto.
-- Il file `Progettazione Fisica.pdf` che contiene la progettazione fisica del database.
 - Il file `Progettazione Fisica.md` che contiene la progettazione fisica del database.
-
-Aggiuntivi:
-
 - Le foto delle statistiche delle interrogazioni aggiuntive richieste divise in cartelle "Senza Indici" e "Con Indici".
 - Il file `DataGenerator.ipynb` che contiene il codice per generare i dati casuali.
 

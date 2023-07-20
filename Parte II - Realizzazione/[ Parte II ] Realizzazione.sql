@@ -1,13 +1,178 @@
 /*
-Parte II.A.B - Popolamento Base di Dati
+Parte II - Progetto Base di Dati
 
 Andrea Franceschetti - 4357070
 William Chen - 4827847
 Alessio De Vincenzi - 4878315
 */
+
+-- CREAZIONE DELLO SCHEMA DELLA BASE DATI
+
+DROP SCHEMA IF EXISTS "OrtiScolastici" CASCADE;
+CREATE SCHEMA IF NOT EXISTS "OrtiScolastici";
 SET search_path TO 'OrtiScolastici';
 SET datestyle TO 'MDY';
 SET timezone TO 'GMT';
+
+DROP TABLE IF EXISTS "Progetto", "Scuola", "Persona", "Ruolo", "Classe" CASCADE;
+DROP TABLE IF EXISTS "Specie", "Orto", "Pianta", "Esposizione", "Gruppo", "Sensore", "Dati", "Rilevazione", "Responsabile" CASCADE;
+
+-- Tabella Persona
+CREATE TABLE IF NOT EXISTS Persona (
+    Email VARCHAR(100) PRIMARY KEY,
+    Nome VARCHAR(100) NOT NULL,
+    Cognome VARCHAR(100) NOT NULL,
+    Telefono Numeric(10) NULL,
+    RilevatoreEsterno BOOLEAN NULL DEFAULT FALSE
+);
+
+-- Tabella Scuola
+CREATE TABLE IF NOT EXISTS Scuola (
+    Cod_Meccanografico VARCHAR(10) PRIMARY KEY,
+    NomeScuola VARCHAR(100) NOT NULL,
+    CicloIstruzione INTEGER NOT NULL CHECK(CicloIstruzione >= 1 AND CicloIstruzione <= 2),
+    Comune VARCHAR(100) NOT NULL,
+    Provincia VARCHAR(100) NOT NULL,
+    Collabora BOOLEAN NOT NULL DEFAULT FALSE,
+
+    Finanziamento VARCHAR(100) NULL,
+
+    Dirigente VARCHAR(100) NOT NULL,
+    FOREIGN KEY (Dirigente) REFERENCES Persona(Email) ON DELETE CASCADE ON UPDATE CASCADE,
+    
+    Referente VARCHAR(100) NULL,
+    FOREIGN KEY (Referente) REFERENCES Persona(Email) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+-- Tabella Classe
+CREATE TABLE IF NOT EXISTS Classe (
+    IdClasse BIGINT PRIMARY KEY,
+    Sezione VARCHAR(5) NOT NULL,
+    Scuola VARCHAR(10) NOT NULL,
+    FOREIGN KEY (Scuola) REFERENCES Scuola(Cod_Meccanografico) ON DELETE CASCADE ON UPDATE CASCADE,
+    Ordine INTEGER NOT NULL CHECK(Ordine >= 1 AND Ordine <= 2),
+    TipoScuola VARCHAR(100) NOT NULL,
+
+    Docente VARCHAR(100) NOT NULL,
+    FOREIGN KEY (Docente) REFERENCES Persona(Email) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+-- Tabella Specie
+CREATE TABLE IF NOT EXISTS Specie (
+    NomeScientifico VARCHAR(100) NOT NULL PRIMARY KEY,
+    Substrato VARCHAR(100) NOT NULL CHECK(Substrato IN ('TerriccioRinvaso', 'SuoloPreEsistente'))
+);
+
+-- Tabella Orto
+CREATE TABLE IF NOT EXISTS Orto (
+    IdOrto BIGINT,
+    NomeOrto VARCHAR(100) NOT NULL,
+    Latitudine FLOAT NOT NULL,
+    Longitudine FLOAT NOT NULL,
+    Superficie FLOAT NOT NULL,
+    Posizione VARCHAR(100) NOT NULL CHECK(Posizione IN ('Vaso', 'Terra')),
+    CondizioneAmbientale VARCHAR(10) NOT NULL CHECK(CondizioneAmbientale IN ('Pulito', 'Inquinato')),
+
+    Specie VARCHAR(100) NOT NULL,
+    FOREIGN KEY (Specie) REFERENCES Specie(NomeScientifico) ON DELETE CASCADE ON UPDATE CASCADE,
+
+    Scuola VARCHAR(10) NOT NULL,
+    FOREIGN KEY (Scuola) REFERENCES Scuola(Cod_Meccanografico) ON DELETE CASCADE ON UPDATE CASCADE,
+
+    PRIMARY KEY (IdOrto, Specie)
+);
+
+-- Tabella Pianta
+CREATE TABLE IF NOT EXISTS Pianta (
+    NumeroReplica BIGINT NOT NULL,
+    NomeComune VARCHAR(100) NOT NULL,
+    Scopo VARCHAR(100) NOT NULL CHECK(Scopo IN ('Fitobotanica', 'Biomonitoraggio')),
+    DataMessaDimora DATE NOT NULL,
+
+    Specie VARCHAR(100) NOT NULL,
+    FOREIGN KEY (Specie) REFERENCES Specie(NomeScientifico) ON DELETE CASCADE ON UPDATE CASCADE,
+
+    Classe BIGINT NOT NULL,
+    FOREIGN KEY (Classe) REFERENCES Classe(IdClasse) ON DELETE CASCADE ON UPDATE CASCADE,
+    PRIMARY KEY (NumeroReplica, NomeComune)
+);
+
+-- Tabella Esposizione
+CREATE TABLE IF NOT EXISTS Esposizione (
+    NumeroReplica BIGINT NOT NULL,
+    NomeComune VARCHAR(100) NOT NULL,
+    FOREIGN KEY (NumeroReplica, NomeComune) REFERENCES Pianta(NumeroReplica, NomeComune) ON DELETE CASCADE ON UPDATE CASCADE,
+
+    TipoEsposizione VARCHAR(100) NOT NULL CHECK(TipoEsposizione IN ('Sole', 'Mezzombra', 'Ombra')),
+    PRIMARY KEY (NumeroReplica, NomeComune, TipoEsposizione)
+);
+
+-- Tabella Gruppo
+CREATE TABLE IF NOT EXISTS Gruppo (
+    IdGruppo BIGINT,
+    TipoGruppo VARCHAR(100) NOT NULL CHECK(TipoGruppo IN ('Controllo', 'Monitoraggio')),
+
+    NumeroReplica BIGINT NOT NULL,
+    NomeComune VARCHAR(100) NOT NULL,
+    FOREIGN KEY (NumeroReplica, NomeComune) REFERENCES Pianta(NumeroReplica, NomeComune) ON DELETE CASCADE ON UPDATE CASCADE,
+    PRIMARY KEY(IdGruppo, NumeroReplica, NomeComune)
+);
+
+-- Tabella Sensore
+CREATE TABLE IF NOT EXISTS Sensore (
+    IdSensore BIGINT PRIMARY KEY,
+    TipoSensore VARCHAR(100) NOT NULL CHECK(TipoSensore IN ('Arduino', 'Sensore')),
+    TipoAcquisizione VARCHAR(100) NOT NULL CHECK(TipoAcquisizione IN ('Arduino', 'App'))
+);
+
+-- Tabella Rilevazione
+CREATE TABLE IF NOT EXISTS Rilevazione (
+    IdRilevazione BIGINT PRIMARY KEY,
+    DataOraRilevazione TIMESTAMP NOT NULL,
+    DataOraInserimento TIMESTAMP NOT NULL,
+
+    NumeroReplica BIGINT NOT NULL,
+    NomeComune VARCHAR(100) NOT NULL,
+    FOREIGN KEY (NumeroReplica, NomeComune) REFERENCES Pianta(NumeroReplica, NomeComune) ON DELETE CASCADE ON UPDATE CASCADE,
+
+    Sensore BIGINT NOT NULL,
+    FOREIGN KEY (Sensore) REFERENCES Sensore(IdSensore) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+-- Tabella Dati
+CREATE TABLE IF NOT EXISTS Dati (
+    Rilevazione BIGINT PRIMARY KEY,
+    FOREIGN KEY (Rilevazione) REFERENCES Rilevazione(IdRilevazione) ON DELETE CASCADE ON UPDATE CASCADE,
+    -- Parametri Suolo
+    Temperatura FLOAT NOT NULL,
+    Umidita FLOAT NOT NULL,
+    Ph FLOAT NOT NULL,
+    -- Parametri Danni
+    FoglieDanneggiate INT NULL,
+    SuperficieFoglieDanneggiate FLOAT NULL,
+    -- Parametri Fioritura & Fruttificazione
+    Fiori INT NULL,
+    Frutti INT NULL,
+    -- Parametri Biomassa & Struttura
+    AltezzaPianta FLOAT NOT NULL,
+    LunghezzaRadice FLOAT NOT NULL
+);
+
+-- Tabella Responsabile
+CREATE TABLE IF NOT EXISTS Responsabile (
+    Rilevazione BIGINT NOT NULL PRIMARY KEY,
+    FOREIGN KEY (Rilevazione) REFERENCES Rilevazione(IdRilevazione) ON DELETE CASCADE ON UPDATE CASCADE,
+    InserimentoPersona VARCHAR(100) NULL REFERENCES Persona(Email) ON DELETE CASCADE ON UPDATE CASCADE,
+    RilevatorePersona VARCHAR(100) NULL REFERENCES Persona(Email) ON DELETE CASCADE ON UPDATE CASCADE,
+
+    InserimentoClasse BIGINT NULL,
+    FOREIGN KEY (InserimentoClasse) REFERENCES Classe(IdClasse) ON DELETE CASCADE ON UPDATE CASCADE,
+    RilevatoreClasse BIGINT NULL,
+    FOREIGN KEY (RilevatoreClasse) REFERENCES Classe(IdClasse) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+-- POPOLAMENTO DELLA BASE DATI
+
 
 -- Inserimento Persone come Rilevatore Esterno
 INSERT INTO Persona (Email, Nome, Cognome, Telefono, RilevatoreEsterno)
@@ -607,3 +772,267 @@ VALUES (61, 'lorenzo.ostuni@esterno.example.com', NULL, NULL, 11),
     (70, NULL, NULL, 12, NULL),
     (71, 'valentina.rossi@example.com', NULL, NULL, NULL),
     (72, 'valentina.rossi@example.com', NULL, NULL, 12);
+
+-- CREAZIONE DELLE VISTE
+
+/*
+    A. La definizione di una vista che fornisca alcune informazioni riassuntive per ogni attività di biomonitoraggio:
+    - per ogni gruppo e per il corrispondente gruppo di controllo mostrare il numero di piante, la specie, l’orto in cui è posizionato il gruppo, 
+    - su base mensile, il valore medio dei parametri ambientali e di crescita delle piante
+        (selezionare almeno tre parametri, quelli che si ritengono più significativi)
+*/
+
+-- Vista per confrontare il numero di repliche tra gruppi di controllo e monitoraggio
+DROP VIEW IF EXISTS ConfrontoGruppi CASCADE;
+CREATE OR REPLACE VIEW ConfrontoGruppi AS
+SELECT DISTINCT G.IdGruppo AS Controllo, G1.IdGruppo AS Monitoraggio, G.NomeComune AS Pianta
+FROM Gruppo AS G
+JOIN Gruppo AS G1 ON G.NomeComune = G1.NomeComune AND G.TipoGruppo = 'Controllo' AND G1.TipoGruppo = 'Monitoraggio'
+ORDER BY G.IdGruppo, G1.IdGruppo;
+
+-- Vista per collegare la Piante - Orto - Gruppo
+DROP VIEW IF EXISTS PianteOrtoGruppo CASCADE;
+CREATE OR REPLACE VIEW PianteOrtoGruppo AS
+SELECT COUNT(DISTINCT P.NumeroReplica) AS Repliche, P.NomeComune AS Pianta, P.Specie AS Specie, 
+    O.NomeOrto AS Orto,
+    G.Controllo, G.Monitoraggio
+FROM Pianta AS P
+JOIN Orto AS O ON P.Specie = O.Specie
+JOIN ConfrontoGruppi AS G ON P.NomeComune = G.Pianta
+GROUP BY P.NomeComune, P.Specie, O.NomeOrto, G.Controllo, G.Monitoraggio
+ORDER BY G.Controllo, G.Monitoraggio;
+
+-- Vista per collegare la Rilevazione ai Dati (Temperatura, Umidità, Ph, AltezzaPianta, LunghezzaRadice)
+DROP VIEW IF EXISTS DatiRilevazione CASCADE;
+CREATE OR REPLACE VIEW DatiRilevazione AS
+SELECT D.Rilevazione, R.NumeroReplica, R.NomeComune, R.DataOraRilevazione, 
+    D.Temperatura AS Temperatura, D.Umidita AS Umidita, D.Ph AS Ph, 
+    D.AltezzaPianta AS AltezzaPianta, D.LunghezzaRadice AS LunghezzaRadice
+FROM Dati AS D
+JOIN Rilevazione AS R ON D.Rilevazione = R.IdRilevazione;
+
+-- Vista per collegare la pianta alla sua rilevazione
+DROP VIEW IF EXISTS RiassuntoInformazioni CASCADE;
+CREATE OR REPLACE VIEW RiassuntoInformazioni AS
+SELECT P.Repliche, P.Pianta AS Pianta, P.Specie AS Specie, P.Orto AS Orto, P.Controllo AS Controllo, P.Monitoraggio AS Monitoraggio,
+    DATE_TRUNC('month', D.DataOraRilevazione) AS Mese, 
+    AVG(D.Temperatura) AS Temperatura, AVG(D.Umidita) AS Umidita, AVG(D.Ph) AS Ph, AVG(D.altezzapianta) AS AltezzaPianta, 
+    AVG(D.LunghezzaRadice) AS LunghezzaRadice
+FROM PianteOrtoGruppo AS P
+JOIN DatiRilevazione AS D ON P.Repliche = D.NumeroReplica AND P.Pianta = D.NomeComune
+GROUP BY P.Repliche, P.Pianta, P.Specie, P.Orto, DATE_TRUNC('month', D.DataOraRilevazione), P.Controllo, P.Monitoraggio
+ORDER BY P.Controllo, P.Monitoraggio;
+
+-- INTERROGAZIONI
+
+-- A. Determinare le scuole che, pur avendo un finanziamento per il progetto, non hanno inserito rilevazioni in questo anno scolastico;
+
+-- [TESTATA E FUNZIONANTE]
+
+SELECT S.Cod_Meccanografico
+FROM Scuola S
+WHERE
+    S.Finanziamento IS NOT NULL
+    AND S.Referente IS NOT NULL
+    AND S.Cod_Meccanografico != (
+        SELECT C.Scuola
+        FROM CLASSE C
+            JOIN Responsabile R ON C.IdClasse = R.InserimentoClasse
+            JOIN Rilevazione RI ON R.Rilevazione = RI.IdRilevazione
+        WHERE
+            RI.DataOraInserimento BETWEEN '2023-01-01 00:00:00' AND '2023-01-12 23:59:59'
+    );
+
+-- B. Determinare le specie utilizzate in tutti i comuni in cui ci sono scuole aderenti al progetto;
+
+-- [TESTATA E FUNZIONANTE]
+
+SELECT DISTINCT o.Specie
+FROM Orto o
+    JOIN Scuola s ON o.Scuola = s.Cod_Meccanografico
+WHERE s.Comune IN (
+        SELECT
+            DISTINCT s.Comune
+        FROM Scuola s
+            JOIN Orto o ON s.Cod_Meccanografico = o.Scuola
+    );
+
+-- C. Determinare per ogni scuola l’individuo/la classe della scuola che ha effettuato più rilevazioni;
+
+-- [TESTATA E FUNZIONANTE]
+
+(
+    SELECT
+        S.Cod_Meccanografico AS SCUOLA,
+        MAX(RilevazioniTotali) AS RILEVAZIONI_TOTALI
+    FROM Classe C
+        JOIN Scuola AS S ON C.Scuola = S.Cod_Meccanografico
+        LEFT JOIN (
+            SELECT
+                S1.Cod_Meccanografico,
+                R1.RilevatoreClasse,
+                COUNT(*) AS RilevazioniTotali
+            FROM Scuola S1
+                JOIN Classe C1 ON S1.Cod_Meccanografico = C1.Scuola
+                JOIN Responsabile R1 ON C1.IdClasse = R1.RilevatoreClasse
+            GROUP BY
+                S1.Cod_Meccanografico,
+                R1.RilevatoreClasse
+        ) AS R ON C.idClasse = R.RilevatoreClasse
+    GROUP BY
+        S.Cod_Meccanografico
+)
+UNION (
+    SELECT
+        S.Cod_Meccanografico AS SCUOLA,
+        MAX(RilevazioniTotali) AS RILEVAZIONI_TOTALI
+    FROM Classe C
+        JOIN Scuola AS S ON C.Scuola = S.Cod_Meccanografico
+        LEFT JOIN (
+            SELECT
+                S1.Cod_Meccanografico,
+                R1.RilevatorePersona,
+                COUNT(*) AS RilevazioniTotali
+            FROM Scuola S1
+                JOIN Classe C1 ON S1.Cod_Meccanografico = C1.Scuola
+                JOIN Responsabile R1 ON C1.Docente = R1.RilevatorePersona
+            GROUP BY
+                S1.Cod_Meccanografico,
+                R1.RilevatorePersona
+        ) AS R ON C.Docente = R.RilevatorePersona
+    GROUP BY
+        S.Cod_Meccanografico
+)
+ORDER BY
+    RILEVAZIONI_TOTALI DESC;
+
+-- FUNZIONI
+
+/*
+    A - Funzione che realizza l’abbinamento tra gruppo e gruppo di controllo nel caso di operazioni di bio-monitoraggio.
+    -- [TESTATA E FUNZIONANTE]
+*/
+CREATE OR REPLACE FUNCTION match_groups()
+RETURNS TABLE (group_id BIGINT, control_group_id BIGINT, common_name VARCHAR(100)) AS $$
+BEGIN
+    RETURN QUERY
+    SELECT DISTINCT g1.IdGruppo, g2.IdGruppo, g1.NomeComune
+    FROM Gruppo g1, Gruppo g2
+    WHERE g1.NomeComune = g2.NomeComune AND g1.TipoGruppo = 'Controllo' AND g2.TipoGruppo = 'Monitoraggio';
+END;
+$$ LANGUAGE plpgsql;
+
+-- Query di test
+SELECT * FROM MATCH_GROUPS();
+
+/* 
+    B - Funzione che corrisponde alla seguente query parametrica: 
+    - Data una replica con finalità di fitobonifica e due date, determina i valori medi dei parametri rilevati per tale replica
+        nel periodo com-preso tra le due date.
+    -- [TESTATA E FUNZIONANTE]
+*/
+CREATE OR REPLACE FUNCTION average_values(replica BIGINT, start_date DATE, end_date DATE)
+RETURNS TABLE (average_temperature FLOAT, average_humidity FLOAT, average_ph FLOAT) AS $$
+BEGIN
+    RETURN QUERY
+    SELECT AVG(Temperatura), AVG(Umidita), AVG(Ph)
+    FROM Dati
+    JOIN Rilevazione ON Dati.Rilevazione = Rilevazione.IdRilevazione
+    WHERE Rilevazione.NumeroReplica = replica
+    AND Rilevazione.DataOraRilevazione BETWEEN start_date AND end_date;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Query di test
+SELECT * FROM average_values(5, '2023-01-01', '2023-12-31');
+
+-- TRIGGER
+
+/*
+    A. Verifica del vincolo che ogni scuola dovrebbe concentrarsi su tre specie e ogni gruppo dovrebbe contenere 20 repliche
+    -- [TESTATA E FUNZIONANTE]
+*/
+-- Trigger di verifica del vincolo -> Specie <= 3 per Scuola
+CREATE OR REPLACE FUNCTION verifica_numero_specie()
+RETURNS TRIGGER AS $$
+DECLARE
+    numero_specie INTEGER; -- Contatore per il numero di specie
+BEGIN
+    -- Controlla il numero di specie per la scuola
+    SELECT COUNT(DISTINCT Specie), Orto.Scuola
+    INTO numero_specie
+    FROM Orto
+    GROUP BY Orto.Scuola;
+    -- Se il numero di specie è maggiore di 3, lancia un'eccezione
+    IF numero_specie > 3 THEN
+        RAISE EXCEPTION 'La scuola deve concentrarsi su massimo tre specie!';
+    END IF;
+
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Trigger di verifica del vincolo -> Repliche <= 20 per Gruppo
+CREATE OR REPLACE FUNCTION verifica_numero_repliche()
+RETURNS TRIGGER AS $$
+DECLARE
+    numero_repliche INTEGER;
+BEGIN
+    SELECT COUNT(*)
+	INTO numero_repliche
+    FROM Gruppo AS G
+    WHERE G.IdGruppo = NEW.IdGruppo;
+
+    IF numero_repliche > 20 THEN
+        RAISE EXCEPTION 'Il gruppo può contenere al massimo 20 repliche!';
+    END IF;
+
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Creazione dei trigger
+CREATE OR REPLACE TRIGGER controllo_numero_specie
+BEFORE INSERT OR UPDATE ON Orto
+FOR EACH ROW
+EXECUTE FUNCTION verifica_numero_specie();
+
+CREATE OR REPLACE TRIGGER controllo_numero_repliche
+BEFORE INSERT OR UPDATE ON Gruppo
+FOR EACH ROW
+EXECUTE FUNCTION verifica_numero_repliche();
+
+/*
+    B. Generazione di un messaggio (o inserimento di una informazione di warning in qualche tabella) 
+    quando viene rilevato un valore decrescente per un parametro di biomassa.
+    -- [TESTATA E FUNZIONANTE]
+*/
+-- Per tenere traccia dei log in una tabella apposita abbiamo bisogno di una tabella LogWarning
+CREATE TABLE IF NOT EXISTS LogWarning (
+    IdLog SERIAL PRIMARY KEY, -- Chiave Primaria per la Tabella 
+    Messaggio TEXT, -- Messaggio di Warning
+    DataOra TIMESTAMP DEFAULT NOW() -- Data e Ora di inserimento del Messaggio
+);
+-- Trigger di verifica del vincolo -> Biomassa decrescente
+CREATE OR REPLACE FUNCTION verifica_biomassa_decrescente()
+RETURNS TRIGGER AS $$
+BEGIN
+	IF NEW.AltezzaPianta < OLD.AltezzaPianta THEN
+		INSERT INTO LogWarning (Messaggio)
+        	VALUES ('Valore di Biomassa (Altezza Pianta) decrescente rilevato!');
+    END IF;
+	
+	IF NEW.LunghezzaRadice < OLD.LunghezzaRadice THEN
+		INSERT INTO LogWarning (Messaggio)
+        VALUES ('Valore di Biomassa (Lunghezza Radice) decresente rilevato!');
+	END IF;
+
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Creazione del Trigger inserisce il messaggio di Warning in una Tabella apposita per tenere traccia dei Log
+CREATE OR REPLACE TRIGGER controllo_biomassa_decrescente
+BEFORE UPDATE ON Dati
+FOR EACH ROW
+EXECUTE FUNCTION verifica_biomassa_decrescente();

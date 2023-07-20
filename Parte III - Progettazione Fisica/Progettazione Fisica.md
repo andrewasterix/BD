@@ -156,16 +156,16 @@ ORDER BY
 ##### Piano esecuzione prima dell'indice
 
 - Analisi
-  ![Analisi Prima Interrogazione](Aggiuntivi\Senza_Indici\1\Analisi.jpg "Analisi Prima Interrogazione")
+  ![Analisi Prima Interrogazione](Aggiuntivi\Analisi\Senza_Indici\1\Analisi.jpg "Analisi Prima Interrogazione")
 - Grafico
-  ![Grafico Prima Interrogazione](Aggiuntivi\Senza_Indici\1\Grafico.jpg "Grafico Prima Interrogazione")
+  ![Grafico Prima Interrogazione](Aggiuntivi\Analisi\Senza_Indici\1\Grafico.jpg "Grafico Prima Interrogazione")
 
 #### Piano esecuzione dopo l'indice
 
 - Analisi
-  ![Analisi Prima Interrogazione](Aggiuntivi\Con_Indici\1\Analisi.jpg "Analisi Prima Interrogazione")
+  ![Analisi Prima Interrogazione](Aggiuntivi\Analisi\Con_Indici\1\Analisi.jpg "Analisi Prima Interrogazione")
 - Grafico
-  ![Grafico Prima Interrogazione](Aggiuntivi\Con_Indici\1\Grafico.jpg "Grafico Prima Interrogazione")
+  ![Grafico Prima Interrogazione](Aggiuntivi\Analisi\Con_Indici\1\Grafico.jpg "Grafico Prima Interrogazione")
 
 #### Conclusioni
 
@@ -180,16 +180,16 @@ ORDER BY
 ##### Piano esecuzione prima dell'indice
 
 - Analisi
-  ![Analisi Seconda Interrogazione](Aggiuntivi\Senza_Indici\2\Analisi.jpg "Analisi Seconda Interrogazione")
+  ![Analisi Seconda Interrogazione](Aggiuntivi\Analisi\Senza_Indici\2\Analisi.jpg "Analisi Seconda Interrogazione")
 - Grafico
-  ![Grafico Prima Interrogazione](Aggiuntivi\Senza_Indici\2\Grafico.jpg "Grafico Seconda Interrogazione")
+  ![Grafico Prima Interrogazione](Aggiuntivi\Analisi\Senza_Indici\2\Grafico.jpg "Grafico Seconda Interrogazione")
 
 #### Piano esecuzione dopo l'indice
 
 - Analisi
-  ![Analisi Seconda Interrogazione](Aggiuntivi\Con_Indici\2\Analisi.jpg "Analisi Seconda Interrogazione")
+  ![Analisi Seconda Interrogazione](Aggiuntivi\Analisi\Con_Indici\2\Analisi.jpg "Analisi Seconda Interrogazione")
 - Grafico
-  ![Grafico Prima Interrogazione](Aggiuntivi\Con_Indici\2\Grafico.jpg "Grafico Seconda Interrogazione")
+  ![Grafico Prima Interrogazione](Aggiuntivi\Analisi\Con_Indici\2\Grafico.jpg "Grafico Seconda Interrogazione")
 <div style="page-break-after: always;"></div>
 
 #### Conclusioni
@@ -204,17 +204,17 @@ ORDER BY
 ##### Piano esecuzione prima dell'indice
 
 - Analisi
-  ![Analisi Terza Interrogazione](Aggiuntivi\Senza_Indici\3\Analisi.jpg "Analisi Terza Interrogazione")
+  ![Analisi Terza Interrogazione](Aggiuntivi\Analisi\Senza_Indici\3\Analisi.jpg "Analisi Terza Interrogazione")
 - Grafico
-  ![Grafico Terza Interrogazione](Aggiuntivi\Senza_Indici\3\Grafico.jpg "Grafico Terza Interrogazione")
+  ![Grafico Terza Interrogazione](Aggiuntivi\Analisi\Senza_Indici\3\Grafico.jpg "Grafico Terza Interrogazione")
 <div style="page-break-after: always;"></div>
 
 #### Piano esecuzione dopo l'indice
 
 - Analisi
-  ![Analisi Terza Interrogazione](Aggiuntivi\Con_Indici\3\Analisi.jpg "Analisi Terza Interrogazione")
+  ![Analisi Terza Interrogazione](Aggiuntivi\Analisi\Con_Indici\3\Analisi.jpg "Analisi Terza Interrogazione")
 - Grafico
-  ![Grafico Terza Interrogazione](Aggiuntivi\Con_Indici\3\Grafico.jpg "Grafico Terza Interrogazione")
+  ![Grafico Terza Interrogazione](Aggiuntivi\Analisi\Con_Indici\3\Grafico.jpg "Grafico Terza Interrogazione")
 
 #### Conclusioni
 

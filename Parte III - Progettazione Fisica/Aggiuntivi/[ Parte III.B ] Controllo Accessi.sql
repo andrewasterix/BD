@@ -7,6 +7,12 @@ Alessio De Vincenzi - 4878315
 */
 SET search_path TO 'OrtiScolastici';
 
+-- Elimina i ruoli prima di ricrearli
+DROP ROLE IF EXISTS Amministratore;
+DROP ROLE IF EXISTS Referente;
+DROP ROLE IF EXISTS Insegnante;
+DROP ROLE IF EXISTS Studente;
+
 -- Creazione Ruoli
 CREATE ROLE Amministratore;
 GRANT USAGE ON SCHEMA "OrtiScolastici" TO Amministratore WITH GRANT OPTION;
@@ -32,12 +38,6 @@ GRANT SELECT ON Scuola TO Insegnante, Studente;
 GRANT ALL ON Classe TO Amministratore;
 GRANT SELECT, INSERT, UPDATE ON Classe TO Referente;
 GRANT SELECT ON Classe TO Insegnante, Studente;
-
--- Assegnazione dei privilegi per la tabella Studente
-GRANT ALL ON Studente TO Amministratore;
-GRANT SELECT, INSERT, UPDATE, DELETE ON Studente TO Referente;
-GRANT SELECT, INSERT, UPDATE, DELETE ON Studente TO Insegnante;
-GRANT SELECT ON Studente TO Studente;
 
 -- Assegnazione dei privilegi per la tabella Specie
 GRANT ALL ON Specie TO Amministratore;
@@ -84,6 +84,13 @@ GRANT SELECT, INSERT, UPDATE ON Dati TO Studente;
 GRANT ALL ON Responsabile TO Amministratore;
 GRANT SELECT, INSERT, UPDATE, DELETE ON Responsabile TO Referente, Insegnante;
 GRANT SELECT ON Responsabile TO Studente;
+
+-- Elimina gli utenti prima di crearli
+DROP USER IF EXISTS amministratore_user;
+DROP USER IF EXISTS referente_user;
+DROP USER IF EXISTS insegnante_user;
+DROP USER IF EXISTS studente_user_one;
+DROP USER IF EXISTS studente_user_two;
 
 -- Creazione degli utenti e assegnazione di password (NB: le password, non richieste da specifiche, sono tutte uguali per comodità)
 CREATE USER amministratore_user WITH PASSWORD 'password';

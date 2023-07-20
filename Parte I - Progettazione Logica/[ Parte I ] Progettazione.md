@@ -6,7 +6,7 @@
 - **William Chen** - 4827847
 - **Alessio De Vincenzi** - 4878315
 
-## Parte 1 - Requisiti e Progettazione Concettuale
+## Parte 1 - Requisiti Ristrutturati
 
 ### 1 - Descrizione del dominio applicativo
 

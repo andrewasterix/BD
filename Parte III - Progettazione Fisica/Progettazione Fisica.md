@@ -30,13 +30,14 @@ ORDER BY O.NomeOrto;
 <div style="text-align: justify;">
 <p>Questa query restituisce l'ID della rilevazione, la temperatura e l'umidità dai dati per tutte le rilevazioni in cui la temperatura è superiore a 25 e l'umidità è superiore a 80, oppure per tutte le rilevazioni effettuate a partire dal 1º gennaio 2023.</p></div>
 
+<div style="page-break-after: always;"></div>
+
 ```sql
 SELECT R.IdRilevazione, D.Temperatura, D.Umidita
 FROM Rilevazione R
 JOIN Dati D ON R.IdRilevazione = D.Rilevazione
 WHERE (D.Temperatura > 25 AND D.Umidita > 80) OR R.DataOraRilevazione >= '2023-01-01';
 ```
-<div style="page-break-after: always;"></div>
 
 #### Interrogazione 3 - Funzione Generica
 
@@ -77,8 +78,7 @@ CLUSTER Scuola USING idx_Scuola_Finanziamento;
 ```sql
 CREATE INDEX idx_Rilevazione_DataOraRilevazione ON Rilevazione USING btree(DataOraRilevazione);
 CLUSTER Rilevazione USING idx_Rilevazione_DataOraRilevazione;
-```
-```sql
+
 CREATE INDEX idx_Dati_Rilevazione ON Dati USING btree(Rilevazione);
 CLUSTER Dati USING idx_Dati_Rilevazione;
 
@@ -240,28 +240,28 @@ ORDER BY
 
 ### **Tabella Privilegi**
 
-<div style="width: 100%; margin: left 45%">
+<div style="width: 100%; font-size: 11px;">
 <table style="width: 100%; margin: left 45%; position: relative">
 <thead><tr><th>#</th><th>Admin</th><th>Referente</th><th>Insegnante</th><th>Studente</th></thead>
 <tbody>
-<tr><td>Persona</td><td>ALL</td><td>SELECT, INSERT, UPDATE</td><td>SELECT</td><td>SELECT</td>
+<tr><td>Persona</td><td>ALL</td><td>SELECT, INSERT, UPDATE, DELETE</td><td>SELECT</td><td>SELECT</td>
 <tr><td>Scuola</td><td>ALL</td><td>SELECT, INSERT, UPDATE</td><td>SELECT</td><td>SELECT</td>
-<tr><td>Classe</td><td>ALL</td><td>SELECT, INSERT, UPDATE</td><td>SELECT</td><td>SELECT</td>
+<tr><td>Classe</td><td>ALL</td><td>SELECT, INSERT, UPDATE, DELETE</td><td>SELECT</td><td>SELECT</td>
 <tr><td>Studente</td><td>ALL</td><td>SELECT, INSERT, UPDATE, DELETE</td><td>SELECT, INSERT, UPDATE, DELETE</td><td>SELECT</td>
 <tr><td>Specie</td><td>ALL</td><td>SELECT, INSERT, UPDATE</td><td>SELECT, INSERT, UPDATE</td><td>SELECT</td>
-<tr><td>Orto</td><td>ALL</td><td>SELECT, INSERT, UPDATE</td><td>SELECT</td><td>SELECT</td>
+<tr><td>Orto</td><td>ALL</td><td>SELECT, INSERT, UPDATE, DELETE</td><td>SELECT</td><td>SELECT</td>
 <tr><td>Pianta</td><td>ALL</td><td>SELECT, INSERT, UPDATE, DELETE</td><td>SELECT, INSERT, UPDATE, DELETE</td><td>SELECT</td>
 <tr><td>Esposizione</td><td>ALL</td><td>SELECT, INSERT, UPDATE, DELETE</td><td>SELECT, INSERT, UPDATE, DELETE</td><td>SELECT</td>
 <tr><td>Gruppo</td><td>ALL</td><td>SELECT, INSERT, UPDATE, DELETE</td><td>SELECT, INSERT, UPDATE, DELETE</td><td>SELECT</td>
-<tr><td>Sensore</td><td>ALL</td><td>SELECT, INSERT, UPDATE</td><td>SELECT, INSERT, UPDATE</td><td>SELECT</td>
+<tr><td>Sensore</td><td>ALL</td><td>SELECT, INSERT, UPDATE, DELETE</td><td>SELECT, INSERT, UPDATE</td><td>SELECT</td>
 <tr><td>Rilevazione</td><td>ALL</td><td>SELECT, INSERT, UPDATE, DELETE</td><td>SELECT, INSERT, UPDATE, DELETE</td><td>SELECT, INSERT, UPDATE</td>
 <tr><td>Dati</td><td>ALL</td><td>SELECT, INSERT, UPDATE, DELETE</td><td>SELECT, INSERT, UPDATE, DELETE</td><td>SELECT, INSERT, UPDATE</td>
-<tr><td>Responsabile</td><td>ALL</td><td>SELECT, INSERT, UPDATE, DELETE</td><td>SELECT, INSERT, UPDATE, DELETE</td><td>SELECT</td>
+<tr><td>Responsabile</td><td>ALL</td><td>SELECT, INSERT, UPDATE, DELETE</td><td>SELECT, INSERT</td><td>SELECT</td>
 </tbody>
 </table>
+</div>
 
 **Nota:** ALL = SELECT, INSERT, UPDATE, DELETE, TRUNCATE, REFERENCES, TRIGGER.
-<div style="page-break-after: always;"></div>
 
 ## Politica dei Privilegi
 <div style="text-align: justify">
@@ -271,6 +271,7 @@ ORDER BY
 <ol type="1" style="text-align: left;">
   <li><b>Amministratore:</b> Ha accesso a tutti i dati del database e può eseguire tutte le operazioni.
   </li>
+  <div style="page-break-after: always;"></div>
   <li><b>Referente:</b> Ha accesso ai dati della Scuola di cui è Referente e può eseguire tutte le operazioni su di essi.
     <ul>
       <li>Scritture: Inserimento, Modifica -> Su tutti i dati che riguardano la Scuola di cui è Referente.</li>
@@ -289,7 +290,7 @@ ORDER BY
   <li><b>Studente:</b> Ha accesso ai dati della Classe di cui è Studente e può eseguire tutte le operazioni su di essi.
     <ul>
       <li>Scritture: Inserimento, Modifica -> Su tutti i dati che riguardano la Classe di cui è Studente.</li>
-      <li>Scritture: Cancellazione -> Solo su dati che riguardano le Rilevazioni fatte dalla Classe di cui è Studente.</li>
+      <li>Scritture: Cancellazione -> Nessuno.</li>
       <li>Letture: Visualizzazione -> Su tutti i dati che riguardano la Classe di cui è Studente.</li>
       <li>Non può eseguire operazioni su dati di altre Classi.</li>
   </ul>
